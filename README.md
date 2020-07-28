@@ -5,14 +5,14 @@
 ## Members
 * NGUYEN, Kevin (s3783668)
 * SONI, Kajal (s3784244)
-* ILANGANTILEKE, Cass (s3742928)
+* SURNAME, GivenName (sXXXX)
 * SURNAME, GivenName (sXXXX)
 * SURNAME, GivenName (sXXXX)
 
 ## Records
 
 * Github repository : https://github.com/RMIT-SEPT/MajorProject/Groupx
-* ClickUp Workspace : https://app.clickup.com/xxxx/yyyy
+* Trello Workspace : https://trello.com/b/LaE2xJdf/sept-major-project
 
 
 ## Code documentation
