@@ -4,7 +4,7 @@
 
 ## Members
 * NGUYEN, Kevin (s3783668)
-* SURNAME, GivenName (sXXXX)
+* SONI, Kajal (s3784244)
 * SURNAME, GivenName (sXXXX)
 * SURNAME, GivenName (sXXXX)
 * SURNAME, GivenName (sXXXX)
