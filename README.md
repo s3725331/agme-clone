@@ -5,7 +5,7 @@
 ## Members
 * NGUYEN, Kevin (s3783668)
 * SONI, Kajal (s3784244)
-* SURNAME, GivenName (sXXXX)
+* ILANGANTILEKE, Cass (s3742928)
 * SURNAME, GivenName (sXXXX)
 * SURNAME, GivenName (sXXXX)
 
