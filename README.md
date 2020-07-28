@@ -11,7 +11,7 @@
 
 ## Records
 
-* Github repository : https://github.com/RMIT-SEPT/MajorProject/Groupx
+* Github repository : https://github.com/RMIT-SEPT/majorproject-7-tues-14-30-3
 * Trello Workspace : https://trello.com/b/LaE2xJdf/sept-major-project
 
 
