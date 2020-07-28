@@ -6,13 +6,13 @@
 * NGUYEN, Kevin (s3783668)
 * SONI, Kajal (s3784244)
 * ILANGANTILEKE, Cass (s3742928)
-* SURNAME, GivenName (sXXXX)
-* SURNAME, GivenName (sXXXX)
+* ADRIANO, Christian (s3783461)
+* HARRIS, Luke (s3725331)
 
 ## Records
 
-* Github repository : https://github.com/RMIT-SEPT/MajorProject/Groupx
-* ClickUp Workspace : https://app.clickup.com/xxxx/yyyy
+* Github repository : https://github.com/RMIT-SEPT/majorproject-7-tues-14-30-3
+* Trello Workspace : https://trello.com/b/LaE2xJdf/sept-major-project
 
 
 ## Code documentation
