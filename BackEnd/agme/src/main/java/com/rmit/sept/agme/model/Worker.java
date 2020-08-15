@@ -15,6 +15,12 @@ public class Worker {
 
     public Worker(){}
 
+
+    private Boolean accepted;
+
+    @PrePersist
+    protected void onCreate(){ this.accepted = false;}
+
     public Account getAccount() {
         return account;
     }
