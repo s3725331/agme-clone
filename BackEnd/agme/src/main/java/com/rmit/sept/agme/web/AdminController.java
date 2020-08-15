@@ -20,8 +20,5 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
-    @PostMapping("")
-    public ResponseEntity<?> createAdmin(@Valid @RequestBody Admin admin, BindingResult result){
-        return null;
-    }
+
 }

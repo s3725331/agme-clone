@@ -5,14 +5,34 @@ import com.rmit.sept.agme.repositories.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class AccountService {
     @Autowired
     AccountRepository accountRepository;
 
-    public Account saveOrUpdate(Account account){
-        //Business logic
+    private Optional<Account> saveOrUpdate(Account account){
+        if(accountRepository.getByEmail(account.getEmail()).iterator().hasNext()){
+            return Optional.empty();
+        }
 
-        return accountRepository.save(account);
+        return Optional.of(accountRepository.save(account));
+    }
+
+    public Optional<Account> get(long id){
+        return accountRepository.findById(id);
+    }
+
+    public Optional<Account> create(Account account){
+
+        return saveOrUpdate(account);
+    }
+
+    public Optional<Account> update(Account account){
+        if(!accountRepository.findById(account.getId()).isPresent())
+            return Optional.empty();
+
+        return saveOrUpdate(account);
     }
 }

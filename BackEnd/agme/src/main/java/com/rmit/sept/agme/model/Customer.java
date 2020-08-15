@@ -1,6 +1,7 @@
 package com.rmit.sept.agme.model;
 
 import javax.persistence.*;
+import java.util.Date;
 
 
 @Entity
@@ -12,7 +13,22 @@ public class Customer {
     @ManyToOne
     private Account account;
 
-    public Customer(){}
+    private Date createdAt;
+    private Date modifiedAt;
+
+    @PrePersist
+    protected void onCreate(){
+        this.createdAt = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate(){
+        this.modifiedAt = new Date();
+    }
+
+    public Customer(Account account){
+        this.account = account;
+    }
 
     public Account getAccount() {
         return account;

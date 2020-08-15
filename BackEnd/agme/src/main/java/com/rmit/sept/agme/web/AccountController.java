@@ -8,26 +8,53 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/accounts")
 public class AccountController {
     @Autowired
     private AccountService accountService;
 
     @PostMapping("")
-    public ResponseEntity<?> createUser(@Valid @RequestBody Account account, BindingResult result){
+    public ResponseEntity<?> createAccount(@Valid @RequestBody Account account, BindingResult result){
         if(result.hasErrors()) {
-            return new ResponseEntity<>("Invalid Customer Object", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Invalid Accounts Object", HttpStatus.BAD_REQUEST);
         }
 
-        Account savedAccount = accountService.saveOrUpdate(account);
+        Optional<Account> savedAccount = accountService.create(account);
+        if(!savedAccount.isPresent()){
+            return new ResponseEntity<>("Invalid Email", HttpStatus.CONFLICT);
+        }
         return new ResponseEntity<>(savedAccount, HttpStatus.CREATED);
     }
+
+    @GetMapping("")
+    public ResponseEntity<?> getAccount(@RequestParam("id") long id){
+        Optional<Account> account = accountService.get(id);
+
+        if(!account.isPresent()){
+            return new ResponseEntity<>("No account found", HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(account,HttpStatus.OK);
+    }
+
+    @PutMapping("")
+    public ResponseEntity<?> updateAccount(@Valid @RequestBody Account account, BindingResult result){
+        if(result.hasErrors()) {
+            return new ResponseEntity<>("Invalid Account Object", HttpStatus.BAD_REQUEST);
+        }
+
+        Optional<?> savedAccount = accountService.update(account);
+        if(!savedAccount.isPresent())
+            return new ResponseEntity<>("Account Not Found", HttpStatus.NOT_FOUND);
+
+        return new ResponseEntity<>(savedAccount, HttpStatus.OK);
+    }
+
+
 }
