@@ -16,6 +16,14 @@ public class Admin {
     private Date createdAt;
     private Date modifiedAt;
 
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public Date getModifiedAt() {
+        return modifiedAt;
+    }
+
     @PrePersist
     protected void onCreate(){
         this.createdAt = new Date();

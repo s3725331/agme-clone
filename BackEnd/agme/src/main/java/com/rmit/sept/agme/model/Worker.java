@@ -12,6 +12,18 @@ public class Worker {
     @ManyToOne
     private Account account;
 
+    public boolean isAccepted() {
+        return accepted;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public Date getModifiedAt() {
+        return modifiedAt;
+    }
+
     public Worker(){}
 
     public Worker(Account account){this.account = account;}

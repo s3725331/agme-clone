@@ -28,6 +28,14 @@ public class Customer {
         this.modifiedAt = new Date();
     }
 
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public Date getModifiedAt() {
+        return modifiedAt;
+    }
+
     public Customer(Account account){
         this.account = account;
     }
