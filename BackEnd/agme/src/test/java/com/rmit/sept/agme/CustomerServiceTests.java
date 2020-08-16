@@ -99,7 +99,7 @@ public class CustomerServiceTests {
         Account newAccount = accountRepository.save(cust);
         Customer customer = new Customer(newAccount);
         Customer newCustomer = customerRepository.save(customer);
-        assertNotEquals(customerService.update(new Customer(cust)),newCustomer);
+        assertFalse(customerService.update(new Customer(cust)).isPresent());
     }
 
 }

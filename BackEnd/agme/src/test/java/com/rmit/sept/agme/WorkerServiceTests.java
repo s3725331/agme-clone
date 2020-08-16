@@ -100,6 +100,6 @@ public class WorkerServiceTests {
         Account newAccount = accountRepository.save(work);
         Worker worker = new Worker(newAccount);
         Worker newWorker = workerRepository.save(worker);
-        assertNotEquals(workerService.update(new Worker(work)),newWorker);
+        assertFalse(workerService.update(new Worker(work)).isPresent());
     }
 }
