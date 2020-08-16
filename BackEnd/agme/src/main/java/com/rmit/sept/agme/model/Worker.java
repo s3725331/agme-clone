@@ -12,6 +12,8 @@ public class Worker {
     @ManyToOne
     private Account account;
 
+    public Worker(){}
+
     public Worker(Account account){this.account = account;}
 
     private boolean accepted;

@@ -28,6 +28,10 @@ public class Admin {
 
     public Admin(){}
 
+    public Admin(Account account){
+        this.account = account;
+    }
+
     public Account getAccount() {
         return account;
     }

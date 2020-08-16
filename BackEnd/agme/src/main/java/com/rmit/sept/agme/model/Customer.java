@@ -16,6 +16,8 @@ public class Customer {
     private Date createdAt;
     private Date modifiedAt;
 
+    public Customer() {}
+
     @PrePersist
     protected void onCreate(){
         this.createdAt = new Date();
