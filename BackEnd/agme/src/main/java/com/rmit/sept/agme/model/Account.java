@@ -12,6 +12,7 @@ public class Account {
     private long id;
 
     @Email(message = "Email should be valid")
+    @NotBlank(message = "Email must not be empty")
     private String email;
 
     @Size(min = 6, max = 64, message = "Invalid Password length")
