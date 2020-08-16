@@ -2,12 +2,8 @@ package com.rmit.sept.agme.web;
 
 import com.rmit.sept.agme.model.Account;
 import com.rmit.sept.agme.model.Customer;
-import com.rmit.sept.agme.model.TemplateEntity;
-import com.rmit.sept.agme.model.Worker;
-import com.rmit.sept.agme.repositories.AccountRepository;
 import com.rmit.sept.agme.services.AccountService;
 import com.rmit.sept.agme.services.CustomerService;
-import com.rmit.sept.agme.services.TemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

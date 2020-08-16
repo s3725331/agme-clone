@@ -13,7 +13,10 @@ public class AccountService {
     AccountRepository accountRepository;
 
     private Optional<Account> saveOrUpdate(Account account){
-        if(accountRepository.getByEmail(account.getEmail()).iterator().hasNext()){
+        //Enforcing uniqueness of emails
+        Iterable<Account> accounts = accountRepository.getByEmail(account.getEmail());
+        if(accounts.iterator().hasNext() &&
+            accounts.iterator().next().getId() != account.getId()){
             return Optional.empty();
         }
 

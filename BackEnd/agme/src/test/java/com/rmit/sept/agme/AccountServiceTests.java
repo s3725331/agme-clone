@@ -50,7 +50,34 @@ public class AccountServiceTests {
     }
 
     @Test
+    public void testInvalidAccountServiceUpdate() {
+        Account account = new Account();
+        account.setEmail("dominic@gmail.com");
+        account.setPassword("password123");
+        account.setFirstName("Dominic");
+        account.setLastName("Person");
+        account.setAddress("2 Wayne Street Etihad");
+
+        assertFalse(accountService.update(account).isPresent());
+
+    }
+
+    @Test
     public void testAccountServiceCreate() {
+        Account account = new Account();
+        account.setEmail("ashley@gmail.com");
+        account.setPassword("password123");
+        account.setFirstName("Ashley");
+        account.setLastName("Dale");
+        account.setAddress("34 Albert Road Tower");
+
+        //Account secondAccount = accountRepository.save(account);
+
+        assertTrue(accountService.create(account).isPresent());
+    }
+
+    @Test
+    public void testInvalidEmailDupAccountServiceCreate() {
         Account account = new Account();
         account.setEmail("ashley@gmail.com");
         account.setPassword("password123");
@@ -60,7 +87,6 @@ public class AccountServiceTests {
 
         Account secondAccount = accountRepository.save(account);
 
-        assertTrue(accountService.create(secondAccount).isPresent());
-
+        assertFalse(accountService.create(secondAccount).isPresent());
     }
 }

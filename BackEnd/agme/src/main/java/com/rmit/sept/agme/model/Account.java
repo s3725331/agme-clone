@@ -33,7 +33,7 @@ public class Account {
 
 
     //Pattern will only influence return to front end, db will still have date to ms
-    @JsonFormat(pattern = "yyyy-mm-dd")
+    //@JsonFormat(pattern = "yyyy-mm-dd")
     private Date createdAt;
     private Date modifiedAt;
 
