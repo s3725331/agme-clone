@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+
+.btn {
+  width:90%;
+  display: inline-block;
+}
+
+.checkbox-left {
+  vertical-align:bottom;
+}
+
+.checkbox-middle {
+  vertical-align:bottom;
+  margin-left: 50px;
+  
+}
+
