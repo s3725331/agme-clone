@@ -1,13 +1,38 @@
 body {
-  margin: 0;
+  /* margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  -moz-osx-font-smoothing: grayscale; */
+  background: url(https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max);
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.booking-form {
+  width: 500px;
+  margin: 100px;
+}
+
+h4{
+  color: #fff;
+  line-height: 48px;
+  margin-bottom: 25px;
+}
+
+.input-field>label{
+  color: #b3b3b3;
+}
+
+input{
+  border-color: #fff;
+  color: #fff;
+}
+
+label{
+  text-transform: uppercase;
 }
