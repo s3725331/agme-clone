@@ -64,7 +64,7 @@ public class WorkerController {
     }
 
     @GetMapping("")
-    public ResponseEntity<?> getCustomer(@RequestParam("id") long id){
+    public ResponseEntity<?> getWorker(@RequestParam("id") long id){
         Optional<Worker> worker = workerService.get(id);
 
         if(!worker.isPresent()){
@@ -75,7 +75,7 @@ public class WorkerController {
     }
 
     @PutMapping("")
-    public ResponseEntity<?> updateCustomer(@Valid @RequestBody Worker worker, BindingResult result){
+    public ResponseEntity<?> updateWorker(@Valid @RequestBody Worker worker, BindingResult result){
         if(result.hasErrors()) {
             return new ResponseEntity<>("Invalid Account Object", HttpStatus.BAD_REQUEST);
         }
