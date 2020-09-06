@@ -2,21 +2,43 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 export default class CustomerSignUp extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      password: '',
+      username: '',
+      dob: ''
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
   componentDidMount() {
     const M = window.M;
     const Calender = document.querySelector(".datepicker");
     M.Datepicker.init(Calender, {
       defaultDate: new Date(),
-      format: this.state.format,
+      format: this.calenderState.format,
       container: "body",
     });
   }
 
-  state = {
+  calenderState = {
     value: new Date(),
     format: "dd mmm, yyyy",
     formatMoment: "dd MMM, YYYY",
   };
+
+  handleChange(e) {
+    this.setState({ [e.target.id]: e.target.value });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    console.log(this.state);
+  }
 
   render() {
     return (
@@ -31,6 +53,7 @@ export default class CustomerSignUp extends Component {
                   </span>
                 </Link>
               </div>
+              <form onSubmit={this.handleSubmit}>
               <div class="card-content">
                 <h7> What's your email?</h7>
                 <div class="form-field">
@@ -39,6 +62,7 @@ export default class CustomerSignUp extends Component {
                     id="email"
                     type="email"
                     class="validate"
+                    onChange={this.handleChange}
                   ></input>
                   <span
                     class="helper-text"
@@ -69,8 +93,9 @@ export default class CustomerSignUp extends Component {
                   <input
                     placeholder="Create a password."
                     id="password"
-                    type="text"
+                    type="password"
                     class="validate"
+                    onChange={this.handleChange}
                   ></input>
                 </div>
               </div>
@@ -80,7 +105,7 @@ export default class CustomerSignUp extends Component {
                   <input
                     placeholder="Enter your password again."
                     id="password"
-                    type="text"
+                    type="password"
                     class="validate"
                   ></input>
                 </div>
@@ -93,6 +118,7 @@ export default class CustomerSignUp extends Component {
                     id="username"
                     type="text"
                     class="validate"
+                    onChange={this.handleChange}
                   ></input>
                 </div>
               </div>
@@ -101,31 +127,32 @@ export default class CustomerSignUp extends Component {
                 <h7> What's your date of birth?</h7>
                 <input
                   type="text"
-                  id="date"
+                  id="dob"
                   class="datepicker"
                   placeholder="Choose your date of birth."
+                  onChange={this.handleChange}
                 ></input>
               </div>
 
               <div class="card-content">
                 <h7> What's your gender?</h7>
                 <p>
-                  <br/>
+                  <br />
                   <label class="checkbox-left">
                     <input type="checkbox" />
                     <span>Male</span>
                   </label>
                   <label class="checkbox-middle">
-                    <input type="checkbox"/>
+                    <input type="checkbox" />
                     <span>Female</span>
                   </label>
                 </p>
               </div>
 
               <div class="center-align">
-                <a class="btn btn-block blue darken-4" type="submit">
+                <button class="btn btn-block blue darken-4" type="submit">
                   Sign Up
-                </a>
+                </button>
               </div>
 
               <div class="card-content center-align">
@@ -137,6 +164,7 @@ export default class CustomerSignUp extends Component {
                 </Link>
                 <div class="form-field"></div>
               </div>
+              </form>
             </div>
           </div>
         </div>

@@ -1,7 +1,10 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Router } from "react-router-dom";
+import {useSelector} from 'react-redux';
+import { getByText } from "@testing-library/react";
 
 export class DashBoard extends Component {
+  // const for logged in or not
   componentDidMount() {
     const M = window.M;
     const sideNav = document.querySelector(".sidenav");
@@ -11,7 +14,7 @@ export class DashBoard extends Component {
   render() {
     return (
       <div>
-        <div className="navbar-fixed">
+        <div className="navbarFixed">
           <nav className="blue darken-4">
             <div className="container">
               <div className="nav-wrapper">
@@ -23,6 +26,7 @@ export class DashBoard extends Component {
                   <i className="material-icons">menu</i>
                 </a>
                 <ul className="right hide-on-med-and-down">
+                
                   <li>
                     <a href="#home">Home</a>
                   </li>
@@ -35,6 +39,7 @@ export class DashBoard extends Component {
                   <li>
                     <a>|</a>
                   </li>
+                  
                   <li>
                     <Link to="/CustomerSignUp">
                       <a>Sign Up</a>
@@ -45,6 +50,7 @@ export class DashBoard extends Component {
                       <a>Log In</a>
                     </Link>
                   </li>
+                  
                 </ul>
               </div>
             </div>
@@ -52,6 +58,7 @@ export class DashBoard extends Component {
         </div>
 
         <ul className="sidenav" id="mobile-nav">
+        
           <li>
             <a href="#home">Home</a>
           </li>
@@ -71,7 +78,9 @@ export class DashBoard extends Component {
               <a>Log In</a>
             </Link>
           </li>
+          
         </ul>
+        
 
         <ul className="mainDashboard">
           

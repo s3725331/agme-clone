@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
-import Navbar, { DashBoard } from './Components/Layout/DashBoard';
-import CustomerSignUp from './Components/Layout/CustomerSignUp';
-import CustomerLogIn from './Components/Layout/CustomerLogIn';
+import DashBoard from './Components/Layout/DashBoard';
+import CustomerSignUp from './Components/auth/CustomerSignUp';
+import CustomerLogIn from './Components/auth/CustomerLogIn';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 function App() {
