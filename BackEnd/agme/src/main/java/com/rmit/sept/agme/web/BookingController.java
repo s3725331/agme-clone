@@ -72,7 +72,7 @@ public class BookingController {
         }
     }
 
-    @GetMapping("/upcoming")
+    @GetMapping("/past")
     public ResponseEntity<?> getPastBookings(@RequestParam(value = "workerId", required = false) Long workerID,
                                                  @RequestParam(value = "customerId", required = false) Long customerID){
         if(workerID != null && customerID == null){
