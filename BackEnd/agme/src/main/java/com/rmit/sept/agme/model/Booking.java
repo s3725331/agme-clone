@@ -75,11 +75,11 @@ public class Booking {
     @ManyToOne
     private Worker worker;
 
-    @NotBlank
+    @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     private Date startTime;
 
-    @NotBlank
+    @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     private Date endTime;
 
