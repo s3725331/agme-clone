@@ -4,9 +4,12 @@ import DashBoard from './Components/Layout/DashBoard';
 import CustomerSignUp from './Components/auth/CustomerSignUp';
 import CustomerLogIn from './Components/auth/CustomerLogIn';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import {Provider} from "react-redux";
+import store from './store';
 
 function App() {
   return (
+    <Provider store={store}>
     <Router>
       <div>
         <Switch>
@@ -16,6 +19,7 @@ function App() {
         </Switch>
         </div>
     </Router>
+    </Provider>
   );
 }
 
