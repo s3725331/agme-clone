@@ -1,10 +1,6 @@
-import {combineReducers} from 'redux';
-import loggedReducer from './loggedIn';
+import { combineReducers } from "redux";
 import errorReducer from "./errorReducer";
 
-const allReducers = combineReducers({
-    errors: errorReducer,
-    loggedIn: loggedReducer
-})
-
-export default allReducers
+export default combineReducers({
+  errors: errorReducer
+});
