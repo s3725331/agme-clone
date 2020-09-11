@@ -75,7 +75,7 @@ export default class CustomerSignUp extends Component {
                     onChange={this.handleChange}
                   ></input>
                   <span
-                    class="helper-text"
+                    className="helper-text"
                     data-error="This email is invalid. Please make sure it's formatted like example@email.com"
                     data-success=""
                   ></span>
@@ -88,10 +88,10 @@ export default class CustomerSignUp extends Component {
                     placeholder="Enter your email again."
                     id="email"
                     type="email"
-                    class="validate"
+                    className="validate"
                   ></input>
                   <span
-                    class="helper-text"
+                    className="helper-text"
                     data-error="This email is invalid. Please make sure it's formatted like example@email.com"
                     data-success=""
                   ></span>
@@ -104,7 +104,7 @@ export default class CustomerSignUp extends Component {
                     placeholder="Create a password."
                     id="password"
                     type="password"
-                    class="validate"
+                    className="validate"
                     name="password"
                     value= {this.state.password}
                     onChange={this.handleChange}
@@ -118,7 +118,7 @@ export default class CustomerSignUp extends Component {
                     placeholder="Enter your password again."
                     id="password"
                     type="password"
-                    class="validate"
+                    className="validate"
                   ></input>
                 </div>
               </div>
@@ -131,7 +131,7 @@ export default class CustomerSignUp extends Component {
                     placeholder="Enter your First Name."
                     id="firstName"
                     type="text"
-                    class="validate"
+                    className="validate"
                     name = "firstName"
                     value= {this.state.firstName}
                     onChange={this.handleChange}
@@ -148,7 +148,7 @@ export default class CustomerSignUp extends Component {
                     type="text"
                     name = "lastName"
                     value= {this.state.lastName}
-                    class="validate"
+                    className="validate"
                     onChange={this.handleChange}
                   ></input>
                 </div>
@@ -161,7 +161,7 @@ export default class CustomerSignUp extends Component {
                     placeholder="Enter Address."
                     id="address"
                     type="text"
-                    class="validate"
+                    className="validate"
                     name = "address"
                     value= {this.state.address}
                     onChange={this.handleChange}
@@ -177,7 +177,7 @@ export default class CustomerSignUp extends Component {
                 <input
                   type="text"
                   id="dob"
-                  class="datepicker"
+                  className="datepicker"
                   placeholder="Choose your date of birth."
                   onChange={this.handleChange}
                 ></input>
