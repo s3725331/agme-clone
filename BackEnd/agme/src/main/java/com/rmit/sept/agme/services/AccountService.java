@@ -27,6 +27,14 @@ public class AccountService {
         return accountRepository.findById(id);
     }
 
+    public Optional<Account> getByEmail(String email) {
+        Iterable<Account> accounts = accountRepository.getByEmail(email);
+        if(accounts.iterator().hasNext())
+            return Optional.of(accounts.iterator().next());
+        else
+            return Optional.empty();
+    }
+
     public Optional<Account> create(Account account){
 
         return saveOrUpdate(account);

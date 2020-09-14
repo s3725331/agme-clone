@@ -33,14 +33,25 @@ public class AccountController {
     }
 
     @GetMapping("")
-    public ResponseEntity<?> getAccount(@RequestParam("id") long id){
-        Optional<Account> account = accountService.get(id);
+    public ResponseEntity<?> getAccount(@RequestParam(value = "id", required = false) Long id,
+                                        @RequestParam(value = "email", required = false) String email){
+        Optional<Account> account;
 
-        if(!account.isPresent()){
+        if(id != null && email == null) {
+            account = accountService.get(id);
+
+        } else if(id == null && email != null){
+            account = accountService.getByEmail(email);
+            
+        } else {
+            return new ResponseEntity<>("Bad Request", HttpStatus.BAD_REQUEST);
+        }
+
+        if (!account.isPresent()) {
             return new ResponseEntity<>("No account found", HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<>(account,HttpStatus.OK);
+        return new ResponseEntity<>(account, HttpStatus.OK);
     }
 
     @PutMapping("")
