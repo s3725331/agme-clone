@@ -176,7 +176,7 @@ class CustomerSignUp extends Component {
   }
 }
 CustomerSignUp.propTypes = {
-  createProject: PropTypes.func.isRequired
+  createCustomer: PropTypes.func.isRequired
 };
 
 export default connect (
