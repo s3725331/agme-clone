@@ -35,7 +35,7 @@ class CustomerSignUp extends Component {
     }
 
     console.log(newAccount);
-    this.props.createCustomer(this.state, this.props.history);
+    this.props.createCustomer(newAccount, this.props.history);
   }
 
   render() {

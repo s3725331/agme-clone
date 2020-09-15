@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { getAccount } from "../../actions/getAccountActions";
 
-export default class CustomerLogIn extends Component {
+class CustomerLogIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,19 +20,43 @@ export default class CustomerLogIn extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+
+  //used for testing 
+  test(){
+
+   if(localStorage.getItem('currentUser')!= null){ 
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    //console.log(currentUser['email']);
+    console.log(currentUser);
+
+   } else{
+     console.log("null user");
+   }
+   
+
+
+  }
+
+  reset(){
+        localStorage.clear();
+  }
+
   handleSubmit(e) {
     e.preventDefault();
+    this.props.getAccount(this.state.email, this.state.password, this.props.history);
     console.log(this.state);
   }
 
   render() {
 
     return (
+      
       <div>
         <div className="row">
           <div className="col s12 m4 offset-m4">
             <div className="card">
-              <div class="card-action blue darken-4 white-text">
+              <div class="card-action blue darken-4 white-text"
+              onClick={this.reset}>
                 <Link to="/Dashboard">
                   <span class="white-text text-darken-2 center-align">
                     <h2>Agme Booking</h2>
@@ -44,6 +70,7 @@ export default class CustomerLogIn extends Component {
                     field="identifier"
                     placeholder="Please enter your email."
                     name="email"
+                    type="email"
                     value= {this.state.email}
                     onChange={this.handleChange}
                     ></input>
@@ -103,3 +130,12 @@ export default class CustomerLogIn extends Component {
     );
   }
 }
+
+CustomerLogIn.propTypes = {
+  getAccount: PropTypes.func.isRequired
+};
+
+export default connect (
+  null,
+  {getAccount}
+)(CustomerLogIn);
