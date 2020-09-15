@@ -1,43 +1,41 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { createCustomer } from "../../actions/custCreateActions";
 
-export default class CustomerSignUp extends Component {
+class CustomerSignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
-      password: '',
-      username: '',
-      dob: ''
+      email: "",
+      password: "",
+      firstName: "",
+      lastName: "",
+      address: ""
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentDidMount() {
-    const M = window.M;
-    const Calender = document.querySelector(".datepicker");
-    M.Datepicker.init(Calender, {
-      defaultDate: new Date(),
-      format: this.calenderState.format,
-      container: "body",
-    });
-  }
-
-  calenderState = {
-    value: new Date(),
-    format: "dd mmm, yyyy",
-    formatMoment: "dd MMM, YYYY",
-  };
 
   handleChange(e) {
-    this.setState({ [e.target.id]: e.target.value });
+    this.setState({ [e.target.name]: e.target.value });
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(this.state);
+    const newAccount = {
+      email: this.state.email,
+      password: this.state.password,
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      address: this.state.address
+    }
+
+    console.log(newAccount);
+    this.props.createCustomer(this.state, this.props.history);
   }
 
   render() {
@@ -46,123 +44,128 @@ export default class CustomerSignUp extends Component {
         <div className="row">
           <div className="col s12 m4 offset-m4">
             <div className="card">
-              <div class="card-action blue darken-4 white-text">
+              <div className="card-action blue darken-4 white-text">
                 <Link to="/Dashboard">
-                  <span class="white-text text-darken-2 center-align">
+                  <span className="white-text text-darken-2 center-align">
                     <h2>Agme Booking</h2>
                   </span>
                 </Link>
               </div>
               <form onSubmit={this.handleSubmit}>
-              <div class="card-content">
-                <h7> What's your email?</h7>
-                <div class="form-field">
+              <div className="card-content">
+                <h6> What's your email?</h6>
+                <div className="form-field">
                   <input
                     placeholder="Enter your email."
-                    id="email"
                     type="email"
-                    class="validate"
+                    name="email"
+                    value= {this.state.email}
                     onChange={this.handleChange}
                   ></input>
                   <span
-                    class="helper-text"
+                    className="helper-text"
                     data-error="This email is invalid. Please make sure it's formatted like example@email.com"
                     data-success=""
                   ></span>
                 </div>
               </div>
               <div className="card-content">
-                <h7> Confirm your email</h7>
+                <h6> Confirm your email</h6>
                 <div className="form-field">
                   <input
                     placeholder="Enter your email again."
-                    id="email"
                     type="email"
-                    class="validate"
+                    className="validate"
                   ></input>
                   <span
-                    class="helper-text"
+                    className="helper-text"
                     data-error="This email is invalid. Please make sure it's formatted like example@email.com"
                     data-success=""
                   ></span>
                 </div>
               </div>
-              <div class="card-content">
-                <h7> Create a password</h7>
-                <div class="form-field">
+              <div className="card-content">
+                <h6> Create a password</h6>
+                <div className="form-field">
                   <input
                     placeholder="Create a password."
-                    id="password"
                     type="password"
-                    class="validate"
+                    className="validate"
+                    name="password"
+                    value= {this.state.password}
                     onChange={this.handleChange}
                   ></input>
                 </div>
               </div>
-              <div class="card-content">
-                <h7> Confirm your password</h7>
-                <div class="form-field">
+              <div className="card-content">
+                <h6> Confirm your password</h6>
+                <div className="form-field">
                   <input
                     placeholder="Enter your password again."
-                    id="password"
                     type="password"
-                    class="validate"
+                    className="validate"
                   ></input>
                 </div>
               </div>
-              <div class="card-content">
-                <h7> What's your username?</h7>
-                <div class="form-field">
+
+
+              <div className="card-content">
+                <h6> What's your First Name?</h6>
+                <div className="form-field">
                   <input
-                    placeholder="Enter a username."
-                    id="username"
+                    placeholder="Enter your First Name."
                     type="text"
-                    class="validate"
+                    className="validate"
+                    name = "firstName"
+                    value= {this.state.firstName}
                     onChange={this.handleChange}
                   ></input>
                 </div>
               </div>
 
-              <div class="card-content">
-                <h7> What's your date of birth?</h7>
-                <input
-                  type="text"
-                  id="dob"
-                  class="datepicker"
-                  placeholder="Choose your date of birth."
-                  onChange={this.handleChange}
-                ></input>
+              <div className="card-content">
+                <h6> What's your Last Name?</h6>
+                <div className="form-field">
+                  <input
+                    placeholder="Enter your last name."
+                    type="text"
+                    name = "lastName"
+                    value= {this.state.lastName}
+                    className="validate"
+                    onChange={this.handleChange}
+                  ></input>
+                </div>
               </div>
 
-              <div class="card-content">
-                <h7> What's your gender?</h7>
-                <p>
-                  <br />
-                  <label class="checkbox-left">
-                    <input type="checkbox" />
-                    <span>Male</span>
-                  </label>
-                  <label class="checkbox-middle">
-                    <input type="checkbox" />
-                    <span>Female</span>
-                  </label>
-                </p>
+              <div className="card-content">
+                <h6> What's your address?</h6>
+                <div className="form-field">
+                  <input
+                    placeholder="Enter Address."
+                    type="text"
+                    className="validate"
+                    name = "address"
+                    value= {this.state.address}
+                    onChange={this.handleChange}
+                  ></input>
+                </div>
               </div>
 
-              <div class="center-align">
-                <button class="btn btn-block blue darken-4" type="submit">
+
+              <div className="center-align">
+                <button className="btn btn-block blue darken-4" type="submit">
                   Sign Up
                 </button>
               </div>
 
-              <div class="card-content center-align">
-                <h7> Have an account?</h7>
+              <div className="card-content center-align">
+                <h6> Have an account?</h6>
                 <Link to="/CustomerLogIn">
-                  <h7>
+                  <h6>
                     <u> Log In.</u>
-                  </h7>
+                  </h6>
                 </Link>
-                <div class="form-field"></div>
+                <div className="form-field"></div>
               </div>
               </form>
             </div>
@@ -172,3 +175,11 @@ export default class CustomerSignUp extends Component {
     );
   }
 }
+CustomerSignUp.propTypes = {
+  createCustomer: PropTypes.func.isRequired
+};
+
+export default connect (
+  null,
+  {createCustomer}
+)(CustomerSignUp);

@@ -15,6 +15,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/accounts")
+@CrossOrigin
 public class AccountController {
     @Autowired
     private AccountService accountService;

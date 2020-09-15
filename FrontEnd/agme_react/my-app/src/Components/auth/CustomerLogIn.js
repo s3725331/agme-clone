@@ -6,8 +6,8 @@ export default class CustomerLogIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      identifier: '',
-      password: '',
+      email: "",
+      password: "",
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -15,7 +15,7 @@ export default class CustomerLogIn extends Component {
   }
 
   handleChange(e) {
-    this.setState({ [e.target.id]: e.target.value });
+    this.setState({ [e.target.name]: e.target.value });
   }
 
   handleSubmit(e) {
@@ -43,7 +43,8 @@ export default class CustomerLogIn extends Component {
                     <input
                     field="identifier"
                     placeholder="Please enter your email."
-                    id="identifier"
+                    name="email"
+                    value= {this.state.email}
                     onChange={this.handleChange}
                     ></input>
                     <span
@@ -58,7 +59,8 @@ export default class CustomerLogIn extends Component {
                     <input
                       field="password"
                       placeholder="Please enter your password."
-                      id="password"
+                      name="password"
+                      value= {this.state.password}
                       onChange={this.handleChange}
                       type="password"
                     ></input>
