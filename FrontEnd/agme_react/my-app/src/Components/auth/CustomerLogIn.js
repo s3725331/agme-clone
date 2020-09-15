@@ -29,11 +29,11 @@ export default class CustomerLogIn extends Component {
       <div>
         <div className="row">
           <div className="col s12 m4 offset-m4">
-            <div className="card">
-              <div class="card-action blue darken-4 white-text">
+            <div className= "card" data-test="card">
+              <div className="card-action blue darken-4 white-text">
                 <Link to="/Dashboard">
-                  <span class="white-text text-darken-2 center-align">
-                    <h2>Agme Booking</h2>
+                  <span className="white-text text-darken-2 center-align">
+                    <h2 data-test="header">Agme Booking</h2>
                   </span>
                 </Link>
               </div>
