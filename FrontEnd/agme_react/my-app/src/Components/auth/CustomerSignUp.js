@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { createAccount } from "../../actions/signupActions";
+import { createCustomer } from "../../actions/custCreateActions";
 
 class CustomerSignUp extends Component {
   constructor(props) {
@@ -35,7 +35,7 @@ class CustomerSignUp extends Component {
     }
 
     console.log(newAccount);
-    this.props.createAccount(this.state, this.props.history);
+    this.props.createCustomer(this.state, this.props.history);
   }
 
   render() {
@@ -181,5 +181,5 @@ CustomerSignUp.propTypes = {
 
 export default connect (
   null,
-  {createAccount}
+  {createCustomer}
 )(CustomerSignUp);
