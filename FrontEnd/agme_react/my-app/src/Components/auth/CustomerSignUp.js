@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { createAccount } from "../../actions/signupActions";
 
-export default class CustomerSignUp extends Component {
-  constructor() {
-    super();
+class CustomerSignUp extends Component {
+  constructor(props) {
+    super(props);
     this.state = {
       email: "",
       password: "",
@@ -16,24 +19,9 @@ export default class CustomerSignUp extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentDidMount() {
-    const M = window.M;
-    const Calender = document.querySelector(".datepicker");
-    M.Datepicker.init(Calender, {
-      defaultDate: new Date(),
-      format: this.calenderState.format,
-      container: "body",
-    });
-  }
-
-  calenderState = {
-    value: new Date(),
-    format: "dd mmm, yyyy",
-    formatMoment: "dd MMM, YYYY",
-  };
 
   handleChange(e) {
-    this.setState({ [e.target.id]: e.target.value });
+    this.setState({ [e.target.name]: e.target.value });
   }
 
   handleSubmit(e) {
@@ -47,6 +35,7 @@ export default class CustomerSignUp extends Component {
     }
 
     console.log(newAccount);
+    this.props.createAccount(this.state, this.props.history);
   }
 
   render() {
@@ -68,7 +57,6 @@ export default class CustomerSignUp extends Component {
                 <div className="form-field">
                   <input
                     placeholder="Enter your email."
-                    id="email"
                     type="email"
                     name="email"
                     value= {this.state.email}
@@ -86,7 +74,6 @@ export default class CustomerSignUp extends Component {
                 <div className="form-field">
                   <input
                     placeholder="Enter your email again."
-                    id="email"
                     type="email"
                     className="validate"
                   ></input>
@@ -102,7 +89,6 @@ export default class CustomerSignUp extends Component {
                 <div className="form-field">
                   <input
                     placeholder="Create a password."
-                    id="password"
                     type="password"
                     className="validate"
                     name="password"
@@ -116,7 +102,6 @@ export default class CustomerSignUp extends Component {
                 <div className="form-field">
                   <input
                     placeholder="Enter your password again."
-                    id="password"
                     type="password"
                     className="validate"
                   ></input>
@@ -129,7 +114,6 @@ export default class CustomerSignUp extends Component {
                 <div className="form-field">
                   <input
                     placeholder="Enter your First Name."
-                    id="firstName"
                     type="text"
                     className="validate"
                     name = "firstName"
@@ -144,7 +128,6 @@ export default class CustomerSignUp extends Component {
                 <div className="form-field">
                   <input
                     placeholder="Enter your last name."
-                    id="lastName"
                     type="text"
                     name = "lastName"
                     value= {this.state.lastName}
@@ -159,7 +142,6 @@ export default class CustomerSignUp extends Component {
                 <div className="form-field">
                   <input
                     placeholder="Enter Address."
-                    id="address"
                     type="text"
                     className="validate"
                     name = "address"
@@ -169,34 +151,6 @@ export default class CustomerSignUp extends Component {
                 </div>
               </div>
 
-
-
-
-              <div className="card-content">
-                <h6> What's your date of birth?</h6>
-                <input
-                  type="text"
-                  id="dob"
-                  className="datepicker"
-                  placeholder="Choose your date of birth."
-                  onChange={this.handleChange}
-                ></input>
-              </div>
-
-              <div className="card-content">
-                <h6> What's your gender?</h6>
-                <p>
-                  <br />
-                  <label className="checkbox-left">
-                    <input type="checkbox" />
-                    <span>Male</span>
-                  </label>
-                  <label className="checkbox-middle">
-                    <input type="checkbox" />
-                    <span>Female</span>
-                  </label>
-                </p>
-              </div>
 
               <div className="center-align">
                 <button className="btn btn-block blue darken-4" type="submit">
@@ -221,3 +175,11 @@ export default class CustomerSignUp extends Component {
     );
   }
 }
+CustomerSignUp.propTypes = {
+  createProject: PropTypes.func.isRequired
+};
+
+export default connect (
+  null,
+  {createAccount}
+)(CustomerSignUp);
