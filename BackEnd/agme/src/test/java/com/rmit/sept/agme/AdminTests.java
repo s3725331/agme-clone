@@ -23,14 +23,13 @@ public class AdminTests {
     public void testCreatedDate(){
         Account account = new Account();
         account.setPassword("password");
-        account.setAddress("adsadasdasdsa");
-        account.setLastName("sdfsdfsdf");
-        account.setFirstName("sgrgergerg");
+        account.setAddress("7 Street somewhere");
+        account.setLastName("Apple");
+        account.setFirstName("Person");
         account.setEmail("gmail@gmail.com");
         accountRepository.save(account);
         Admin admin = new Admin(account);
         Admin newAdmin = adminRepository.save(admin);
-
         assertThat(newAdmin.getCreatedAt()).isNotNull();
     }
 

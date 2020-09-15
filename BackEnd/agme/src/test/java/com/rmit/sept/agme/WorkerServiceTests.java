@@ -25,36 +25,36 @@ public class WorkerServiceTests {
     WorkerService workerService;
 
     @Test
-    public void testValidCustomerCreate() {
+    public void testValidWorkerCreate() {
         Account work = new Account();
-        work.setAddress("13 realplace drive, suburbs");
-        work.setEmail("Juan@mail.com");
-        work.setFirstName("Juan");
-        work.setLastName("Rosso");
+        work.setAddress("26 Hill Avenue EastLand");
+        work.setEmail("bob@gmail.com");
+        work.setFirstName("Bob");
+        work.setLastName("Builder");
         work.setPassword("password");
         Account newAccount = accountRepository.save(work);
         assertTrue(workerService.create(newAccount.getId()).isPresent());
     }
 
     @Test
-    public void testInvalidCustomerCreate() {
+    public void testInvalidWorkerCreate() {
         Account work = new Account();
-        work.setAddress("13 realplace drive, suburbs");
-        work.setEmail("Juan@mail.com");
-        work.setFirstName("Juan");
-        work.setLastName("Rosso");
-        work.setPassword("password");
+        work.setAddress("132 Wayne Street Etihad");
+        work.setEmail("dominic@gmail.com");
+        work.setFirstName("Dominic");
+        work.setLastName("Person");
+        work.setPassword("password123");
         Account newAccount = accountRepository.save(work);
         assertFalse(workerService.create(12345).isPresent());
     }
     @Test
-    public void testValidCustomerGet() {
+    public void testValidWorkerGet() {
         Account work = new Account();
-        work.setAddress("13 realplace drive, suburbs");
-        work.setEmail("Juan@mail.com");
-        work.setFirstName("Juan");
-        work.setLastName("Rosso");
-        work.setPassword("password");
+        work.setAddress("132 Wayne Street Etihad");
+        work.setEmail("dominic@gmail.com");
+        work.setFirstName("Dominic");
+        work.setLastName("Person");
+        work.setPassword("password123");
         Account newAccount = accountRepository.save(work);
         Worker worker = new Worker(newAccount);
         Worker newWorker = workerRepository.save(worker);
@@ -62,12 +62,12 @@ public class WorkerServiceTests {
     }
 
     @Test
-    public void testInvalidCustomerGet() {
+    public void testInvalidWorkerGet() {
         Account work = new Account();
-        work.setAddress("13 realplace drive, suburbs");
-        work.setEmail("Juan@mail.com");
-        work.setFirstName("Juan");
-        work.setLastName("Rosso");
+        work.setAddress("26 Hill Avenue EastLand");
+        work.setEmail("bob@gmail.com");
+        work.setFirstName("Bob");
+        work.setLastName("Builder");
         work.setPassword("password");
         Account newAccount = accountRepository.save(work);
         Worker worker = new Worker(newAccount);
@@ -76,13 +76,13 @@ public class WorkerServiceTests {
     }
 
     @Test
-    public void testValidCustomerUpdate() {
+    public void testValidWorkerUpdate() {
         Account work = new Account();
-        work.setAddress("13 realplace drive, suburbs");
-        work.setEmail("Juan@mail.com");
-        work.setFirstName("Juan");
-        work.setLastName("Rosso");
-        work.setPassword("password");
+        work.setEmail("ashley@gmail.com");
+        work.setPassword("password123");
+        work.setFirstName("Ashley");
+        work.setLastName("Dale");
+        work.setAddress("34 Albert Road Tower");
         Account newAccount = accountRepository.save(work);
         Worker worker = new Worker(newAccount);
         Worker newWorker = workerRepository.save(worker);
@@ -90,13 +90,13 @@ public class WorkerServiceTests {
     }
 
     @Test
-    public void testInvalidCustomerUpdate() {
+    public void testInvalidWorkerUpdate() {
         Account work = new Account();
-        work.setAddress("13 realplace drive, suburbs");
-        work.setEmail("Juan@mail.com");
-        work.setFirstName("Juan");
-        work.setLastName("Rosso");
-        work.setPassword("password");
+        work.setEmail("ashley@gmail.com");
+        work.setPassword("password123");
+        work.setFirstName("Ashley");
+        work.setLastName("Dale");
+        work.setAddress("34 Albert Road Tower");
         Account newAccount = accountRepository.save(work);
         Worker worker = new Worker(newAccount);
         Worker newWorker = workerRepository.save(worker);
