@@ -26,6 +26,7 @@ export default class CustomerLogIn extends Component {
   render() {
 
     return (
+
       <div>
         <div className="row">
           <div className="col s12 m4 offset-m4">
@@ -39,7 +40,7 @@ export default class CustomerLogIn extends Component {
               </div>
               <form onSubmit={this.handleSubmit}>
                 <div class="card-content">
-                  <div class="form-field">
+                  <div data-test="email-field">
                     <input
                     field="identifier"
                     placeholder="Please enter your email."
@@ -55,7 +56,7 @@ export default class CustomerLogIn extends Component {
                   </div>
                 </div>
                 <div class="card-content">
-                  <div class="form-field">
+                  <div data-test="password-field">
                     <input
                       field="password"
                       placeholder="Please enter your password."
@@ -74,6 +75,7 @@ export default class CustomerLogIn extends Component {
                 <div class="center-align">
                   <button
                     className="btn btn-block blue darken-4"
+                    data-test="log-in-button"
                     type="submit"
                   >
                     Log In
@@ -90,6 +92,7 @@ export default class CustomerLogIn extends Component {
                 <div class="center-align">
                   <a
                     class="btn btn-block blue-grey lighten-5 blue-text"
+                    data-test="signUpButton"
                     type="submit"
                   >
                     <Link to="/CustomerSignUp">Sign Up for Agme</Link>

@@ -1,20 +1,20 @@
 import React, { Component } from "react";
 import { Link, Router } from "react-router-dom";
-import {useSelector} from 'react-redux';
-import { getByText } from "@testing-library/react";
+import allReducer from './../../reducers/loggedIn';
 
-export class DashBoard extends Component {
-  // const for logged in or not
+export default class DashBoard extends Component {
+  
   componentDidMount() {
     const M = window.M;
     const sideNav = document.querySelector(".sidenav");
     M.Sidenav.init(sideNav, {});
   }
-
+  
   render() {
+
     return (
       <div>
-        <div className="navbarFixed">
+        <div data-test="navbar">
           <nav className="blue darken-4">
             <div className="container">
               <div className="nav-wrapper">
@@ -27,19 +27,20 @@ export class DashBoard extends Component {
                 </a>
                 <ul className="right hide-on-med-and-down">
                 
-                  <li>
+                  <li class="waves-effect col s3">
                     <a href="#home">Home</a>
                   </li>
-                  <li>
+                  <li class="waves-effect col s3">
                     <a href="#about">About</a>
                   </li>
-                  <li>
+                  <li class="waves-effect col s3">
                     <a href="#contact">Contact Us</a>
                   </li>
                   <li>
                     <a>|</a>
                   </li>
                   
+                  {/*
                   <li>
                     <Link to="/CustomerSignUp">
                       <a>Sign Up</a>
@@ -49,6 +50,18 @@ export class DashBoard extends Component {
                     <Link to="/CustomerLogIn">
                       <a>Log In</a>
                     </Link>
+                  </li>
+                  */}
+                  
+                  <li class="waves-effect col s3">
+                  <div>
+                    <a class="area">
+                      <i class="material-icons">account_circle</i>
+                      <span class="nav-text">Profile 
+                        <i class="material-icons right">arrow_drop_down</i>
+                      </span>
+                    </a>
+                    </div>
                   </li>
                   
                 </ul>
@@ -90,4 +103,3 @@ export class DashBoard extends Component {
   }
 }
 
-export default DashBoard;

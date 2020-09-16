@@ -20,15 +20,34 @@ describe('CustomerLogIn', () => {
         component = setUp();
     })
 
-    // testing class renders
     it('should find card class', () => {
         const wrapper = findByTestAtrr(component, 'card');
         expect(wrapper.length).toBe(1);
     });
 
-    // testing header renders
     it('should render the header', () => {
-        const header = findByTestAtrr(component, 'header');
-        expect(header.length).toBe(1);
+        const h2 = findByTestAtrr(component, 'header');
+        expect(h2.length).toBe(1);
     });
+
+    it('should render email input', () => {
+        const wrapper = findByTestAtrr(component, 'email-field');
+        expect(wrapper.length).toBe(1);
+    });
+
+    it('should render password input', () => {
+        const wrapper = findByTestAtrr(component, 'password-field');
+        expect(wrapper.length).toBe(1);
+    });
+
+    it('should render log in button', () => {
+        const button = findByTestAtrr(component, 'log-in-button');
+        expect(button.length).toBe(1);
+    });
+
+    it('should render sign up button', () => {
+        const button = findByTestAtrr(component, 'signUpButton');
+        expect(button.length).toBe(1);
+    });
+
 })
