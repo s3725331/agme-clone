@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getAccount } from "../../actions/getAccountActions";
 
-class CustomerLogIn extends Component {
+export class CustomerLogIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -54,18 +54,18 @@ class CustomerLogIn extends Component {
       <div>
         <div className="row">
           <div className="col s12 m4 offset-m4">
-            <div className="card">
+            <div className="card" data-test="card">
               <div class="card-action blue darken-4 white-text"
               onClick={this.reset}>
                 <Link to="/Dashboard">
                   <span class="white-text text-darken-2 center-align">
-                    <h2>Agme Booking</h2>
+                    <h2 data-test="header">Agme Booking</h2>
                   </span>
                 </Link>
               </div>
               <form onSubmit={this.handleSubmit}>
                 <div class="card-content">
-                  <div class="form-field">
+                  <div data-test="email-field">
                     <input
                     field="identifier"
                     placeholder="Please enter your email."
@@ -82,7 +82,7 @@ class CustomerLogIn extends Component {
                   </div>
                 </div>
                 <div class="card-content">
-                  <div class="form-field">
+                  <div data-test="password-field">
                     <input
                       field="password"
                       placeholder="Please enter your password."
@@ -101,6 +101,7 @@ class CustomerLogIn extends Component {
                 <div class="center-align">
                   <button
                     className="btn btn-block blue darken-4"
+                    data-test="log-in-button"
                     type="submit"
                   >
                     Log In
@@ -117,6 +118,7 @@ class CustomerLogIn extends Component {
                 <div class="center-align">
                   <a
                     class="btn btn-block blue-grey lighten-5 blue-text"
+                    data-test="signUpButton"
                     type="submit"
                   >
                     <Link to="/CustomerSignUp">Sign Up for Agme</Link>
