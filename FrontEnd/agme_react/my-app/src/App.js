@@ -9,7 +9,7 @@ import store from './store';
 
 function App() {
   return (
-    <Provider store={store}>
+   <Provider store = {store}>
     <Router>
       <div>
         <Switch>

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createCustomer } from "../../actions/custCreateActions";
+import { LOGIN_SUCCESS } from "../../actions/types";
 
 export class CustomerSignUp extends Component {
   constructor(props) {
@@ -12,13 +13,12 @@ export class CustomerSignUp extends Component {
       password: "",
       firstName: "",
       lastName: "",
-      address: ""
+      address: "",
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
 
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -34,8 +34,11 @@ export class CustomerSignUp extends Component {
       address: this.state.address
     }
 
+
     console.log(newAccount);
     this.props.createCustomer(newAccount, this.props.history);
+
+    console.log()
   }
 
   render() {
@@ -177,9 +180,12 @@ export class CustomerSignUp extends Component {
     );
   }
 }
+
 CustomerSignUp.propTypes = {
-  createCustomer: PropTypes.func.isRequired
+  createCustomer: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
 };
+
 
 export default connect (
   null,
