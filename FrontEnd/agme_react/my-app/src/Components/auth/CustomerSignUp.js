@@ -12,7 +12,8 @@ class CustomerSignUp extends Component {
       password: "",
       firstName: "",
       lastName: "",
-      address: ""
+      address: "",
+      type:""
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -35,7 +36,7 @@ class CustomerSignUp extends Component {
     }
 
     console.log(newAccount);
-    this.props.createCustomer(newAccount, this.props.history);
+    this.props.createCustomer(newAccount, this.state.type, this.props.history);
   }
 
   render() {
@@ -149,6 +150,18 @@ class CustomerSignUp extends Component {
                     onChange={this.handleChange}
                   ></input>
                 </div>
+              </div>
+
+              <div className="card-content">
+              <h6> Are you a customer or a Worker? </h6>
+              <select className = "browser-default" onChange={this.handleChange} 
+              value= {this.state.type} 
+              name = "type" required >
+                      <option value="" disabled selected>Select account type</option>
+                      <option value="Customer">Customer</option>
+                      <option value="Worker">Worker</option>
+                  </select>
+                  
               </div>
 
 
