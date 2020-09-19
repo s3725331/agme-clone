@@ -77,13 +77,15 @@ export class DashBoard extends Component {
             <Link to="/CustomerLogIn">
               <a>Log In</a>
             </Link>
-          </li>
-          
+          </li>        
         </ul>
-        
 
         <ul className="mainDashboard">
-          
+          <div className ="col s12 m12 offset-m4 center-align">
+            <Link to = "/Booking">
+              <a class="waves-effect blue darken-4 btn-small">Book an appointment</a>
+            </Link>
+          </div>
         </ul>
       </div>
     );
