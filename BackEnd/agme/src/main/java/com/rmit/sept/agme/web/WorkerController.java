@@ -65,8 +65,9 @@ public class WorkerController {
     }
 
     @GetMapping("")
-    public ResponseEntity<?> getCustomer(@RequestParam("id") long id){
-        Optional<Worker> worker = workerService.get(id);
+    public ResponseEntity<?> getWorker(@RequestParam("accountId") long accountId){
+        Optional<Account> account = accountService.get(accountId);
+        Optional<Worker> worker = workerService.getByAccount(account.get());
 
         if(!worker.isPresent()){
             return new ResponseEntity<>("No Worker Found", HttpStatus.NOT_FOUND);
@@ -75,8 +76,19 @@ public class WorkerController {
         return new ResponseEntity<>(worker,HttpStatus.OK);
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<?> getAllWorker(){
+        Iterable<Worker> worker = workerService.getAll();
+
+        if(!worker.iterator().hasNext()){
+            return new ResponseEntity<>("No Worker Found", HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(worker,HttpStatus.OK);
+    }
+
     @PutMapping("")
-    public ResponseEntity<?> updateCustomer(@Valid @RequestBody Worker worker, BindingResult result){
+    public ResponseEntity<?> updateWorker(@Valid @RequestBody Worker worker, BindingResult result){
         if(result.hasErrors()) {
             return new ResponseEntity<>("Invalid Account Object", HttpStatus.BAD_REQUEST);
         }

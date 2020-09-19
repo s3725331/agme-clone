@@ -2,6 +2,7 @@ package com.rmit.sept.agme.model;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -10,6 +11,7 @@ public class Admin {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotNull
     @ManyToOne
     private Account account;
 

@@ -25,6 +25,16 @@ public class CustomerService {
         return customerRepository.findById(id);
     }
 
+  public Optional<Customer> getByAccount(Account account) {
+
+       Iterable<Customer> customers = customerRepository.getByAccount(account);
+
+        if(customers.iterator().hasNext())
+            return Optional.of(customers.iterator().next());
+        else
+            return Optional.empty();
+    }
+
     public Optional<Customer> create(long accountID){
         Optional<Account> userAccount = accountRepository.findById(accountID);
         if(!userAccount.isPresent()){
