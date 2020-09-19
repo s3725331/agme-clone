@@ -3,7 +3,8 @@ import { Link, Router } from "react-router-dom";
 import { useSelector, connect } from "react-redux";
 import { getByText } from "@testing-library/react";
 import Navbar from "./Navbars/MainNavbar";
-import SideNavbar from "./Navbars/SideNavbar";
+import MainSideNavbar from "./Navbars/MainSideNavbar";
+import Footer from "./Footer";
 
 export default class DashBoard extends Component {
 
@@ -17,7 +18,8 @@ export default class DashBoard extends Component {
     return (
       <div>
         <Navbar />
-        <SideNavbar />
+        <MainSideNavbar />
+        <Footer />
       </div>
     );
   }

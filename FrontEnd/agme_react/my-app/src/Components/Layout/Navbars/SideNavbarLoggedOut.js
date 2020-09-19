@@ -6,16 +6,7 @@ import { Link, Router } from "react-router-dom";
 export default class SideNavbar extends Component {
   render() {
     return (
-      <ul className="sidenav" id="mobile-nav">
-        <li>
-          <a href="#home">Home</a>
-        </li>
-        <li>
-          <a href="#about">About</a>
-        </li>
-        <li>
-          <a href="#contact">Contact Us</a>
-        </li>
+      <ul id="mobile-nav">
         <li>
           <Link to="/CustomerSignUp">
             <a>Sign Up</a>

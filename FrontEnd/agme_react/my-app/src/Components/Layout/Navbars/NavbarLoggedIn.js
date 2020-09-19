@@ -2,12 +2,23 @@ import React, { Component, useState } from "react";
 
 export default class loggedInComponent extends Component {
 
-  render() {
+  componentDidMount() {
+    const M = window.M;
+    var elems = document.querySelectorAll('.dropdown-trigger');
+    var instances = M.Dropdown.init(elems, {
+      coverTrigger: false
+    });
+  }
 
+  logOut() {
+    localStorage.clear();
+  }
+
+  render() {
     return (
       <li class="waves-effect col s3">
         <div>
-          <a class="dropdown-trigger">
+          <a class="dropdown-trigger" data-target='dropdown'>
             <i class="material-icons">account_circle</i>
             <span class="nav-text">
               Profile
@@ -15,6 +26,14 @@ export default class loggedInComponent extends Component {
             </span>
           </a>
         </div>
+        <ul id="dropdown" class="dropdown-content">
+          <li>
+            <a href="#!">Account</a>
+          </li>
+          <li>
+            <a href="#!" onClick={this.logOut}>Logout</a>
+          </li>
+        </ul>
       </li>
     );
   }

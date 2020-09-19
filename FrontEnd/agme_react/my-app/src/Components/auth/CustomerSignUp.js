@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createCustomer } from "../../actions/custCreateActions";
-import { LOGIN_SUCCESS } from "../../actions/types";
 
 export class CustomerSignUp extends Component {
   constructor(props) {

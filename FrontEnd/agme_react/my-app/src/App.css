@@ -63,9 +63,11 @@ nav ul .waves-effect i {
 }
 
 .dropdown-trigger {
-  height:63px;
+  height:164px;
 }
 
-.blue darken-4 {
-  overflow: visible
+.page-footer{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
