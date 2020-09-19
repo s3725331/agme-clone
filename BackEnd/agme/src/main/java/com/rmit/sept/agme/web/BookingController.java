@@ -61,10 +61,10 @@ public class BookingController {
     public ResponseEntity<?> getUpcomingBookings(@RequestParam(value = "workerId", required = false) Long workerID,
                                                @RequestParam(value = "customerId", required = false) Long customerID){
         if(workerID != null && customerID == null){
-            List<Booking> bookings = bookingService.getByWorkerBetween(workerID, new Date(), null);
+            Iterable<Booking> bookings = bookingService.getByWorkerBetween(workerID, new Date(), null);
             return new ResponseEntity<>(bookings, HttpStatus.OK);
         } else if(workerID == null && customerID != null){
-            List<Booking> bookings = bookingService.getByCustomerBetween(customerID, new Date(), null);
+            Iterable<Booking> bookings = bookingService.getByCustomerBetween(customerID, new Date(), null);
             return new ResponseEntity<>(bookings, HttpStatus.OK);
         }
         else{
@@ -76,10 +76,10 @@ public class BookingController {
     public ResponseEntity<?> getPastBookings(@RequestParam(value = "workerId", required = false) Long workerID,
                                                  @RequestParam(value = "customerId", required = false) Long customerID){
         if(workerID != null && customerID == null){
-            List<Booking> bookings = bookingService.getByWorkerBetween(workerID, null, new Date());
+            Iterable<Booking> bookings = bookingService.getByWorkerBetween(workerID, null, new Date());
             return new ResponseEntity<>(bookings, HttpStatus.OK);
         } else if(workerID == null && customerID != null){
-            List<Booking> bookings = bookingService.getByCustomerBetween(customerID, null, new Date());
+            Iterable<Booking> bookings = bookingService.getByCustomerBetween(customerID, null, new Date());
             return new ResponseEntity<>(bookings, HttpStatus.OK);
         }
         else{

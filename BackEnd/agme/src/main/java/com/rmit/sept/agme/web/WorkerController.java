@@ -64,11 +64,22 @@ public class WorkerController {
     }
 
     @GetMapping("")
-    public ResponseEntity<?> getWorker(@RequestParam("id") long id){
-        Optional<Account> account = accountService.get(id);
+    public ResponseEntity<?> getWorker(@RequestParam("accountId") long accountId){
+        Optional<Account> account = accountService.get(accountId);
         Optional<Worker> worker = workerService.getByAccount(account.get());
 
         if(!worker.isPresent()){
+            return new ResponseEntity<>("No Worker Found", HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(worker,HttpStatus.OK);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<?> getAllWorker(){
+        Iterable<Worker> worker = workerService.getAll();
+
+        if(!worker.iterator().hasNext()){
             return new ResponseEntity<>("No Worker Found", HttpStatus.NOT_FOUND);
         }
 

@@ -9,6 +9,7 @@ import org.hibernate.jdbc.Work;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -40,7 +41,7 @@ public class WorkerService {
 
     public Optional<Worker> getByAccount(Account account) {
 
-        Iterable<Worker> workers = workerRepository.getAccount(account);
+        Iterable<Worker> workers = workerRepository.getByAccount(account);
 
         if(workers.iterator().hasNext())
             return Optional.of(workers.iterator().next());
@@ -66,5 +67,9 @@ public class WorkerService {
             return Optional.empty();
 
         return Optional.of(account);
+    }
+
+    public Iterable<Worker> getAll(){
+        return workerRepository.findAll();
     }
 }

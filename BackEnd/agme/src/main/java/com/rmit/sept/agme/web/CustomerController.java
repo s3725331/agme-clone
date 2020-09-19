@@ -52,8 +52,8 @@ public class CustomerController {
     }
 
     @GetMapping("")
-    public ResponseEntity<?> getCustomer(@RequestParam("id") long id){
-        Optional<Account> account = accountService.get(id);
+    public ResponseEntity<?> getCustomer(@RequestParam("accountId") long accountId){
+        Optional<Account> account = accountService.get(accountId);
         Optional<Customer> customer = customerService.getByAccount(account.get());
 
         if(!customer.isPresent()){

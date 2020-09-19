@@ -27,7 +27,7 @@ public class CustomerService {
 
   public Optional<Customer> getByAccount(Account account) {
 
-       Iterable<Customer> customers = customerRepository.getAccount(account);
+       Iterable<Customer> customers = customerRepository.getByAccount(account);
 
         if(customers.iterator().hasNext())
             return Optional.of(customers.iterator().next());

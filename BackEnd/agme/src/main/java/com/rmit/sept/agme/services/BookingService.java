@@ -42,7 +42,7 @@ public class BookingService {
         return Optional.of(bookingRepository.save(booking.get()));
     }
 
-    public List<Booking> getByWorkerBetween(long workerID, Date start, Date end){
+    public Iterable<Booking> getByWorkerBetween(long workerID, Date start, Date end){
         if(start == null){
             return bookingRepository.getPastByWorker(workerID, end);
         } else if(end == null) {
@@ -51,7 +51,7 @@ public class BookingService {
         return Collections.EMPTY_LIST;
     }
 
-    public List<Booking> getByCustomerBetween(long customerID, Date start, Date end){
+    public Iterable<Booking> getByCustomerBetween(long customerID, Date start, Date end){
         if(start == null){
             return bookingRepository.getPastByCustomer(customerID, end);
         } else if(end == null) {
