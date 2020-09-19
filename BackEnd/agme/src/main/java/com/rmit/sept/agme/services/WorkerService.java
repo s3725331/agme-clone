@@ -1,6 +1,7 @@
 package com.rmit.sept.agme.services;
 
 import com.rmit.sept.agme.model.Account;
+import com.rmit.sept.agme.model.Customer;
 import com.rmit.sept.agme.model.Worker;
 import com.rmit.sept.agme.repositories.AccountRepository;
 import com.rmit.sept.agme.repositories.WorkerRepository;
@@ -36,6 +37,18 @@ public class WorkerService {
     public Optional<Worker> get(long id){
         return workerRepository.findById(id);
     }
+
+    public Optional<Worker> getByAccount(Account account) {
+
+        Iterable<Worker> workers = workerRepository.getAccount(account);
+
+        if(workers.iterator().hasNext())
+            return Optional.of(workers.iterator().next());
+        else
+            return Optional.empty();
+    }
+
+
 
     public Optional<Worker> create(long accountID){
         Optional<Account> userAccount = accountRepository.findById(accountID);

@@ -65,7 +65,8 @@ public class WorkerController {
 
     @GetMapping("")
     public ResponseEntity<?> getWorker(@RequestParam("id") long id){
-        Optional<Worker> worker = workerService.get(id);
+        Optional<Account> account = accountService.get(id);
+        Optional<Worker> worker = workerService.getByAccount(account.get());
 
         if(!worker.isPresent()){
             return new ResponseEntity<>("No Worker Found", HttpStatus.NOT_FOUND);

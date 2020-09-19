@@ -53,7 +53,8 @@ public class CustomerController {
 
     @GetMapping("")
     public ResponseEntity<?> getCustomer(@RequestParam("id") long id){
-        Optional<Customer> customer = customerService.get(id);
+        Optional<Account> account = accountService.get(id);
+        Optional<Customer> customer = customerService.getByAccount(account.get());
 
         if(!customer.isPresent()){
             return new ResponseEntity<>("No Customer Found", HttpStatus.NOT_FOUND);
