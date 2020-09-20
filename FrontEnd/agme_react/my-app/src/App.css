@@ -52,3 +52,22 @@
   
 }
 
+nav ul .waves-effect i {
+  display: inline;
+  margin-left: 8px;
+}
+
+.nav-text {
+  vertical-align: 8px;
+  margin-left: 10px;
+}
+
+.dropdown-trigger {
+  height:164px;
+}
+
+.page-footer{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}

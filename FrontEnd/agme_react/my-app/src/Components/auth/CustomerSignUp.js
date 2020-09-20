@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createCustomer } from "../../actions/custCreateActions";
 
-class CustomerSignUp extends Component {
+export class CustomerSignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,7 +20,6 @@ class CustomerSignUp extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
@@ -35,6 +34,7 @@ class CustomerSignUp extends Component {
       address: this.state.address
     }
 
+
     console.log(newAccount);
     this.props.createCustomer(newAccount, this.state.type, this.props.history);
   }
@@ -44,10 +44,10 @@ class CustomerSignUp extends Component {
       <div>
         <div className="row">
           <div className="col s12 m4 offset-m4">
-            <div className="card">
+            <div className="card" data-test="card">
               <div className="card-action blue darken-4 white-text">
                 <Link to="/Dashboard">
-                  <span className="white-text text-darken-2 center-align">
+                  <span className="white-text text-darken-2 center-align" data-test="header">
                     <h2>Agme Booking</h2>
                   </span>
                 </Link>
@@ -55,7 +55,7 @@ class CustomerSignUp extends Component {
               <form onSubmit={this.handleSubmit}>
               <div className="card-content">
                 <h6> What's your email?</h6>
-                <div className="form-field">
+                <div data-test="email-field">
                   <input
                     placeholder="Enter your email."
                     type="email"
@@ -72,7 +72,7 @@ class CustomerSignUp extends Component {
               </div>
               <div className="card-content">
                 <h6> Confirm your email</h6>
-                <div className="form-field">
+                <div data-test="confirm-email-field">
                   <input
                     placeholder="Enter your email again."
                     type="email"
@@ -87,7 +87,7 @@ class CustomerSignUp extends Component {
               </div>
               <div className="card-content">
                 <h6> Create a password</h6>
-                <div className="form-field">
+                <div data-test="password-field">
                   <input
                     placeholder="Create a password."
                     type="password"
@@ -100,7 +100,7 @@ class CustomerSignUp extends Component {
               </div>
               <div className="card-content">
                 <h6> Confirm your password</h6>
-                <div className="form-field">
+                <div data-test="confirm-password-field">
                   <input
                     placeholder="Enter your password again."
                     type="password"
@@ -112,7 +112,7 @@ class CustomerSignUp extends Component {
 
               <div className="card-content">
                 <h6> What's your First Name?</h6>
-                <div className="form-field">
+                <div data-test="first-name-field">
                   <input
                     placeholder="Enter your First Name."
                     type="text"
@@ -126,7 +126,7 @@ class CustomerSignUp extends Component {
 
               <div className="card-content">
                 <h6> What's your Last Name?</h6>
-                <div className="form-field">
+                <div data-test="last-name-field">
                   <input
                     placeholder="Enter your last name."
                     type="text"
@@ -140,7 +140,7 @@ class CustomerSignUp extends Component {
 
               <div className="card-content">
                 <h6> What's your address?</h6>
-                <div className="form-field">
+                <div data-test="address-field">
                   <input
                     placeholder="Enter Address."
                     type="text"
@@ -166,7 +166,9 @@ class CustomerSignUp extends Component {
 
 
               <div className="center-align">
-                <button className="btn btn-block blue darken-4" type="submit">
+                <button className="btn btn-block blue darken-4" 
+                data-test="sign-up-button"
+                type="submit">
                   Sign Up
                 </button>
               </div>
@@ -188,9 +190,12 @@ class CustomerSignUp extends Component {
     );
   }
 }
+
 CustomerSignUp.propTypes = {
-  createCustomer: PropTypes.func.isRequired
+  createCustomer: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
 };
+
 
 export default connect (
   null,

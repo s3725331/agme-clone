@@ -1,10 +1,12 @@
-import { combineReducers } from "redux";
+import { combineReducers, createStore } from "redux";
 import errorReducer from "./errorReducer";
-import loggedReducer from './loggedIn';
+import loggedInReducer from './loggedInReducer';
 import currentReducer from './currentUser';
 
-export default combineReducers({
+const rootReducer = combineReducers({
   errors: errorReducer,
-  loggedIn: loggedReducer,
-  currentUser:currentReducer
-});
+  loggedIn: loggedInReducer,
+  currentUser:currentReducer,
+})
+
+export default rootReducer

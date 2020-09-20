@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import DashBoard from './Components/Layout/DashBoard';
+import DashBoard from './Components/Layout/Dashboards/DashBoard';
 import CustomerSignUp from './Components/auth/CustomerSignUp';
 import CustomerLogIn from './Components/auth/CustomerLogIn';
 import Booking from './Components/Layout/Booking';
@@ -10,7 +10,7 @@ import store from './store';
 
 function App() {
   return (
-    <Provider store={store}>
+   <Provider store = {store}>
     <Router>
       <div>
         <Switch>
