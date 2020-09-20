@@ -3,7 +3,8 @@ import SideNavbarLoggedIn from "./SideNavbarLoggedIn";
 import SideNavbarLoggedOut from "./SideNavbarLoggedOut";
 import { Link, Router } from "react-router-dom";
 
-export default class SideNavbar extends Component {
+export class SideNavbar extends Component {
+
   render() {
     var sideNavAccountComponent;
     if (localStorage.getItem("currentUser") != null) {
@@ -13,18 +14,17 @@ export default class SideNavbar extends Component {
     }
 
     return (
-      <ul className="sidenav" id="mobile-nav">
+      <ul className="sidenav" id="mobile-nav" data-test="side-nav">
         <li>
-          <a href="#home">Home</a>
-        </li>
-        <li>
-          <a href="#about">About</a>
+          <a href="#home" data-test="home">Home</a>
         </li>
         <li>
           <a href="#contact">Contact Us</a>
         </li>
-        <li>{sideNavAccountComponent}</li>
+        <li><i data-test="account-component">{sideNavAccountComponent}</i></li>
       </ul>
     );
   }
 }
+
+export default SideNavbar;

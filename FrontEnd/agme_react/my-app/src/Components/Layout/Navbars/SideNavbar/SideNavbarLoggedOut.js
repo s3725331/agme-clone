@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import NavbarLoggedIn from "./NavbarLoggedIn";
-import NavbarLoggedOut from "./NavbarLoggedOut";
+import NavbarLoggedIn from "../MainNavbar/NavbarLoggedIn";
+import NavbarLoggedOut from "../MainNavbar/NavbarLoggedOut";
 import { Link, Router } from "react-router-dom";
 
 export default class SideNavbar extends Component {
@@ -9,12 +9,12 @@ export default class SideNavbar extends Component {
       <ul id="mobile-nav">
         <li>
           <Link to="/CustomerSignUp">
-            <a>Sign Up</a>
+            <h8>Sign Up</h8>
           </Link>
         </li>
         <li>
           <Link to="/CustomerLogIn">
-            <a>Log In</a>
+            <h8>Log In</h8>
           </Link>
         </li>
       </ul>

@@ -5,7 +5,7 @@ export default class loggedInComponent extends Component {
   componentDidMount() {
     const M = window.M;
     var elems = document.querySelectorAll('.dropdown-trigger');
-    var instances = M.Dropdown.init(elems, {
+    M.Dropdown.init(elems, {
       coverTrigger: false
     });
   }
@@ -16,7 +16,7 @@ export default class loggedInComponent extends Component {
 
   render() {
     return (
-      <li class="waves-effect col s3">
+      <li class="waves-effect col s3" data-test="logged-in-account-component">
         <div>
           <a class="dropdown-trigger" data-target='dropdown'>
             <i class="material-icons">account_circle</i>

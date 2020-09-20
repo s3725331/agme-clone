@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export default class loggedOutComponent extends Component {
   render() {
     return (
-      <div>
+      <div data-test="logged-out-account-component">
         <li>
           <Link to="/CustomerSignUp">Sign Up</Link>
         </li>

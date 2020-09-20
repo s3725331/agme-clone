@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { Link, Router } from "react-router-dom";
 import { useSelector, connect } from "react-redux";
 import { getByText } from "@testing-library/react";
-import Navbar from "./Navbars/MainNavbar";
-import MainSideNavbar from "./Navbars/MainSideNavbar";
-import Footer from "./Footer";
+import Navbar from "../Navbars/MainNavbar/MainNavbar";
+import MainSideNavbar from "../Navbars/SideNavbar/SideNavbar";
+import Footer from "../Footer/Footer";
 
 export default class DashBoard extends Component {
 
@@ -17,7 +17,7 @@ export default class DashBoard extends Component {
   render() {
     return (
       <div>
-        <Navbar />
+        <a data-test="navbar"><Navbar /></a>
         <MainSideNavbar />
         <Footer />
       </div>

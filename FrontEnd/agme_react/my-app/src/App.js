@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import DashBoard from './Components/Layout/DashBoard';
+import DashBoard from './Components/Layout/Dashboards/DashBoard';
 import CustomerSignUp from './Components/auth/CustomerSignUp';
 import CustomerLogIn from './Components/auth/CustomerLogIn';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';

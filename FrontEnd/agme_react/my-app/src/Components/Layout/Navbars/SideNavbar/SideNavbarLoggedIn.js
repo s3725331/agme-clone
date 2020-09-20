@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import NavbarLoggedIn from "./NavbarLoggedIn";
-import NavbarLoggedOut from "./NavbarLoggedOut";
+import NavbarLoggedIn from "../MainNavbar/NavbarLoggedIn";
+import NavbarLoggedOut from "../MainNavbar/NavbarLoggedOut";
 import { Link, Router } from "react-router-dom";
 
 export default class SideNavbar extends Component {
