@@ -16,6 +16,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/bookings")
+@CrossOrigin
 public class BookingController {
     @Autowired
     BookingService bookingService;
