@@ -19,8 +19,8 @@ import axios from "axios";
      
       var workerStore = [{id:"0",
        account : {
-      firstName:"null",
-      lastName:"null"}
+      firstName:"No",
+      lastName:"workers"}
       }]
      
 
@@ -35,17 +35,7 @@ import axios from "axios";
       endTime: "",
       loaded: false
     };
-    //console.log(this.state.workers[0]['account']['firstName'])
 
-   // var select = document.getElementById("selectNumber");
-   // var options = ["1", "2", "3", "4", "5"];
-   // for(var i = 0; i < options.length; i++) {
-    //    var opt = options[i];
-    //    var el = document.createElement("option");
-    //    el.textContent = opt;
-     //   el.value = opt;
-     //   select.appendChild(el);
-   // }
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -77,9 +67,18 @@ import axios from "axios";
 
   }
   async componentDidMount() {
+    try{
     const res = await axios.get("http://localhost:8080/api/worker/all");
     this.setState({ workers: res.data, loaded: true });
-}
+    }    catch (err) {  
+
+
+    if(err.response.status == 404){
+      this.setState({ loaded: true });
+
+  }
+  }
+  }
 
   
 render() { 
@@ -140,7 +139,7 @@ render() {
                     name = "startDate"
                     value= {this.state.startDate}
                     onChange={this.handleChange}
-                    reqired></input>
+                    required></input>
                   </div>
               </div>
 
@@ -152,7 +151,7 @@ render() {
                 name = "startTime"
                 value= {this.state.startTime}
                 onChange={this.handleChange}
-                ></input>
+                required></input>
                 </div>
                 </div>   
 
@@ -163,7 +162,7 @@ render() {
                 name = "endTime"
                 value= {this.state.endTime}
                 onChange={this.handleChange}
-                ></input>
+                required></input>
               </div>
               </div>  
 
@@ -192,8 +191,5 @@ Booking.propTypes = {
     
  // }
 //}
-
-
-//export default connect (null, {getWorkers})(Booking);
 
 export default connect (null, {createBooking})(Booking);
