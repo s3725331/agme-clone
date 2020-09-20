@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getAccount } from "../../actions/getAccountActions";
-import { loginUser } from "../../actions/logActions";
 
 export class CustomerLogIn extends Component {
   constructor(props) {
@@ -11,42 +10,29 @@ export class CustomerLogIn extends Component {
     this.state = {
       email: "",
       password: "",
+      error: false
     };
-
+    
+  
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
-  }
-
-
-  //used for testing 
-  test(){
-
-   if(localStorage.getItem('currentUser')!= null){ 
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    //console.log(currentUser['email']);
-    console.log(currentUser);
-
-   } else{
-     console.log("null user");
-   }
-   
-
 
   }
 
-  reset(){
-        localStorage.clear();
-  }
+
+
 
   handleSubmit(e) {
     e.preventDefault();
+    
     this.props.getAccount(this.state.email, this.state.password, this.props.history);
-    console.log(this.state);
+    this.setState({ error:true});
   }
+
 
   render() {
 
@@ -56,16 +42,32 @@ export class CustomerLogIn extends Component {
         <div className="row">
           <div className="col s12 m4 offset-m4">
             <div className="card" data-test="card">
-              <div class="card-action blue darken-4 white-text"
-              onClick={this.reset}>
+              <div className="card-action blue darken-4 white-text"
+              >
                 <Link to="/Dashboard">
-                  <span class="white-text text-darken-2 center-align">
+                  <span className="white-text text-darken-2 center-align">
                     <h2 data-test="header">Agme Booking</h2>
                   </span>
                 </Link>
               </div>
+
+              <div className="card-content">
+                {
+                   (this.state.error == false) ? true: (
+                     (this.props.message == null) ? null :(
+                    <div className="card-action red darken-4 white-text">
+                    <div className="white-text  text-darken-2 center-align">
+                     <h5>Sorry, Wrong {this.props.message}</h5>
+                     </div>
+                    </div>
+                     ))
+                }
+              
+              </div>
+
+
               <form onSubmit={this.handleSubmit}>
-                <div class="card-content">
+                <div className="card-content">
                   <div data-test="email-field">
                     <input
                     field="identifier"
@@ -76,13 +78,13 @@ export class CustomerLogIn extends Component {
                     onChange={this.handleChange}
                     ></input>
                     <span
-                      class="helper-text"
+                      className="helper-text"
                       data-error="Please enter your email address or username."
                       data-success=""
                     ></span>
                   </div>
                 </div>
-                <div class="card-content">
+                <div className="card-content">
                   <div data-test="password-field">
                     <input
                       field="password"
@@ -93,13 +95,13 @@ export class CustomerLogIn extends Component {
                       type="password"
                     ></input>
                     <span
-                      class="helper-text"
+                      className="helper-text"
                       data-error="Please enter your password."
                       data-success=""
                     ></span>
                   </div>
                 </div>
-                <div class="center-align">
+                <div className="center-align">
                   <button
                     className="btn btn-block blue darken-4"
                     data-test="log-in-button"
@@ -109,16 +111,16 @@ export class CustomerLogIn extends Component {
                   </button>
                 </div>
               </form>
-              <div class="card-content center-align">
+              <div className="card-content center-align">
                 <h8>
                   <b>Don't have an account?</b>
                 </h8>
-                <div class="form-field"></div>
+                <div className="form-field"></div>
               </div>
-              <div class="card-content">
-                <div class="center-align">
+              <div className="card-content">
+                <div className="center-align">
                   <a
-                    class="btn btn-block blue-grey lighten-5 blue-text"
+                    className="btn btn-block blue-grey lighten-5 blue-text"
                     data-test="signUpButton"
                     type="submit"
                   >
@@ -138,7 +140,13 @@ CustomerLogIn.propTypes = {
   getAccount: PropTypes.func.isRequired
 };
 
+const stateToProps = (state) =>{
+  return {
+    message:state.message
+  }
+}
+
 export default connect (
-  null,
+  stateToProps,
   {getAccount}
 )(CustomerLogIn);
