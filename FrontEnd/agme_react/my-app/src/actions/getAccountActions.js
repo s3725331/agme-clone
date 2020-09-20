@@ -43,25 +43,12 @@ export const getAccount = (account, password, history) => async dispatch => {
 
 })
 
-axios.get("http://localhost:8080/api/worker/all").then(res2 => {
-
-
-const data2 = res2.data;
-
-localStorage.setItem('workerStorage', JSON.stringify(data2));
-//history.push("/Dashboard");
-
-})
-       
-
-
-
       history.push("/Dashboard");
       }  else {
         //TODO wrong password
      }
   })
-;
+
 
  
     

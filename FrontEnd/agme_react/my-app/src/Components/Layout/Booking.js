@@ -12,37 +12,28 @@ import axios from "axios";
     var workerStore;
     var customerObj;
 
-
-     if(localStorage.getItem('workerStorage')!= null){ 
-       workerStore = JSON.parse(localStorage.getItem('workerStorage'));
-  
-      }
-
      if(localStorage.getItem('customerObject')!= null){ 
       customerObj = JSON.parse(localStorage.getItem('customerObject'));
 
      }
-
-    // workerStore = this.props.currentUser;
-
-     if(workerStore == null){
-       workerStore = [{id:"0",
+     
+      var workerStore = [{id:"0",
        account : {
       firstName:"null",
       lastName:"null"}
       }]
-     }
+     
 
      
 
     this.state = {
-
       workers : workerStore,
       worker : "",
       customer : customerObj,
       startDate: "",
       startTime: "",
-      endTime: ""
+      endTime: "",
+      loaded: false
     };
     //console.log(this.state.workers[0]['account']['firstName'])
 
@@ -62,7 +53,7 @@ import axios from "axios";
 
     handleChange(e) {
        this.setState({ [e.target.name]: e.target.value });
-
+   
   }
 
 
@@ -85,23 +76,17 @@ import axios from "axios";
    this.props.createBooking(newBooking, this.props.history);
 
   }
-
-  test(){
-
-    if(localStorage.getItem('workerStorage')!= null){ 
-     const storage = JSON.parse(localStorage.getItem('workerStorage'));
-     return storage;
- 
-    } else{
-      return null;
-    }
-    
-   }
-
-
+  async componentDidMount() {
+    const res = await axios.get("http://localhost:8080/api/worker/all");
+    this.setState({ workers: res.data, loaded: true });
+}
 
   
 render() { 
+  if (!this.state.loaded) {
+    return null;
+}
+
 
     return (
       <div>
@@ -200,13 +185,12 @@ render() {
 }
 Booking.propTypes = {
   createBooking: PropTypes.func.isRequired
-  //getWorkers: PropTypes.func.isRequired
 };
 
 //const stateToProps = (state) =>{
-  //return {
-    //currentUser : state.currentUser
-  //}
+ // return {
+    
+ // }
 //}
 
 
