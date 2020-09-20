@@ -169,7 +169,7 @@ render() {
 
 
                 <div className="col s12 m6 offset-m3">
-                  <button className="btn btn-block blue darken-4" type="submit">
+                  <button className="btn btn-form blue darken-4" type="submit">
                     Book
                   </button>
                 </div>

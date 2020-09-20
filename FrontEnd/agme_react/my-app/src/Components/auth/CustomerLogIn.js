@@ -101,7 +101,7 @@ export class CustomerLogIn extends Component {
                 </div>
                 <div class="center-align">
                   <button
-                    className="btn btn-block blue darken-4"
+                    className="btn btn-form blue darken-4"
                     data-test="log-in-button"
                     type="submit"
                   >

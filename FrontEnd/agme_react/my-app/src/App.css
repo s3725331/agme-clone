@@ -37,8 +37,14 @@
   }
 }
 
-.btn {
+.btn-form {
   width:90%;
+  display: inline-block;
+}
+
+.btn-book {
+  height: 50px;
+  width: 40%;
   display: inline-block;
 }
 
