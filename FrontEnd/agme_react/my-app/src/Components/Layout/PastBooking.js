@@ -27,16 +27,13 @@ export default class PastBooking extends Component {
     //console.log(this.state.customer)
   }
 
-  setValue(){
-    console.log("hi")
-  }
+
 
   async componentDidMount() {
     try{
     const res = await axios.get("http://localhost:8080/api/bookings/past",{ params: { customerId :
     this.state.profile['id']}});
 
-      console.log(res.data)
     this.setState({ book: res.data, loaded: true });
     }    catch (err) {  
 

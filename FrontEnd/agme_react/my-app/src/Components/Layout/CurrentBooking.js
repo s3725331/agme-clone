@@ -15,12 +15,6 @@ export default class CurrentBooking extends Component {
       user = JSON.parse(localStorage.getItem('customerObject'));
      }
 
-     var bookings =  [{id:"0",
-     account : {
-    firstName:"No",
-    lastName:"workers"}
-    }];
-
      
 
     this.state = {
@@ -37,7 +31,7 @@ export default class CurrentBooking extends Component {
     const res = await axios.get("http://localhost:8080/api/bookings/upcoming",{ params: { customerId :
     this.state.profile['id']}});
 
-      console.log(res.data)
+
     this.setState({ book: res.data, loaded: true });
     }    catch (err) {  
 
