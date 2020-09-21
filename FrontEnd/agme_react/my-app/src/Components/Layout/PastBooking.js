@@ -25,14 +25,26 @@ export default class PastBooking extends Component {
                 <div className="card-content">
                   <h5><b>Your details</b></h5> <br></br>
                   <h6>Full name: John Smith</h6>
-                  <h6>Email: address@email.com</h6>
-                
-                  <h5><b>Past booking details</b></h5> <br></br>
-                  <h6>Date of appointment: 06/09/2020</h6>
-                  {/* <h6>Service: Consultancy</h6> */}
-                  <h6>Worker: Michelle Obama</h6>                
-                  <h6>Start time: 10:00am</h6> 
-                  <h6>End time: 10:30am</h6> <br></br>
+                  <h6>Email: address@email.com</h6> <br></br>
+
+                  <div>
+                    <h5><b>Past booking details</b></h5> <br></br>
+                    <div>   
+                      <h6><b>Booking 1</b></h6>
+                      <h6>Date of appointment: 06/09/2020</h6>
+                      {/* <h6>Service: Consultancy</h6> */}
+                      <h6>Worker: Barak Obama</h6>                
+                      <h6>Start time: 2:00pm</h6> 
+                      <h6>End time: 2:30pm</h6> <br></br>
+                    </div>
+                      <h6><b>Booking 2</b></h6>
+                      <h6>Date of appointment: 3/08/2020</h6>
+                      {/* <h6>Service: Consultancy</h6> */}
+                      <h6>Worker: Kanye West</h6>
+                      <h6>Start time: 11:00am</h6> 
+                      <h6>End time: 11:30am</h6> <br></br>
+                  </div>
+
                 </div>  
               </div>          
             </div>

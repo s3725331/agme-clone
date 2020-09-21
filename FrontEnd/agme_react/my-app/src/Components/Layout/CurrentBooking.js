@@ -25,14 +25,26 @@ export default class CurrentBooking extends Component {
                 <div className="card-content">
                   <h5><b>Your details</b></h5> <br></br>
                   <h6>Full name: John Smith</h6>
-                  <h6>Email: address@email.com</h6>
+                  <h6>Email: address@email.com</h6> <br></br>
 
-                  <h5><b>Booking details</b></h5> <br></br>
-                  <h6>Date of appointment: 22/09/2020</h6>
-                  {/* <h6>Service: Consultancy</h6> */}
-                  <h6>Worker: Barak Obama</h6>
-                  <h6>Start time: 10:00am</h6> 
-                  <h6>End time: 10:30am</h6> <br></br>
+                  <div>
+                    <h5><b>Booking details</b></h5> <br></br>
+                    <div>   
+                      <h6><b>Booking 1</b></h6>
+                      <h6>Date of appointment: 22/09/2020</h6>
+                      {/* <h6>Service: Consultancy</h6> */}
+                      <h6>Worker: Michelle Obama</h6>
+                      <h6>Start time: 10:00am</h6> 
+                      <h6>End time: 10:30am</h6> <br></br>
+                    </div>
+                      <h6><b>Booking 2</b></h6>
+                      <h6>Date of appointment: 27/09/2020</h6>
+                      {/* <h6>Service: Consultancy</h6> */}
+                      <h6>Worker: Will Smith</h6>
+                      <h6>Start time: 11:00am</h6> 
+                      <h6>End time: 11:30am</h6> <br></br>
+                  </div>
+
                 </div>  
               </div>          
             </div>
