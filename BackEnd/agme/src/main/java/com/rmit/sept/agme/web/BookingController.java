@@ -63,9 +63,21 @@ public class BookingController {
                                                @RequestParam(value = "customerId", required = false) Long customerID){
         if(workerID != null && customerID == null){
             Iterable<Booking> bookings = bookingService.getByWorkerBetween(workerID, new Date(), null);
+
+            if(!bookings.iterator().hasNext()){
+                return new ResponseEntity<>("No Booking Found", HttpStatus.NOT_FOUND);
+            }
+
+
             return new ResponseEntity<>(bookings, HttpStatus.OK);
         } else if(workerID == null && customerID != null){
             Iterable<Booking> bookings = bookingService.getByCustomerBetween(customerID, new Date(), null);
+
+
+            if(!bookings.iterator().hasNext()){
+                return new ResponseEntity<>("No Booking Found", HttpStatus.NOT_FOUND);
+            }
+
             return new ResponseEntity<>(bookings, HttpStatus.OK);
         }
         else{
@@ -78,9 +90,20 @@ public class BookingController {
                                                  @RequestParam(value = "customerId", required = false) Long customerID){
         if(workerID != null && customerID == null){
             Iterable<Booking> bookings = bookingService.getByWorkerBetween(workerID, null, new Date());
+
+            if(!bookings.iterator().hasNext()){
+                return new ResponseEntity<>("No Booking Found", HttpStatus.NOT_FOUND);
+            }
+
             return new ResponseEntity<>(bookings, HttpStatus.OK);
+
         } else if(workerID == null && customerID != null){
             Iterable<Booking> bookings = bookingService.getByCustomerBetween(customerID, null, new Date());
+
+            if(!bookings.iterator().hasNext()){
+                return new ResponseEntity<>("No Booking Found", HttpStatus.NOT_FOUND);
+            }
+
             return new ResponseEntity<>(bookings, HttpStatus.OK);
         }
         else{

@@ -71,7 +71,7 @@ export const getAccount = (account, password, history) => async dispatch => {
       payload: err.response.data
     });
       
-    if(err.response.status == 404){
+    if(err.response.status === 404){
       dispatch({ type: message, payload: "Email" });
 
     history.push("/CustomerLogIn");

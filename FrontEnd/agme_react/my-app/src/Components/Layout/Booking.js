@@ -21,7 +21,7 @@ import axios from "axios";
        account : {
       firstName:"No",
       lastName:"workers"}
-      }]
+      }];
      
 
      
@@ -70,10 +70,11 @@ import axios from "axios";
     try{
     const res = await axios.get("http://localhost:8080/api/worker/all");
     this.setState({ workers: res.data, loaded: true });
+    console.log(res.data)
     }    catch (err) {  
 
 
-    if(err.response.status == 404){
+    if(err.response.status === 404){
       this.setState({ loaded: true });
 
   }

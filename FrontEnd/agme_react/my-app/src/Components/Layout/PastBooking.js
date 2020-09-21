@@ -7,8 +7,51 @@ import axios from "axios";
 
 
 export default class PastBooking extends Component {
+  constructor(props) {
+    super(props);
+    var user;
+
+     if(localStorage.getItem('customerObject')!= null){ 
+      user = JSON.parse(localStorage.getItem('customerObject'));
+     }
+
+     
+
+     
+
+    this.state = {
+      profile : user,
+      book: null,
+      loaded: false
+    };
+    //console.log(this.state.customer)
+  }
+
+  setValue(){
+    console.log("hi")
+  }
+
+  async componentDidMount() {
+    try{
+    const res = await axios.get("http://localhost:8080/api/bookings/past",{ params: { customerId :
+    this.state.profile['id']}});
+
+      console.log(res.data)
+    this.setState({ book: res.data, loaded: true });
+    }    catch (err) {  
+
+
+    if(err.response.status === 404){
+      this.setState({ loaded: true });
+
+  }
+  }
+  }
   
   render() { 
+    if (!this.state.loaded) {
+      return null;
+  }
 
     return (
         <div>
@@ -23,29 +66,36 @@ export default class PastBooking extends Component {
                   </Link>
                 </div>              
                 <div className="card-content">
-                  <h5><b>Your details</b></h5> <br></br>
-                  <h6>Full name: John Smith</h6>
-                  <h6>Email: address@email.com</h6> <br></br>
+                <h5><b>Your details</b></h5> <br></br>
+                <h6>Full name:  {this.state.profile['account']['firstName']} {this.state.profile['account']['lastName']}</h6>
+                <h6>Email:  {this.state.profile['account']['email']}</h6> <br></br>
 
-                  <div>
-                    <h5><b>Past booking details</b></h5> <br></br>
-                    <div>   
-                      <h6><b>Booking 1</b></h6>
-                      <h6>Date of appointment: 06/09/2020</h6>
-                      {/* <h6>Service: Consultancy</h6> */}
-                      <h6>Worker: Barak Obama</h6>                
-                      <h6>Start time: 2:00pm</h6> 
-                      <h6>End time: 2:30pm</h6> <br></br>
-                    </div>
-                      <h6><b>Booking 2</b></h6>
-                      <h6>Date of appointment: 3/08/2020</h6>
-                      {/* <h6>Service: Consultancy</h6> */}
-                      <h6>Worker: Kanye West</h6>
-                      <h6>Start time: 11:00am</h6> 
-                      <h6>End time: 11:30am</h6> <br></br>
+                <div>
+                  <h5><b>Booking details</b></h5> <br></br>
+                  {
+                    (this.state.book != null) ? 
+                    this.state.book.map((book, index) => (
+                    
+                  <div key={book['id']} >   
+                    <h6><b>Booking {index +1}</b></h6>
+                    
+                    
+                    <h6>Date of appointment: {book['startTime'].substring(0,10)}</h6>
+                    
+                    {/* <h6>Service: Consultancy</h6> */}
+                    <h6>Worker: {book['worker']['account']['firstName']} {book['worker']['account']['lastName']}</h6>
+                    <h6>Start time: {book['startTime'].substring(11)}</h6> 
+                    <h6>End time: {book['endTime'].substring(11)}</h6> <br></br>
                   </div>
+                  )): (
+                  
+                      <h6><b>No bookings available</b></h6>
+                  
+                      )
+                 }
+                </div>
 
-                </div>  
+              </div>  
               </div>          
             </div>
           </div>

@@ -50,8 +50,8 @@ export class CustomerLogIn extends Component {
 
               <div className="card-content">
                 {
-                   (this.state.error == false) ? true: (
-                     (this.props.message == null) ? null :(
+                   (this.state.error === false) ? null: (
+                     (this.props.message === null) ? null :(
                     <div className="card-action red darken-4 white-text">
                     <div className="white-text  text-darken-2 center-align">
                      <h5>Sorry, Wrong {this.props.message}</h5>
@@ -87,6 +87,8 @@ export class CustomerLogIn extends Component {
                       field="password"
                       placeholder="Please enter your password."
                       id="password"
+                      name="password"
+                      value= {this.state.password}
                       onChange={this.handleChange}
                       type="password"
                     ></input>

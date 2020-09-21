@@ -7,8 +7,52 @@ import axios from "axios";
 
 
 export default class CurrentBooking extends Component {
+  constructor(props) {
+    super(props);
+    var user;
+
+     if(localStorage.getItem('customerObject')!= null){ 
+      user = JSON.parse(localStorage.getItem('customerObject'));
+     }
+
+     var bookings =  [{id:"0",
+     account : {
+    firstName:"No",
+    lastName:"workers"}
+    }];
+
+     
+
+    this.state = {
+      profile : user,
+      book: null,
+      loaded: false
+    };
+    console.log(this.state.customer)
+  }
+
+
+  async componentDidMount() {
+    try{
+    const res = await axios.get("http://localhost:8080/api/bookings/upcoming",{ params: { customerId :
+    this.state.profile['id']}});
+
+      console.log(res.data)
+    this.setState({ book: res.data, loaded: true });
+    }    catch (err) {  
+
+
+    if(err.response.status === 404){
+      this.setState({ loaded: true });
+
+  }
+  }
+  }
   
   render() { 
+    if (!this.state.loaded) {
+      return null;
+  }
 
     return (
         <div>
@@ -24,25 +68,30 @@ export default class CurrentBooking extends Component {
                 </div>              
                 <div className="card-content">
                   <h5><b>Your details</b></h5> <br></br>
-                  <h6>Full name: John Smith</h6>
-                  <h6>Email: address@email.com</h6> <br></br>
+                  <h6>Full name:  {this.state.profile['account']['firstName']} {this.state.profile['account']['lastName']}</h6>
+                  <h6>Email:  {this.state.profile['account']['email']}</h6> <br></br>
 
                   <div>
                     <h5><b>Booking details</b></h5> <br></br>
-                    <div>   
-                      <h6><b>Booking 1</b></h6>
-                      <h6>Date of appointment: 22/09/2020</h6>
+                    {
+                      (this.state.book != null) ? 
+                      this.state.book.map((book, index) => (
+                      
+                    <div key={book['id']} >   
+                      <h6><b>Booking {index +1}</b></h6>
+                      <h6>Date of appointment: {book['startTime'].substring(0,10)}</h6>
+                    
                       {/* <h6>Service: Consultancy</h6> */}
-                      <h6>Worker: Michelle Obama</h6>
-                      <h6>Start time: 10:00am</h6> 
-                      <h6>End time: 10:30am</h6> <br></br>
+                      <h6>Worker: {book['worker']['account']['firstName']} {book['worker']['account']['lastName']}</h6>
+                      <h6>Start time: {book['startTime'].substring(11)}</h6> 
+                      <h6>End time: {book['endTime'].substring(11)}</h6> <br></br>
                     </div>
-                      <h6><b>Booking 2</b></h6>
-                      <h6>Date of appointment: 27/09/2020</h6>
-                      {/* <h6>Service: Consultancy</h6> */}
-                      <h6>Worker: Will Smith</h6>
-                      <h6>Start time: 11:00am</h6> 
-                      <h6>End time: 11:30am</h6> <br></br>
+                    )): (
+                    
+                        <h6><b>No bookings available</b></h6>
+                    
+                        )
+                   }
                   </div>
 
                 </div>  

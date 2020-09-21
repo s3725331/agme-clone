@@ -48,6 +48,12 @@
   display: inline-block;
 }
 
+.btn-bookings{
+  height: 50px;
+  width: 80%;
+  display: inline-block;
+}
+
 .checkbox-left {
   vertical-align:bottom;
 }
