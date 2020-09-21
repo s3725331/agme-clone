@@ -23,9 +23,6 @@ export class CustomerLogIn extends Component {
 
   }
 
-
-
-
   handleSubmit(e) {
     e.preventDefault();
     
@@ -89,8 +86,7 @@ export class CustomerLogIn extends Component {
                     <input
                       field="password"
                       placeholder="Please enter your password."
-                      name="password"
-                      value= {this.state.password}
+                      id="password"
                       onChange={this.handleChange}
                       type="password"
                     ></input>

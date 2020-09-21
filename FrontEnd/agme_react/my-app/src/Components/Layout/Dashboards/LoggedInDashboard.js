@@ -22,8 +22,36 @@ export default class LoggedInDashboard extends Component {
                   Book Now
                 </button>
                 </Link>
-            </div>
-          </div>
+
+                <h6><b>
+                  OR
+                  </b>
+                  </h6>
+                  <h6><b>
+                    Already booked?
+                    </b>
+                  </h6>
+                  
+                  <Link to="/CurrentBooking">
+                  <button className="btn btn-book blue darken-4" 
+                    data-test="sign-up-button"
+                    type="submit">
+                    Upcoming appointments
+                  </button>
+                  </Link>
+
+                  <h6><b></b></h6>
+
+                  <Link to="/PastBooking">
+                  <button className="btn btn-book blue darken-4" 
+                    data-test="sign-up-button"
+                    type="submit">
+                    Past Bookings
+                  </button>
+                  </Link>
+                  
+            </div>           
+            </div>            
         </div>
       </div>
     );
