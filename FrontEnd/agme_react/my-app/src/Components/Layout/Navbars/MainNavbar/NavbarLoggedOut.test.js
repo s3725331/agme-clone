@@ -1,9 +1,8 @@
 import React from 'react';
-import Enzyme, {mount, shallow} from 'enzyme';
+import Enzyme, { shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import NavbarLoggedOut from './NavbarLoggedOut';
 import { findByTestAtrr } from './../../../../../Utils';
-import { MemoryRouter, Link } from 'react-router-dom';
 
 Enzyme.configure({ adapter: new Adapter()});
 

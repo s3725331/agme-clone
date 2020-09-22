@@ -35,7 +35,7 @@ export default class Navbar extends Component {
                 <li>
                   <a>|</a>
                 </li>
-                <li><a data-test="account-component">{accountComponent}</a></li>
+                {accountComponent}
               </ul>
             </div>
           </div>

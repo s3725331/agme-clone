@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import SideNavbarLoggedIn from "./SideNavbarLoggedIn";
 import SideNavbarLoggedOut from "./SideNavbarLoggedOut";
-import { Link, Router } from "react-router-dom";
 
 export class SideNavbar extends Component {
 
@@ -21,7 +20,7 @@ export class SideNavbar extends Component {
         <li>
           <a href="#contact">Contact Us</a>
         </li>
-        <li><i data-test="account-component">{sideNavAccountComponent}</i></li>
+        <div data-test="account-component">{sideNavAccountComponent}</div>
       </ul>
     );
   }

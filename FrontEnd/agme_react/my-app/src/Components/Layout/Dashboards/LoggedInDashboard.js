@@ -12,9 +12,10 @@ export default class LoggedInDashboard extends Component {
 
     return (
       <div className="loggedInComponent" data-test="logged-in-dashboard">
-        <div class="container">
-          <div class="row">
-            <div class="col l8 s12">
+        <div className="container">
+          <div className="row">
+            <div className="col l8 s12">
+              <div className = "logged-in-dashboard-text">
               <h3>
                 <b>Looking to Book?</b>
               </h3>
@@ -22,6 +23,7 @@ export default class LoggedInDashboard extends Component {
                 Start booking with the best services.
               </b>
               </h5>
+              </div>
               <Link to="/Booking" data-test="book-btn">
               <button className="btn btn-book blue darken-4" 
                 data-test="sign-up-button"

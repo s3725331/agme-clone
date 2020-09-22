@@ -1,23 +1,21 @@
 import React, { Component } from "react";
-import NavbarLoggedIn from "../MainNavbar/NavbarLoggedIn";
-import NavbarLoggedOut from "../MainNavbar/NavbarLoggedOut";
-import { Link, Router } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default class SideNavbar extends Component {
   render() {
     return (
-      <ul id="mobile-nav">
+      <div>
         <li>
-          <Link to="/CustomerSignUp">
-            <h8>Sign Up</h8>
+          <Link id="RouterNavLink" to="/CustomerSignUp">
+            Sign Up
           </Link>
         </li>
         <li>
-          <Link to="/CustomerLogIn">
-            <h8>Log In</h8>
+          <Link id="RouterNavLink" to="/CustomerLogIn">
+            Log In
           </Link>
         </li>
-      </ul>
+      </div>
     );
   }
 }
