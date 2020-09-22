@@ -23,41 +23,45 @@ public class BookingController {
 
     @PostMapping("")
     public ResponseEntity<?> createBooking(@Valid @RequestBody Booking booking, BindingResult result){
-        if(result.hasErrors()) {
+        if(result.hasErrors()) { //Invalid booking object in request body
             return new ResponseEntity<>("Invalid Bookings Object", HttpStatus.BAD_REQUEST);
         }
 
+        //Create booking in repo
         Optional<Booking> savedBooking = bookingService.create(booking);
-        if(!savedBooking.isPresent()){
+        if(!savedBooking.isPresent()){ //Bad booking
             return new ResponseEntity<>("Invalid Booking", HttpStatus.CONFLICT);
         }
-        return new ResponseEntity<>(savedBooking, HttpStatus.CREATED);
+        return new ResponseEntity<>(savedBooking, HttpStatus.CREATED); //New booking object returned
     }
 
     @GetMapping("")
     public ResponseEntity<?> getBooking(@RequestParam("id") long id){
-        Optional<Booking> booking = bookingService.get(id);
+        Optional<Booking> booking = bookingService.get(id); //Get booking from repo
 
         if(!booking.isPresent()){
             return new ResponseEntity<>("No Booking Found", HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<>(booking,HttpStatus.OK);
+        return new ResponseEntity<>(booking,HttpStatus.OK); //Booking returned
     }
 
     @PutMapping("")
     public ResponseEntity<?> updateBooking(@Valid @RequestBody Booking booking, BindingResult result){
-        if(result.hasErrors()) {
+        if(result.hasErrors()) { //Invalid booking object in request body
             return new ResponseEntity<>("Invalid Booking Object", HttpStatus.BAD_REQUEST);
         }
 
+        //Update booking in repo
         Optional<?> savedBooking = bookingService.update(booking);
-        if(!savedBooking.isPresent())
+        if(!savedBooking.isPresent()) //No booking found
             return new ResponseEntity<>("Booking Not Found", HttpStatus.NOT_FOUND);
 
-        return new ResponseEntity<>(savedBooking, HttpStatus.OK);
+        return new ResponseEntity<>(savedBooking, HttpStatus.OK); //Updated booking object returned
     }
 
+    //Get bookings that have not started yet
+    //Bookings can be got by workerID or customerID
     @GetMapping("/upcoming")
     public ResponseEntity<?> getUpcomingBookings(@RequestParam(value = "workerId", required = false) Long workerID,
                                                @RequestParam(value = "customerId", required = false) Long customerID){
@@ -85,28 +89,32 @@ public class BookingController {
         }
     }
 
+    //Get bookings that have started
+    //Bookings can be got by workerID or customerID
     @GetMapping("/past")
     public ResponseEntity<?> getPastBookings(@RequestParam(value = "workerId", required = false) Long workerID,
                                                  @RequestParam(value = "customerId", required = false) Long customerID){
         if(workerID != null && customerID == null){
+            //Get from repo by workerID
             Iterable<Booking> bookings = bookingService.getByWorkerBetween(workerID, null, new Date());
 
             if(!bookings.iterator().hasNext()){
                 return new ResponseEntity<>("No Booking Found", HttpStatus.NOT_FOUND);
             }
 
-            return new ResponseEntity<>(bookings, HttpStatus.OK);
+            return new ResponseEntity<>(bookings, HttpStatus.OK); //Return array of bookings
 
         } else if(workerID == null && customerID != null){
+            //Get from repo by customerID
             Iterable<Booking> bookings = bookingService.getByCustomerBetween(customerID, null, new Date());
 
             if(!bookings.iterator().hasNext()){
                 return new ResponseEntity<>("No Booking Found", HttpStatus.NOT_FOUND);
             }
 
-            return new ResponseEntity<>(bookings, HttpStatus.OK);
+            return new ResponseEntity<>(bookings, HttpStatus.OK); //Return array of bookings
         }
-        else{
+        else{ //Invalid request params
             return new ResponseEntity<>("Bad Request", HttpStatus.BAD_REQUEST);
         }
     }
