@@ -5,6 +5,7 @@ import SideNavbarLoggedOut from "./SideNavbarLoggedOut";
 export class SideNavbar extends Component {
 
   render() {
+    // assigning side navbar depending on whether user is logged in or not
     var sideNavAccountComponent;
     if (localStorage.getItem("currentUser") != null) {
       sideNavAccountComponent = <SideNavbarLoggedIn />;

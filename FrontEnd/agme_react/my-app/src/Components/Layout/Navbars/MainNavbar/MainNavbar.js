@@ -6,6 +6,7 @@ export default class Navbar extends Component {
 
 
   render() {
+    // assigning Navbar depending on whether user is logged in or not
     var accountComponent;
     if (localStorage.getItem("currentUser") != null) {
       accountComponent = <NavbarLoggedIn />;

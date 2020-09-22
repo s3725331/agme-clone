@@ -3,6 +3,8 @@ import Enzyme, { shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import NavbarLoggedIn from './NavbarLoggedIn';
 import { findByTestAtrr } from './../../../../../Utils';
+import { checkPropTypes } from 'prop-types';
+import { CustomerLogIn } from '../../../auth/CustomerLogIn';
 
 Enzyme.configure({ adapter: new Adapter()});
 
@@ -18,6 +20,17 @@ describe('logged in MainNavbar', () => {
     let component;
     beforeEach(() => {
         component = setUp();
+    })
+
+    it('should not throw warning', () => {
+        const expectedProps = {
+            email: "james@gmail.com",
+            password: "Password12",
+            error: false
+        };
+
+        const propsErr = checkPropTypes(CustomerLogIn.propTypes, expectedProps, 'props', CustomerLogIn.name);
+        expect(propsErr).toBeUndefined();
     })
 
     it('should find logged in account class', () => {

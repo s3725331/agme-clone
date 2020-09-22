@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { createBooking} from "../../actions/bookingActions";
 import axios from "axios";
 
- class Booking extends Component {
+ export class Booking extends Component {
   constructor(props) {
     super(props);
 
@@ -86,23 +86,21 @@ render() {
   if (!this.state.loaded) {
     return null;
 }
-
-
     return (
-      <div>
+      <div data-test="booking-card">
         <div className="row">
           <div className="col s12 m6 offset-m3">
             <div className="card">
               <div className="card-action blue darken-4 white-text">
                 <Link to="/Dashboard">
-                  <span className="white-text text-darken-2 center-align" data-test="booking-card">
+                  <span className="white-text text-darken-2 center-align">
                     <h3>Book your appointment</h3>
                   </span>
                 </Link>
               </div>
 
               { <form onSubmit={this.handleSubmit}>
-              <div className="card-content">
+              <div className="card-content" data-test="booking-card-services">
                 <h6> Select a service</h6>
                   <div className="form-field">
                     <select className = "browser-default" name = "service"
@@ -115,7 +113,7 @@ render() {
                   </div>
               </div>
 
-              <div className="card-content">
+              <div className="card-content" data-test="workers">
                 <h6> Select a worker</h6>
                   <div className="form-field">
                   <select  className = "browser-default" name = "worker"
@@ -133,7 +131,7 @@ render() {
                   </div>
               </div>
 
-              <div className="card-content">
+              <div className="card-content" data-test="date-picker">
                 <h6> Choose your availability</h6>
                   <div className="form-field" >
                     <input type="date" className="datepicker"
@@ -145,7 +143,7 @@ render() {
               </div>
 
               
-              <div className="card-content">
+              <div className="card-content" data-test="start-time-picker">
                 <h6> Pick Start time </h6>
                 <div className="form-field" >
                 <input type="time" className="timepicker"
@@ -156,7 +154,7 @@ render() {
                 </div>
                 </div>   
 
-                <div className="card-content">
+                <div className="card-content" data-test="end-time-picker">
                 <h6> Pick End time </h6>
                 <div className="form-field" >
                 <input type="time" className="timepicker"
@@ -168,7 +166,7 @@ render() {
               </div>  
 
 
-                <div className="col s12 m6 offset-m3">
+                <div className="col s12 m6 offset-m3" data-test="book-btn">
                   <button className="btn btn-form blue darken-4" type="submit">
                     Book
                   </button>
