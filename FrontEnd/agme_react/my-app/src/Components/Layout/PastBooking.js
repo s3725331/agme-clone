@@ -13,11 +13,7 @@ export default class PastBooking extends Component {
 
      if(localStorage.getItem('customerObject')!= null){ 
       user = JSON.parse(localStorage.getItem('customerObject'));
-     }
-
-     
-
-     
+     } 
 
     this.state = {
       profile : user,
@@ -64,35 +60,34 @@ export default class PastBooking extends Component {
                 </div>              
                 <div className="card-content">
                 <h5><b>Your details</b></h5> <br></br>
-                <h6>Full name:  {this.state.profile['account']['firstName']} {this.state.profile['account']['lastName']}</h6>
-                <h6>Email:  {this.state.profile['account']['email']}</h6> <br></br>
+                  <h6>Full name:  {this.state.profile['account']['firstName']} {this.state.profile['account']['lastName']}</h6>
+                  <h6>Email:  {this.state.profile['account']['email']}</h6> <br></br>
 
-                <div>
-                  <h5><b>Booking details</b></h5> <br></br>
-                  {
-                    (this.state.book != null) ? 
-                    this.state.book.map((book, index) => (
+                  <div>
+                    <h5><b>Booking details</b></h5> <br></br>
+                    {
+                      (this.state.book != null) ? 
+                      this.state.book.map((book, index) => (
+                      
+                    <div key={book['id']} >   
+                      <h6><b>Booking {index +1}</b></h6>
+                      
+                      
+                      <h6>Date of appointment: {book['startTime'].substring(0,10)}</h6>
+                      
+                      {/* <h6>Service: Consultancy</h6> */}
+                      <h6>Worker: {book['worker']['account']['firstName']} {book['worker']['account']['lastName']}</h6>
+                      <h6>Start time: {book['startTime'].substring(11)}</h6> 
+                      <h6>End time: {book['endTime'].substring(11)}</h6> <br></br>
+                    </div>
+                    )): (
                     
-                  <div key={book['id']} >   
-                    <h6><b>Booking {index +1}</b></h6>
+                        <h6><b>No bookings available</b></h6>
                     
-                    
-                    <h6>Date of appointment: {book['startTime'].substring(0,10)}</h6>
-                    
-                    {/* <h6>Service: Consultancy</h6> */}
-                    <h6>Worker: {book['worker']['account']['firstName']} {book['worker']['account']['lastName']}</h6>
-                    <h6>Start time: {book['startTime'].substring(11)}</h6> 
-                    <h6>End time: {book['endTime'].substring(11)}</h6> <br></br>
+                        )
+                  }
                   </div>
-                  )): (
-                  
-                      <h6><b>No bookings available</b></h6>
-                  
-                      )
-                 }
-                </div>
-
-              </div>  
+                </div>  
               </div>          
             </div>
           </div>

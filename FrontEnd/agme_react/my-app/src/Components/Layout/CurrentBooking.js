@@ -11,11 +11,9 @@ export default class CurrentBooking extends Component {
     super(props);
     var user;
 
-     if(localStorage.getItem('customerObject')!= null){ 
+     if(localStorage.getItem('customerObject')!= null) { 
       user = JSON.parse(localStorage.getItem('customerObject'));
-     }
-
-     
+     }     
 
     this.state = {
       profile : user,
@@ -33,7 +31,8 @@ export default class CurrentBooking extends Component {
 
 
     this.setState({ book: res.data, loaded: true });
-    }    catch (err) {  
+    }    
+    catch (err) {  
 
 
     if(err.response.status === 404){
@@ -74,7 +73,8 @@ export default class CurrentBooking extends Component {
                     <div key={book['id']} >   
                       <h6><b>Booking {index +1}</b></h6>
                       <h6>Date of appointment: {book['startTime'].substring(0,10)}</h6>
-                    
+
+                    {/* Service Functionality will be implemented next sprint */}
                       {/* <h6>Service: Consultancy</h6> */}
                       <h6>Worker: {book['worker']['account']['firstName']} {book['worker']['account']['lastName']}</h6>
                       <h6>Start time: {book['startTime'].substring(11)}</h6> 
@@ -82,12 +82,10 @@ export default class CurrentBooking extends Component {
                     </div>
                     )): (
                     
-                        <h6><b>No bookings available</b></h6>
-                    
+                        <h6><b>No bookings available</b></h6>                   
                         )
                    }
                   </div>
-
                 </div>  
               </div>          
             </div>
