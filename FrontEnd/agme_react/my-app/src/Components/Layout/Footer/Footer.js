@@ -1,42 +1,39 @@
 import React, { Component } from "react";
 
-import { Link, Router } from "react-router-dom";
-
 export default class Footer extends Component {
   render() {
     return (
-      <footer class="page-footer blue darken-4" data-test="footer">
-        <div class="container">
-          <div class="row">
-            <div class="col l6 s12">
-              <a class="white-text" href="">
+      <footer className="page-footer blue darken-4" data-test="footer">
+        <div className="container">
+          <div className="row">
+            <div className="col l6 s12">
+              <a className="white-text" href="">
                 <h6>
                   <i className="material-icons">collections_bookmark</i>Agme
                   Booking
                 </h6>
-                <li>
-                  <a class="grey-text text-lighten-3" href="#!">
-                    About
-                  </a>
-                </li>
-                <li>
-                  <a class="grey-text text-lighten-3" href="#!">
-                    Help
-                  </a>
-                </li>
-                <li>
-                  <a class="grey-text text-lighten-3" href="#!">
-                    Legal
-                  </a>
-                </li>
+              </a>
+              <li>
+                <a className="grey-text text-lighten-3" href="#!">
+                  About
+                </a>
+              </li>
+              <li>
+                <a className="grey-text text-lighten-3" href="#!">
+                  Help
+                </a>
+              </li>
+
+              <a className="grey-text text-lighten-3" href="#!">
+                Legal
               </a>
             </div>
-            <div class="col l4 offset-l2 s12" data-test="social-links">
-              <h6 class="white-text">Social links</h6>
+            <div className="col l4 offset-l2 s12" data-test="social-links">
+              <h6 className="white-text">Social links</h6>
               <ul>
                 <li>
                   <a
-                    class="grey-text text-lighten-3"
+                    className="grey-text text-lighten-3"
                     href="#!"
                     data-test="facebook-link"
                   >
@@ -45,7 +42,7 @@ export default class Footer extends Component {
                 </li>
                 <li>
                   <a
-                    class="grey-text text-lighten-3"
+                    className="grey-text text-lighten-3"
                     href="#!"
                     data-test="twitter-link"
                   >
@@ -54,7 +51,7 @@ export default class Footer extends Component {
                 </li>
                 <li>
                   <a
-                    class="grey-text text-lighten-3"
+                    className="grey-text text-lighten-3"
                     href="#!"
                     data-test="linkedIn-link"
                   >
@@ -63,7 +60,7 @@ export default class Footer extends Component {
                 </li>
                 <li>
                   <a
-                    class="grey-text text-lighten-3"
+                    className="grey-text text-lighten-3"
                     href="#!"
                     data-test="instagram-link"
                   >
@@ -74,10 +71,10 @@ export default class Footer extends Component {
             </div>
           </div>
         </div>
-        <div class="footer-copyright">
-          <div class="container">
+        <div className="footer-copyright">
+          <div className="container">
             © 2020 Agme Booking
-            <a class="grey-text text-lighten-4 right">Australia</a>
+            <a className="grey-text text-lighten-4 right">Australia</a>
           </div>
         </div>
       </footer>

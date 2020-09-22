@@ -192,7 +192,6 @@ export class CustomerSignUp extends Component {
 
 CustomerSignUp.propTypes = {
   createCustomer: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
 };
 
 

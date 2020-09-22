@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import SideNavbarLoggedIn from "./SideNavbarLoggedIn";
 import SideNavbarLoggedOut from "./SideNavbarLoggedOut";
-import { Link, Router } from "react-router-dom";
 
 export class SideNavbar extends Component {
 
   render() {
+    // assigning side navbar depending on whether user is logged in or not
     var sideNavAccountComponent;
     if (localStorage.getItem("currentUser") != null) {
       sideNavAccountComponent = <SideNavbarLoggedIn />;
@@ -21,7 +21,7 @@ export class SideNavbar extends Component {
         <li>
           <a href="#contact">Contact Us</a>
         </li>
-        <li><i data-test="account-component">{sideNavAccountComponent}</i></li>
+        <div data-test="account-component">{sideNavAccountComponent}</div>
       </ul>
     );
   }

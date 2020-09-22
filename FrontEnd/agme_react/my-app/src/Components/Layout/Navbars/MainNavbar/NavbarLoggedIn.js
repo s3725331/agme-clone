@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 
 export default class loggedInComponent extends Component {
 
@@ -26,7 +26,7 @@ export default class loggedInComponent extends Component {
             </span>
           </a>
         </div>
-        <ul id="dropdown" class="dropdown-content" data-test="dropdown-content">
+        <ul id="dropdown" className="dropdown-content" data-test="dropdown-content">
           <li>
             <a href="#!">Account</a>
           </li>

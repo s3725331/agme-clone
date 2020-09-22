@@ -15,6 +15,7 @@ export default class DashBoard extends Component {
   
   render() {
 
+    // assigning DashboardCard depending on whether user is logged in or not
     var DashboardCard;
     if (localStorage.getItem("currentUser") != null) {
       DashboardCard = <LoggedInDashboard />;

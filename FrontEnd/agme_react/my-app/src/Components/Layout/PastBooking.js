@@ -1,8 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { createBooking} from "../../actions/bookingActions";
 import axios from "axios";
 
 
@@ -88,7 +85,7 @@ console.log(res.data)
         <div>
           <div className="row">
             <div className="col s12 m6 offset-m3">
-              <div className="card">
+              <div className="card" data-test="past-bookings-card">
                 <div className="card-action blue darken-4 white-text">
                   <Link to="/Dashboard">
                     <span className="white-text text-darken-2 center-align">
@@ -96,7 +93,7 @@ console.log(res.data)
                     </span>
                   </Link>
                 </div>              
-                <div className="card-content">
+                <div className="card-content" data-test="account-details">
 
                    {/*Conditional that checks account type and loads title accordingly */}
                 {
@@ -110,7 +107,7 @@ console.log(res.data)
                 <h6>Full name:  {this.state.profile['account']['firstName']} {this.state.profile['account']['lastName']}</h6>
                 <h6>Email:  {this.state.profile['account']['email']}</h6> <br></br>
 
-                <div>
+                <div data-test="booking-details">
                   <h5><b>Booking Details</b></h5> <br></br>
 
 
