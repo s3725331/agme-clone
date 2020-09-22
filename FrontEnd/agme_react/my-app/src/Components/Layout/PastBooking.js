@@ -80,7 +80,14 @@ console.log(res.data)
                   </Link>
                 </div>              
                 <div className="card-content">
-                <h5><b>Your details</b></h5> <br></br>
+                {
+                  (this.state.account === "Customer") ? 
+                    (this.state.account === "Worker") ? null :
+                      (<h5><b>Customer Details</b></h5> ):
+                        (<h5><b>Worker Details</b></h5>)
+                } 
+                
+                <br></br>
                 <h6>Full name:  {this.state.profile['account']['firstName']} {this.state.profile['account']['lastName']}</h6>
                 <h6>Email:  {this.state.profile['account']['email']}</h6> <br></br>
 
