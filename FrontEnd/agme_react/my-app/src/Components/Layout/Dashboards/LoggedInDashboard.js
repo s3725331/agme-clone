@@ -1,17 +1,46 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import React, { Component } from "react";
+import { Link } from 'react-router-dom';
 
 export default class LoggedInDashboard extends Component {
   render() {
-    if( localStorage.getItem("workerObject") != null){
+    if( localStorage.getItem("workerObject") != null || localStorage.getItem("adminObject") != null){
       return (
-        <div>
+        <div className="loggedInComponent">
+        <div class="container">
+          <div class="row">
+                <div className="col l8 s12">
+                  <h5><b>
+                    Check your Bookings
+                    </b>
+                  </h5>
+                  
+                  <Link to="/CurrentBooking">
+                  <button className="btn btn-bookings blue darken-4" 
+                    data-test="sign-up-button"
+                    type="submit">
+                    Upcoming appointments
+                  </button>
+                  </Link>
+
+                  <h6><b></b></h6>
+
+                  <Link to="/PastBooking">
+                  <button className="btn btn-bookings blue darken-4" 
+                    data-test="sign-up-button"
+                    type="submit">
+                    Past Bookings
+                  </button>
+                  </Link>
+                  </div>
+                      
+            </div>            
         </div>
+      </div>
       )
     }
 
     return (
-      <div className="loggedInComponent" data-test="logged-in-dashboard">
+      <div className="loggedInComponent">
         <div class="container">
           <div class="row">
             <div class="col l8 s12">
@@ -22,7 +51,7 @@ export default class LoggedInDashboard extends Component {
                 Start booking with the best services.
               </b>
               </h5>
-              <Link to="/Booking" data-test="book-btn">
+              <Link to="/Booking">
               <button className="btn btn-book blue darken-4" 
                 data-test="sign-up-button"
                 type="submit">
