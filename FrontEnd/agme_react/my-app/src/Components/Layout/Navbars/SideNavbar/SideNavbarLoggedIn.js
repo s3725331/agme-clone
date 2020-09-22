@@ -1,7 +1,4 @@
-import React, { Component } from "react";
-import NavbarLoggedIn from "../MainNavbar/NavbarLoggedIn";
-import NavbarLoggedOut from "../MainNavbar/NavbarLoggedOut";
-import { Link, Router } from "react-router-dom";
+import React, { Component } from 'react'
 
 export default class SideNavbar extends Component {
   logOut() {

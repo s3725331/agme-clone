@@ -83,3 +83,18 @@ nav ul .waves-effect i {
   bottom: 0;
   width: 100%;
 }
+
+.dashboard-signup {
+  height: 50px;
+  width: 50%;
+  display: inline-block;
+}
+
+.dashboard-main-text {
+  margin-top: 40px;
+  font-size: 70px; 
+}
+
+.dashboard-sub-text {
+  margin-bottom: 40px;
+}

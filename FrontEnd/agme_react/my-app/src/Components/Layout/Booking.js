@@ -95,7 +95,7 @@ render() {
             <div className="card">
               <div className="card-action blue darken-4 white-text">
                 <Link to="/Dashboard">
-                  <span className="white-text text-darken-2 center-align">
+                  <span className="white-text text-darken-2 center-align" data-test="booking-card">
                     <h3>Book your appointment</h3>
                   </span>
                 </Link>

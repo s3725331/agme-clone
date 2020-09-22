@@ -24,4 +24,9 @@ describe('logged in MainNavbar', () => {
         const wrapper = findByTestAtrr(component, 'logged-in-account-component');
         expect(wrapper.length).toBe(1);
     });
+
+    it('should render dropdown content', () => {
+        const wrapper = findByTestAtrr(component, 'dropdown-content');
+        expect(wrapper.length).toBe(1);
+    });
 })
