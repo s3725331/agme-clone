@@ -1,7 +1,4 @@
 import React, { Component } from "react";
-import { Link, Router } from "react-router-dom";
-import { useSelector, connect } from "react-redux";
-import { getByText } from "@testing-library/react";
 import Navbar from "../Navbars/MainNavbar/MainNavbar";
 import MainSideNavbar from "../Navbars/SideNavbar/SideNavbar";
 import Footer from "../Footer/Footer";
@@ -10,7 +7,7 @@ import LoggedOutDashboard from "./LoggedOutDashboard";
 
 export default class DashBoard extends Component {
 
-  componentDidMount() {
+  async componentDidMount() {
     const M = window.M;
     const sideNav = document.querySelector(".sidenav");
     M.Sidenav.init(sideNav, {});
@@ -27,7 +24,7 @@ export default class DashBoard extends Component {
 
     return (
       <div>
-        <a data-test="navbar"><Navbar /></a>
+        <Navbar />
         <MainSideNavbar />
         {DashboardCard}
         <Footer />

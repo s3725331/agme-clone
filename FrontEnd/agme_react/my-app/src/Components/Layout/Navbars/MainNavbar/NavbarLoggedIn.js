@@ -2,7 +2,7 @@ import React, { Component, useState } from "react";
 
 export default class loggedInComponent extends Component {
 
-  componentDidMount() {
+  async componentDidMount() {
     const M = window.M;
     var elems = document.querySelectorAll('.dropdown-trigger');
     M.Dropdown.init(elems, {
@@ -26,7 +26,7 @@ export default class loggedInComponent extends Component {
             </span>
           </a>
         </div>
-        <ul id="dropdown" class="dropdown-content">
+        <ul id="dropdown" class="dropdown-content" data-test="dropdown-content">
           <li>
             <a href="#!">Account</a>
           </li>

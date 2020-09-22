@@ -14,29 +14,59 @@ export default class Footer extends Component {
                   <i className="material-icons">collections_bookmark</i>Agme
                   Booking
                 </h6>
+                <li>
+                  <a class="grey-text text-lighten-3" href="#!">
+                    About
+                  </a>
+                </li>
+                <li>
+                  <a class="grey-text text-lighten-3" href="#!">
+                    Help
+                  </a>
+                </li>
+                <li>
+                  <a class="grey-text text-lighten-3" href="#!">
+                    Legal
+                  </a>
+                </li>
               </a>
-              <p class="white-text text-lighten-4"><a class="white-text" href="#!">About</a></p>
             </div>
             <div class="col l4 offset-l2 s12" data-test="social-links">
               <h6 class="white-text">Social links</h6>
               <ul>
                 <li>
-                  <a class="grey-text text-lighten-3" href="#!" data-test="facebook-link">
+                  <a
+                    class="grey-text text-lighten-3"
+                    href="#!"
+                    data-test="facebook-link"
+                  >
                     Facebook
                   </a>
                 </li>
                 <li>
-                  <a class="grey-text text-lighten-3" href="#!" data-test="twitter-link">
+                  <a
+                    class="grey-text text-lighten-3"
+                    href="#!"
+                    data-test="twitter-link"
+                  >
                     Twitter
                   </a>
                 </li>
                 <li>
-                  <a class="grey-text text-lighten-3" href="#!"data-test="linkedIn-link">
+                  <a
+                    class="grey-text text-lighten-3"
+                    href="#!"
+                    data-test="linkedIn-link"
+                  >
                     LinkedIn
                   </a>
                 </li>
                 <li>
-                  <a class="grey-text text-lighten-3" href="#!" data-test="instagram-link">
+                  <a
+                    class="grey-text text-lighten-3"
+                    href="#!"
+                    data-test="instagram-link"
+                  >
                     Instagram
                   </a>
                 </li>
