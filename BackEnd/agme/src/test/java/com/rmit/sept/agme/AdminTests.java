@@ -40,11 +40,22 @@ public class AdminTests {
         account.setAddress("adsadasdasdsa");
         account.setLastName("sdfsdfsdf");
         account.setFirstName("sgrgergerg");
-        account.setEmail("gmail@gmail.com");
+        account.setEmail("gmail212@gmail.com");
+
+        Account account2 = new Account();
+
+        account2.setPassword("password2");
+        account2.setAddress("testing street");
+        account2.setLastName("replace");
+        account2.setFirstName("bob");
+        account2.setEmail("email21@gmail.com");
+
         accountRepository.save(account);
+        accountRepository.save(account2);
+
         Admin admin = new Admin(account);
         Admin newAdmin = adminRepository.save(admin);
-        newAdmin.setAccount(null);
+        newAdmin.setAccount(account2);
         Admin updatedAdmin = adminRepository.save(newAdmin);
 
         assertThat(updatedAdmin.getModifiedAt()).isNotNull();

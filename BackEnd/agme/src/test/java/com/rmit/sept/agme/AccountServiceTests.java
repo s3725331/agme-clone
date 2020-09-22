@@ -37,7 +37,7 @@ public class AccountServiceTests {
     @Test
     public void testAccountServiceUpdate() {
         Account account = new Account();
-        account.setEmail("dominic@gmail.com");
+        account.setEmail("dominic21@gmail.com");
         account.setPassword("password123");
         account.setFirstName("Dominic");
         account.setLastName("Person");
@@ -65,7 +65,7 @@ public class AccountServiceTests {
     @Test
     public void testAccountServiceCreate() {
         Account account = new Account();
-        account.setEmail("ashley@gmail.com");
+        account.setEmail("ashley21@gmail.com");
         account.setPassword("password123");
         account.setFirstName("Ashley");
         account.setLastName("Dale");
