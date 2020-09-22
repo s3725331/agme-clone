@@ -3,7 +3,10 @@ import { Link } from 'react-router-dom';
 
 export default class LoggedInDashboard extends Component {
   render() {
-    if( localStorage.getItem("workerObject") != null || localStorage.getItem("adminObject") != null){
+
+
+    //if logged in user is worker, display this, else display customer version
+    if( localStorage.getItem("workerObject") != null ){
       return (
         <div className="loggedInComponent">
         <div class="container">

@@ -3,7 +3,7 @@ import { GET_ERRORS } from "./types";
 
 export const createCustomer = (newAccount, type, history) => async dispatch => {
   try {
-
+      //if account type is of Customer, a customer account is created, else a worker account is created
       if(type === "Customer"){
         const  res1 = await axios.post("http://localhost:8080/api/customer/account", newAccount);
       } else if (type === "Worker"){

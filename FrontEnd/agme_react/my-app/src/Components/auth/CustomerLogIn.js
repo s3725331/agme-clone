@@ -26,7 +26,10 @@ export class CustomerLogIn extends Component {
   handleSubmit(e) {
     e.preventDefault();
     
+    //grab account using email and password, will only work if details are correct
     this.props.getAccount(this.state.email, this.state.password, this.props.history);
+
+    //set error state to true to display error message, will only work is login fails
     this.setState({ error:true});
   }
 
@@ -49,6 +52,8 @@ export class CustomerLogIn extends Component {
               </div>
 
               <div className="card-content">
+
+              {/* will display error message if login fails */}
                 {
                    (this.state.error === false) ? null: (
                      (this.props.message === null) ? null :(
@@ -138,6 +143,7 @@ CustomerLogIn.propTypes = {
   getAccount: PropTypes.func.isRequired
 };
 
+//used to grab errors stored in the store.
 const stateToProps = (state) =>{
   return {
     message:state.message

@@ -9,25 +9,18 @@ import axios from "axios";
   constructor(props) {
     super(props);
 
-    var workerStore;
     var customerObj;
 
+    //gets and stores customer object from local storage. Used to add Customer details into booking
      if(localStorage.getItem('customerObject')!= null){ 
       customerObj = JSON.parse(localStorage.getItem('customerObject'));
 
      }
-     
-      var workerStore = [{id:"0",
-       account : {
-      firstName:"No",
-      lastName:"workers"}
-      }];
-     
-
+  
      
 
     this.state = {
-      workers : workerStore,
+      workers : null,
       worker : "",
       customer : customerObj,
       startDate: "",
@@ -51,6 +44,8 @@ import axios from "axios";
 
   handleSubmit(e) {
     e.preventDefault();
+
+    //formats dates into database friendly pattern
     var starting = this.state.startDate+ " " + this.state.startTime+":00";
     var ending = this.state.startDate+ " " + this.state.endTime+":00";
 
@@ -60,13 +55,19 @@ import axios from "axios";
       startTime : starting,
       endTime : ending
     }
-    console.log(starting)
-    console.log(ending)
-   console.log(newBooking);
+
+   //creates a booking based on info provided in form
    this.props.createBooking(newBooking, this.props.history);
 
   }
   async componentDidMount() {
+
+    //used to load information on all workers in database in order to give options to the customer
+    //when choosing which worker they want to book
+
+    //set loaded state to true if all workers have bee loaded or if no workers have been found 
+    //in order to render page
+
     try{
     const res = await axios.get("http://localhost:8080/api/worker/all");
     this.setState({ workers: res.data, loaded: true });
@@ -83,9 +84,11 @@ import axios from "axios";
 
   
 render() { 
+
+  //used to render only after workers have been grabbed
   if (!this.state.loaded) {
     return null;
-}
+  }
 
 
     return (
@@ -102,6 +105,7 @@ render() {
               </div>
 
               { <form onSubmit={this.handleSubmit}>
+
               <div className="card-content">
                 <h6> Select a service</h6>
                   <div className="form-field">
@@ -118,6 +122,13 @@ render() {
               <div className="card-content">
                 <h6> Select a worker</h6>
                   <div className="form-field">
+
+                  {/* if workers exist, loop through each worker in the drop down menu for the form
+                  if they dont exit, load message saying workers dont exist*/ }
+                  { (this.state.workers === null) ? (
+                    <h6> No workers available</h6>
+
+                  ) :
                   <select  className = "browser-default" name = "worker"
                   value = {this.state.worker} onChange={this.handleChange}  required>
 
@@ -128,8 +139,9 @@ render() {
                             <option key={worker['id']} value={index}> {worker['account']['firstName']} {worker['account']['lastName']}</option>
                           ))
                         }
-
+                      
                     </select>
+                      }
                   </div>
               </div>
 
