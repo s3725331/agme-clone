@@ -5,6 +5,13 @@ export default class LoggedInDashboard extends Component {
   render() {
 
 
+    if( localStorage.getItem("adminObject") != null ){
+      return (
+        <div></div>
+      )
+    }
+
+
     //if logged in user is worker, display this, else display customer version
     if( localStorage.getItem("workerObject") != null ){
       return (
