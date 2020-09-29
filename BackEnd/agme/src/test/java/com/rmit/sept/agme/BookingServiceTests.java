@@ -1,16 +1,15 @@
 package com.rmit.sept.agme;
 
-import com.rmit.sept.agme.model.Account;
-import com.rmit.sept.agme.model.Booking;
-import com.rmit.sept.agme.model.Customer;
-import com.rmit.sept.agme.model.Worker;
+import com.rmit.sept.agme.model.*;
 import com.rmit.sept.agme.repositories.AccountRepository;
 import com.rmit.sept.agme.repositories.CustomerRepository;
 import com.rmit.sept.agme.repositories.WorkerRepository;
 import com.rmit.sept.agme.services.CustomerService;
 import com.rmit.sept.agme.services.BookingService;
 import com.rmit.sept.agme.repositories.BookingRepository;
+import com.rmit.sept.agme.services.ServiceNameService;
 import com.rmit.sept.agme.services.WorkerService;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -45,6 +44,18 @@ public class BookingServiceTests {
     @Autowired
     BookingService bookingService;
 
+    @Autowired
+    ServiceNameService serviceNameService;
+
+    ServiceName mockService;
+
+    @BeforeAll
+    public void setUp(){
+        serviceNameService.create("Service Name");
+        mockService = serviceNameService.getByService("Service Name").iterator().next();
+    }
+
+
     @Test
     public void testValidBookingCreate() {
         Account cust = new Account();
@@ -62,7 +73,7 @@ public class BookingServiceTests {
         work.setLastName("Azurro");
         work.setPassword("wordpass");
         Account newWorker = accountRepository.save(work);
-        workerService.create(newWorker.getId());
+        workerService.create(newWorker.getId(), mockService);
         Booking book = new Booking();
         Customer custom = customerRepository.save(new Customer(newCustomer));
         Worker worker = workerRepository.save(new Worker(newWorker));
@@ -157,7 +168,7 @@ public class BookingServiceTests {
         work.setLastName("Azurro");
         work.setPassword("wordpass");
         Account newWorker = accountRepository.save(work);
-        workerService.create(newWorker.getId());
+        workerService.create(newWorker.getId(), mockService);
         
         Booking book = new Booking();
         Customer custom = customerRepository.save(new Customer(newCustomer));
@@ -189,7 +200,7 @@ public class BookingServiceTests {
         work.setLastName("Azurro");
         work.setPassword("wordpass");
         Account newWorker = accountRepository.save(work);
-        workerService.create(newWorker.getId());
+        workerService.create(newWorker.getId(), mockService);
         
         Booking book = new Booking();
         Customer custom = customerRepository.save(new Customer(newCustomer));

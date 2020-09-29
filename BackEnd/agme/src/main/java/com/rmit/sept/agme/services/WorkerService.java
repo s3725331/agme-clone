@@ -2,14 +2,13 @@ package com.rmit.sept.agme.services;
 
 import com.rmit.sept.agme.model.Account;
 import com.rmit.sept.agme.model.Customer;
+import com.rmit.sept.agme.model.ServiceName;
 import com.rmit.sept.agme.model.Worker;
 import com.rmit.sept.agme.repositories.AccountRepository;
 import com.rmit.sept.agme.repositories.WorkerRepository;
-import org.hibernate.jdbc.Work;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -43,9 +42,14 @@ public class WorkerService {
         return workerRepository.findById(id);
     }
 
-    //Get all workers
-    public Iterable<Worker> getAll(){
-        return workerRepository.findAll();
+    //Get all accepted workers
+    public Iterable<Worker> getAllAccepted(){
+        return workerRepository.getByAccepted(true);
+    }
+
+    //Get all workers not yet accepted
+    public Iterable<Worker> getAllUnaccepted(){
+        return workerRepository.getByAccepted(false);
     }
 
     public Optional<Worker> getByAccount(Account account) {
@@ -58,7 +62,7 @@ public class WorkerService {
     }
 
     //Worker created from account
-    public Optional<Worker> create(long accountID){
+    public Optional<Worker> create(long accountID, ServiceName service){
         Optional<Account> userAccount = accountRepository.findById(accountID);
         if(!userAccount.isPresent()){
             return Optional.empty(); //no account found, creation failed
@@ -66,6 +70,7 @@ public class WorkerService {
 
         //Worker created
         Worker newWorker = new Worker(userAccount.get());
+        newWorker.setServiceName(service); //Set workers service
         return Optional.of(saveOrUpdate(newWorker));
     }
 

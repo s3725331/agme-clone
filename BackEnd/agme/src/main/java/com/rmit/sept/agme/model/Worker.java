@@ -14,6 +14,10 @@ public class Worker {
     @ManyToOne
     private Account account;
 
+    @NotNull
+    @ManyToOne
+    private ServiceName serviceName;
+
     public boolean isAccepted() {
         return accepted;
     }
@@ -68,5 +72,13 @@ public class Worker {
 
     public void setAccepted(boolean accepted) {
         this.accepted = accepted;
+    }
+
+    public ServiceName getServiceName() {
+        return serviceName;
+    }
+
+    public void setServiceName(ServiceName serviceName) {
+        this.serviceName = serviceName;
     }
 }
