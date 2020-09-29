@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import Footer from "../Footer/Footer";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import Navbar from "../Navbars/MainNavbar/MainNavbar";
+import { updateAccount } from "../../../actions/updateActions";
 import axios from "axios";
 
-export default class Account extends Component {
+ class Account extends Component {
   constructor(props) {
     super(props);
     var user;
@@ -17,6 +19,7 @@ export default class Account extends Component {
       accountType = "Customer";
     } else if (localStorage.getItem("workerObject") != null) {
       user = JSON.parse(localStorage.getItem("workerObject"));
+      console.log(user)
       accountType = "Worker";
     }
 
@@ -24,16 +27,19 @@ export default class Account extends Component {
 
     this.state = {
       profile: user,
-      account: accountType,
+      type: accountType,
       loaded: false,
       editStatus: false,
+      service:user["serviceName"]["service"],
+      services: null,
+      loaded:false,
       email: user["account"]["email"],
       firstName: user["account"]["firstName"],
       lastName: user["account"]["lastName"],
       address: user["account"]["address"]
     };
 
-    this.setEditFalse = this.setEditFalse.bind(this);
+ 
     this.setEditTrue = this.setEditTrue.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -45,10 +51,26 @@ export default class Account extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const newAccount = {
-
+    var account;
+    if (localStorage.getItem("customerObject") != null) {
+      account = JSON.parse(localStorage.getItem("customerObject"));
+    } else if (localStorage.getItem("workerObject") != null) {
+      account = JSON.parse(localStorage.getItem("workerObject"));
+      account["serviceName"]["service"] = this.state.service;
     }
 
+    account["account"]["email"]=this.state.email;
+    account["account"]["firstName"]=this.state.firstName;
+    account["account"]["lastName"]=this.state.lastName;
+    account["account"]["address"]=this.state.address;
+
+    console.log(account)
+
+    this.props.updateAccount(account, this.state.type, this.props.history);
+   // console.log(account)
+  
+    this.setState({ editStatus: false });
+   
   }
 
 
@@ -56,14 +78,34 @@ export default class Account extends Component {
     this.setState({ editStatus: true });
   }
 
+  async componentDidMount() {
 
 
-  setEditFalse(){
-    this.setState({ editStatus: false });
- 
+
+    try{
+    const res = await axios.get("http://localhost:8080/api/service/all");
+    this.setState({ services: res.data, loaded: true });
+    console.log(res.data)
+    }    catch (err) {  
+
+
+    if(err.response.status === 404){
+      this.setState({ loaded: true });
+
+  }
+  }
   }
 
+
+
+
+
+
   render() {
+      //used to render only after workers have been grabbed
+  if (!this.state.loaded) {
+    return null;
+}
 
     if(this.state.editStatus){
       return (
@@ -82,12 +124,12 @@ export default class Account extends Component {
                     <div className="card-content">
                       <div className="col s3">
                         <h6>
-                          <b>Profile</b>
+                          <b>Edit Profile</b>
                         </h6>
                       </div>
                     </div>
 
-
+                    <form onSubmit={this.handleSubmit}>
                     <div className="card-content">
                     <h6> Edit Email</h6>
                     <div data-test="email-field">
@@ -147,13 +189,40 @@ export default class Account extends Component {
                       ></input>
                     </div>
                   </div>
+
+                  <div className="card-content">
+                  {(this.state.type != "Worker") ? null: 
+                  <h7>Edit Service</h7>
+                }
+                {
+                
+                
+                
+                  (this.state.type != "Worker") ? null: 
+                
+                <select className = "browser-default" onChange={this.handleChange} 
+                value= {this.state.service} 
+                name = "service">
+                <option value = "" disabled selected>Choose your option</option>
+                {
+                  
+                  this.state.services.map((service, index) => (
+                    <option key={index} value={service['service']}> {service['service']} </option>
+                  ))
+                }
+                    </select> 
+  
+     
+                  
+                }
+                </div>
     
     
                   <div className="card-content">
   
                   
   
-                  <button className="btn btn-profile blue darken-4"    type="submit" onClick={this.setEditFalse} >
+                  <button className="btn btn-profile blue darken-4"    type="submit" >
                   Save Profile
                   
                 </button> 
@@ -162,12 +231,11 @@ export default class Account extends Component {
 
                 </div>
 
-
+                </form>
 
 
                     </div>
-
-                    <div className="card-content"></div>
+                    
                   </div>
                 </div>
               </div>
@@ -232,6 +300,24 @@ export default class Account extends Component {
                       </h7>
                     </div>
                   </div>
+
+                  <div className="card-content">
+                  <div className="col s3">
+                  {(this.state.type != "Worker") ? null: 
+                  <h7>Service</h7>
+                }
+                    
+                  </div>
+                  <div className="col s3 push-s3">
+                    <h7>
+
+                    {(this.state.type != "Worker") ? null: 
+                    <b>{this.state.profile["serviceName"]["service"]}</b>
+                  }
+                      
+                    </h7>
+                  </div>
+                </div>
                   <div className="card-content">
 
                     <button className="btn btn-profile blue darken-4"     type="submit" onClick={this.setEditTrue} >
@@ -253,3 +339,12 @@ export default class Account extends Component {
     }
   
 }
+Account.propTypes = {
+  updateAccount: PropTypes.func.isRequired,
+};
+
+
+export default connect (
+  null,
+  {updateAccount}
+)(Account);

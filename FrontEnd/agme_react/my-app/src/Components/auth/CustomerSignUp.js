@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createCustomer } from "../../actions/custCreateActions";
+import axios from "axios";
 
 export class CustomerSignUp extends Component {
   constructor(props) {
@@ -13,7 +14,10 @@ export class CustomerSignUp extends Component {
       firstName: "",
       lastName: "",
       address: "",
-      type:""
+      type:"",
+      service:"",
+      services:null,
+      loaded:false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -26,6 +30,8 @@ export class CustomerSignUp extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+
+
     const newAccount = {
       email: this.state.email,
       password: this.state.password,
@@ -34,11 +40,42 @@ export class CustomerSignUp extends Component {
       address: this.state.address
     }
 
+
     //method used to create account with specified type. Will be successful if details are valid
-    this.props.createCustomer(newAccount, this.state.type, this.props.history);
+
+      this.props.createCustomer(newAccount, this.state.service, this.state.type, this.props.history);
+    
+
+
   }
 
+  async componentDidMount() {
+
+
+
+    try{
+    const res = await axios.get("http://localhost:8080/api/service/all");
+    this.setState({ services: res.data, loaded: true });
+    console.log(res.data)
+    }    catch (err) {  
+
+
+    if(err.response.status === 404){
+      this.setState({ loaded: true });
+
+  }
+  }
+  }
+
+
+
   render() {
+  //used to render only after workers have been grabbed
+  if (!this.state.loaded) {
+    return null;
+}
+
+
     return (
       <div>
         <div className="row">
@@ -161,6 +198,35 @@ export class CustomerSignUp extends Component {
                       <option value="Worker">Worker</option>
                   </select>
                   
+              </div>
+
+              <div className="card-content">
+
+
+              {(this.state.type != "Worker") ? null: 
+                <h6> Select Service </h6>
+              }
+              {
+                
+                
+                
+                (this.state.type != "Worker") ? null: 
+              
+              <select className = "browser-default" onChange={this.handleChange} 
+              value= {this.state.service} 
+              name = "service">
+              <option value = "" disabled selected>Choose your option</option>
+              {
+                
+                this.state.services.map((service, index) => (
+                  <option key={index} value={service['service']}> {service['service']} </option>
+                ))
+              }
+                  </select> 
+
+   
+                
+              }
               </div>
 
 

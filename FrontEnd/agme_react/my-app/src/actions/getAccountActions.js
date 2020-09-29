@@ -61,6 +61,24 @@ export const getAccount = (account, password, history) => async dispatch => {
             payload: err.response.data
           });
       }
+
+
+      try{
+        const res4 = await axios.get("http://localhost:8080/api/admin",  { params: { accountId :
+        userData['id']}
+        })
+          const data4 = res4.data;
+     
+        localStorage.setItem('adminObject', JSON.stringify(data4));
+  
+        } 
+          catch (err) {  
+            
+            dispatch({
+              type: GET_ERRORS,
+              payload: err.response.data
+            });
+        }
   
       history.push("/Dashboard");
       }  else {

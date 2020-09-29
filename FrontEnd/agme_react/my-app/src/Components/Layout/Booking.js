@@ -60,6 +60,7 @@ import axios from "axios";
    this.props.createBooking(newBooking, this.props.history);
 
   }
+  
   async componentDidMount() {
 
     //used to load information on all workers in database in order to give options to the customer
