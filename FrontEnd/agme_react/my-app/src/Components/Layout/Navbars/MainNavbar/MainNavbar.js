@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import NavbarLoggedIn from "./NavbarLoggedIn";
 import NavbarLoggedOut from "./NavbarLoggedOut";
+import { Link } from "react-router-dom";
 
 export default class Navbar extends Component {
 
@@ -19,10 +20,12 @@ export default class Navbar extends Component {
         <nav className="blue darken-4">
           <div className="container">
             <div className="nav-wrapper">
-              <a href="" className="brand-logo" data-test="logo">
+            <Link id="RouterNavLink" to="/Dashboard">
+              <a href="/Dashboard" className="brand-logo" data-test="logo">
                 Agme Booking
                 <i className="material-icons">collections_bookmark</i>
               </a>
+              </Link>
               <a href="" data-target="mobile-nav" className="sidenav-trigger">
                 <i className="material-icons">menu</i>
               </a>

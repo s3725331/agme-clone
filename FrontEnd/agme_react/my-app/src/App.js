@@ -9,6 +9,7 @@ import PastBooking from './Components/Layout/PastBooking'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './store'
+import Account from './Components/Layout/Accounts/Account'
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route exact path="/Booking" component={Booking} />
             <Route exact path="/CurrentBooking" component = {CurrentBooking}/>
             <Route exact path="/PastBooking" component = {PastBooking}/>
+            <Route exact path="/Account" component = {Account}/>
           </Switch>
         </div>
       </Router>
