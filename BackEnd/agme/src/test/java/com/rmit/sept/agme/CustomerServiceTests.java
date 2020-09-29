@@ -28,8 +28,8 @@ public class CustomerServiceTests {
         Account cust = new Account();
         cust.setAddress("13 realplace drive, suburbs");
         cust.setEmail("Juan@mail.com");
-        cust.setFirstname("Juan");
-        cust.setLastname("Rosso");
+        cust.setFirstName("Juan");
+        cust.setLastName("Rosso");
         cust.setPassword("password");
         Account newAccount = accountRepository.save(cust);
         assertTrue(customerService.create(newAccount.getId()).isPresent());
@@ -40,8 +40,8 @@ public class CustomerServiceTests {
         Account cust = new Account();
         cust.setAddress("13 realplace drive, suburbs");
         cust.setEmail("Juan@mail.com");
-        cust.setFirstname("Juan");
-        cust.setLastname("Rosso");
+        cust.setFirstName("Juan");
+        cust.setLastName("Rosso");
         cust.setPassword("password");
         Account newAccount = accountRepository.save(cust);
         assertFalse(customerService.create(12345).isPresent());
@@ -51,8 +51,8 @@ public class CustomerServiceTests {
         Account cust = new Account();
         cust.setAddress("13 realplace drive, suburbs");
         cust.setEmail("Juan@mail.com");
-        cust.setFirstname("Juan");
-        cust.setLastname("Rosso");
+        cust.setFirstName("Juan");
+        cust.setLastName("Rosso");
         cust.setPassword("password");
         Account newAccount = accountRepository.save(cust);
         Customer customer = new Customer(newAccount);
@@ -65,8 +65,8 @@ public class CustomerServiceTests {
         Account cust = new Account();
         cust.setAddress("13 realplace drive, suburbs");
         cust.setEmail("Juan@mail.com");
-        cust.setFirstname("Juan");
-        cust.setLastname("Rosso");
+        cust.setFirstName("Juan");
+        cust.setLastName("Rosso");
         cust.setPassword("password");
         Account newAccount = accountRepository.save(cust);
         Customer customer = new Customer(newAccount);
@@ -79,8 +79,8 @@ public class CustomerServiceTests {
         Account cust = new Account();
         cust.setAddress("13 realplace drive, suburbs");
         cust.setEmail("Juan@mail.com");
-        cust.setFirstname("Juan");
-        cust.setLastname("Rosso");
+        cust.setFirstName("Juan");
+        cust.setLastName("Rosso");
         cust.setPassword("password");
         Account newAccount = accountRepository.save(cust);
         Customer customer = new Customer(newAccount);
@@ -93,8 +93,8 @@ public class CustomerServiceTests {
         Account cust = new Account();
         cust.setAddress("13 realplace drive, suburbs");
         cust.setEmail("Juan@mail.com");
-        cust.setFirstname("Juan");
-        cust.setLastname("Rosso");
+        cust.setFirstName("Juan");
+        cust.setLastName("Rosso");
         cust.setPassword("password");
         Account newAccount = accountRepository.save(cust);
         Customer customer = new Customer(newAccount);

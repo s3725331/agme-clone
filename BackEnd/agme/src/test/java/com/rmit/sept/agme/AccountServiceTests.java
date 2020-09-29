@@ -23,8 +23,8 @@ public class AccountServiceTests {
         Account account = new Account();
         account.setEmail("bob@gmail.com");
         account.setPassword("password123");
-        account.setFirstname("Bob");
-        account.setLastname("Build");
+        account.setFirstName("Bob");
+        account.setLastName("Build");
         account.setAddress("26 Hill Avenue EastLand");
 
         Account secondAccount = accountRepository.save(account);
@@ -39,8 +39,8 @@ public class AccountServiceTests {
         Account account = new Account();
         account.setEmail("dominic21@gmail.com");
         account.setPassword("password123");
-        account.setFirstname("Dominic");
-        account.setLastname("Person");
+        account.setFirstName("Dominic");
+        account.setLastName("Person");
         account.setAddress("2 Wayne Street Etihad");
 
         Account secondAccount = accountRepository.save(account);
@@ -54,8 +54,8 @@ public class AccountServiceTests {
         Account account = new Account();
         account.setEmail("dominic@gmail.com");
         account.setPassword("password123");
-        account.setFirstname("Dominic");
-        account.setLastname("Person");
+        account.setFirstName("Dominic");
+        account.setLastName("Person");
         account.setAddress("2 Wayne Street Etihad");
 
         assertFalse(accountService.update(account).isPresent());
@@ -67,8 +67,8 @@ public class AccountServiceTests {
         Account account = new Account();
         account.setEmail("ashley21@gmail.com");
         account.setPassword("password123");
-        account.setFirstname("Ashley");
-        account.setLastname("Dale");
+        account.setFirstName("Ashley");
+        account.setLastName("Dale");
         account.setAddress("34 Albert Road Tower");
 
         //Account secondAccount = accountRepository.save(account);
@@ -81,8 +81,8 @@ public class AccountServiceTests {
         Account account = new Account();
         account.setEmail("ashley@gmail.com");
         account.setPassword("password123");
-        account.setFirstname("Ashley");
-        account.setLastname("Dale");
+        account.setFirstName("Ashley");
+        account.setLastName("Dale");
         account.setAddress("34 Albert Road Tower");
 
         Account secondAccount = accountRepository.save(account);

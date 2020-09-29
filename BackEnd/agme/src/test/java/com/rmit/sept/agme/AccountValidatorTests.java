@@ -27,8 +27,8 @@ public class AccountValidatorTests {
             Account contact = new Account();
             contact.setEmail("sam@gmail.com");
             contact.setPassword("Password123");
-            contact.setFirstname("Sam");
-            contact.setLastname("Brooks");
+            contact.setFirstName("Sam");
+            contact.setLastName("Brooks");
             contact.setAddress("24 York Street Sunshine");
             Set<ConstraintViolation<Account>> violations = validator.validate(contact);
             assertTrue(violations.isEmpty());
@@ -39,8 +39,8 @@ public class AccountValidatorTests {
             Account contact = new Account();
             contact.setEmail("sam@gmail.com");
             contact.setPassword("Pa");
-            contact.setFirstname("Sam");
-            contact.setLastname("Brooks");
+            contact.setFirstName("Sam");
+            contact.setLastName("Brooks");
             contact.setAddress("24 York Street Sunshine");
             Set<ConstraintViolation<Account>> violations = validator.validate(contact);
             assertFalse(violations.isEmpty());
@@ -51,8 +51,8 @@ public class AccountValidatorTests {
             Account contact = new Account();
             contact.setEmail("sam@gmail.com");
             contact.setPassword("passwrodcarbustrucksshcwoaodnssseodddgsjskfhsgahdjsjshsjfhcgshcj123");
-            contact.setFirstname("Sam");
-            contact.setLastname("Brooks");
+            contact.setFirstName("Sam");
+            contact.setLastName("Brooks");
             contact.setAddress("24 York Street Sunshine");
             Set<ConstraintViolation<Account>> violations = validator.validate(contact);
             assertFalse(violations.isEmpty());
@@ -62,8 +62,8 @@ public class AccountValidatorTests {
         public void testAccountPasswordFieldBlankFailure() {
             Account contact = new Account();
             contact.setEmail("sam@gmail.com");
-            contact.setFirstname("Sam");
-            contact.setLastname("Brooks");
+            contact.setFirstName("Sam");
+            contact.setLastName("Brooks");
             contact.setAddress("24 York Street Sunshine");
             Set<ConstraintViolation<Account>> violations = validator.validate(contact);
             assertFalse(violations.isEmpty());
@@ -74,8 +74,8 @@ public class AccountValidatorTests {
             Account contact = new Account();
             contact.setEmail("samgmail.com");
             contact.setPassword("Password123");
-            contact.setFirstname("Sam");
-            contact.setLastname("Brooks");
+            contact.setFirstName("Sam");
+            contact.setLastName("Brooks");
             contact.setAddress("24 York Street Sunshine");
             Set<ConstraintViolation<Account>> violations = validator.validate(contact);
             assertFalse(violations.isEmpty());
@@ -86,8 +86,8 @@ public class AccountValidatorTests {
             Account contact = new Account();
             contact.setEmail("sam@gmail.com");
             contact.setPassword("Password123");
-            contact.setFirstname("");
-            contact.setLastname("Brooks");
+            contact.setFirstName("");
+            contact.setLastName("Brooks");
             contact.setAddress("24 York Street Sunshine");
             Set<ConstraintViolation<Account>> violations = validator.validate(contact);
             assertFalse(violations.isEmpty());
@@ -98,8 +98,8 @@ public class AccountValidatorTests {
             Account contact = new Account();
             contact.setEmail("sam@gmail.com");
             contact.setPassword("Password123");
-            contact.setFirstname("Sam");
-            contact.setLastname("Brooks");
+            contact.setFirstName("Sam");
+            contact.setLastName("Brooks");
             contact.setAddress("qw");
             Set<ConstraintViolation<Account>> violations = validator.validate(contact);
             assertFalse(violations.isEmpty());
@@ -110,8 +110,8 @@ public class AccountValidatorTests {
             Account contact = new Account();
             contact.setEmail("sam@gmail.com");
             contact.setPassword("Password123");
-            contact.setFirstname("Sam");
-            contact.setLastname("Brooks");
+            contact.setFirstName("Sam");
+            contact.setLastName("Brooks");
             contact.setAddress("qwdgdgdgdgddgdghjiwfweufbbcjsnubwefyujdhwydhakxjadyhwhudkhadhjsjdhfefwefw" +
                     "dfffffffffffsfdsfsfsdfsfsdfsfsfsfsdfsdfsfsfsfsdfsdfsdfsdfefewfwefwefwefwfwfwefwefwefwefwf Toorak");
             Set<ConstraintViolation<Account>> violations = validator.validate(contact);
@@ -123,8 +123,8 @@ public class AccountValidatorTests {
             Account contact = new Account();
             contact.setEmail("sam@gmail.com");
             contact.setPassword("Password123");
-            contact.setFirstname("Sam");
-            contact.setLastname("Brooks");
+            contact.setFirstName("Sam");
+            contact.setLastName("Brooks");
             Set<ConstraintViolation<Account>> violations = validator.validate(contact);
             assertFalse(violations.isEmpty());
         }
@@ -133,8 +133,8 @@ public class AccountValidatorTests {
         public void testAccountEmailBlankFailure() {
             Account contact = new Account();
             contact.setPassword("Password123");
-            contact.setFirstname("Sam");
-            contact.setLastname("Brooks");
+            contact.setFirstName("Sam");
+            contact.setLastName("Brooks");
             contact.setAddress("24 York Street Sunshine");
             Set<ConstraintViolation<Account>> violations = validator.validate(contact);
             assertFalse(violations.isEmpty());

@@ -19,11 +19,11 @@ public class Account {
 
     @Size(min = 3, max = 32, message = "Please enter valid name (3 to 32 characters) ")
     @NotBlank(message = "Field must not be empty")
-    private String firstname;
+    private String firstName;
 
     @Size(min = 3, max = 32, message = "Please enter valid name (3 to 32 characters) ")
     @NotBlank(message = "Field must not be empty")
-    private String lastname;
+    private String lastName;
 
     @Size (min = 6, max = 128, message = "Invalid Address Length")
     @NotBlank(message = "Field must not be empty")
@@ -70,20 +70,20 @@ public class Account {
         this.password = password;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getAddress() {

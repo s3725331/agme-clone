@@ -22,8 +22,8 @@ public class CustomerTests {
         Account account = new Account();
         account.setPassword("password");
         account.setAddress("adsadasdasdsa");
-        account.setLastname("sdfsdfsdf");
-        account.setFirstname("sgrgergerg");
+        account.setLastName("sdfsdfsdf");
+        account.setFirstName("sgrgergerg");
         account.setEmail("gmail@gmail.com");
         accountRepository.save(account);
         Customer customer = new Customer(account);
@@ -37,15 +37,15 @@ public class CustomerTests {
         Account account = new Account();
         account.setPassword("password");
         account.setAddress("adsadasdasdsa");
-        account.setLastname("sdfsdfsdf");
-        account.setFirstname("sgrgergerg");
+        account.setLastName("sdfsdfsdf");
+        account.setFirstName("sgrgergerg");
         account.setEmail("gmail21@gmail.com");
 
         Account account2 = new Account();
         account2.setPassword("password2");
         account2.setAddress("testing street");
-        account2.setLastname("replace");
-        account2.setFirstname("bob");
+        account2.setLastName("replace");
+        account2.setFirstName("bob");
         account2.setEmail("email22@gmail.com");
         accountRepository.save(account);
         accountRepository.save(account2);
