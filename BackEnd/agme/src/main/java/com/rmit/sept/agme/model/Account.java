@@ -1,5 +1,4 @@
 package com.rmit.sept.agme.model;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.Date;
@@ -20,11 +19,11 @@ public class Account {
 
     @Size(min = 3, max = 32, message = "Please enter valid name (3 to 32 characters) ")
     @NotBlank(message = "Field must not be empty")
-    private String firstName;
+    private String firstname;
 
     @Size(min = 3, max = 32, message = "Please enter valid name (3 to 32 characters) ")
     @NotBlank(message = "Field must not be empty")
-    private String lastName;
+    private String lastname;
 
     @Size (min = 6, max = 128, message = "Invalid Address Length")
     @NotBlank(message = "Field must not be empty")
@@ -71,20 +70,20 @@ public class Account {
         this.password = password;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getAddress() {

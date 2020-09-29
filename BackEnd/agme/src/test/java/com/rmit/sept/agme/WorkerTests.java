@@ -22,8 +22,8 @@ public class WorkerTests {
         Account account = new Account();
         account.setPassword("password");
         account.setAddress("adsadasdasdsa");
-        account.setLastName("sdfsdfsdf");
-        account.setFirstName("sgrgergerg");
+        account.setLastname("sdfsdfsdf");
+        account.setFirstname("sgrgergerg");
         account.setEmail("gmail@gmail.com");
         accountRepository.save(account);
         Worker worker = new Worker(account);
@@ -37,8 +37,8 @@ public class WorkerTests {
         Account account = new Account();
         account.setPassword("password");
         account.setAddress("adsadasdasdsa");
-        account.setLastName("sdfsdfsdf");
-        account.setFirstName("sgrgergerg");
+        account.setLastname("sdfsdfsdf");
+        account.setFirstname("sgrgergerg");
         account.setEmail("gmail@gmail.com");
         accountRepository.save(account);
         Worker worker = new Worker(account);

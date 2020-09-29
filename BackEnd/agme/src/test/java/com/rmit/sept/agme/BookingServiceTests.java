@@ -18,8 +18,6 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.Date;
-
 @SpringBootTest
 public class BookingServiceTests {
 
@@ -61,16 +59,16 @@ public class BookingServiceTests {
         Account cust = new Account();
         cust.setAddress("13 realplace drive, suburbs");
         cust.setEmail("Juan@mail.com");
-        cust.setFirstName("Juan");
-        cust.setLastName("Rosso");
+        cust.setFirstname("Juan");
+        cust.setLastname("Rosso");
         cust.setPassword("password");
         Account newCustomer = accountRepository.save(cust);
         customerService.create(newCustomer.getId());
         Account work = new Account();
         work.setAddress("31 fakeplace drive, suburbs");
         work.setEmail("Jose@mail.com");
-        work.setFirstName("Jose");
-        work.setLastName("Azurro");
+        work.setFirstname("Jose");
+        work.setLastname("Azurro");
         work.setPassword("wordpass");
         Account newWorker = accountRepository.save(work);
         workerService.create(newWorker.getId(), mockService);
@@ -91,8 +89,8 @@ public class BookingServiceTests {
     	Account cust = new Account();
     	cust.setAddress("13 realplace drive, suburbs");
         cust.setEmail("Juan@mail.com");
-        cust.setFirstName("Juan");
-        cust.setLastName("Rosso");
+        cust.setFirstname("Juan");
+        cust.setLastname("Rosso");
         cust.setPassword("password");
     	Account getCustomer = accountRepository.save(cust);
     	customerService.get(getCustomer.getId());
@@ -100,8 +98,8 @@ public class BookingServiceTests {
     	Account work = new Account();
         work.setAddress("31 fakeplace drive, suburbs");
         work.setEmail("Jose@mail.com");
-        work.setFirstName("Jose");
-        work.setLastName("Azurro");
+        work.setFirstname("Jose");
+        work.setLastname("Azurro");
         work.setPassword("wordpass");
         Account getWorker = accountRepository.save(work);
         workerService.get(getWorker.getId());
@@ -123,8 +121,8 @@ public class BookingServiceTests {
     	Account cust = new Account();
     	cust.setAddress("13 realplace drive, suburbs");
         cust.setEmail("Juan@mail.com");
-        cust.setFirstName("Juan");
-        cust.setLastName("Rosso");
+        cust.setFirstname("Juan");
+        cust.setLastname("Rosso");
         cust.setPassword("password");
     	Account getCustomer = accountRepository.save(cust);
     	customerService.get(getCustomer.getId());
@@ -132,8 +130,8 @@ public class BookingServiceTests {
     	Account work = new Account();
         work.setAddress("31 fakeplace drive, suburbs");
         work.setEmail("Jose@mail.com");
-        work.setFirstName("Jose");
-        work.setLastName("Azurro");
+        work.setFirstname("Jose");
+        work.setLastname("Azurro");
         work.setPassword("wordpass");
         Account getWorker = accountRepository.save(work);
         workerService.get(getWorker.getId());
@@ -155,8 +153,8 @@ public class BookingServiceTests {
     	Account cust = new Account();
         cust.setAddress("13 realplace drive, suburbs");
         cust.setEmail("Juan@mail.com");
-        cust.setFirstName("Juan");
-        cust.setLastName("Rosso");
+        cust.setFirstname("Juan");
+        cust.setLastname("Rosso");
         cust.setPassword("password");
         Account newCustomer = accountRepository.save(cust);
         customerService.create(newCustomer.getId());
@@ -164,8 +162,8 @@ public class BookingServiceTests {
         Account work = new Account();
         work.setAddress("31 fakeplace drive, suburbs");
         work.setEmail("Jose@mail.com");
-        work.setFirstName("Jose");
-        work.setLastName("Azurro");
+        work.setFirstname("Jose");
+        work.setLastname("Azurro");
         work.setPassword("wordpass");
         Account newWorker = accountRepository.save(work);
         workerService.create(newWorker.getId(), mockService);
@@ -187,8 +185,8 @@ public class BookingServiceTests {
     	Account cust = new Account();
         cust.setAddress("13 realplace drive, suburbs");
         cust.setEmail("Juan@mail.com");
-        cust.setFirstName("Juan");
-        cust.setLastName("Rosso");
+        cust.setFirstname("Juan");
+        cust.setLastname("Rosso");
         cust.setPassword("password");
         Account newCustomer = accountRepository.save(cust);
         customerService.create(newCustomer.getId());
@@ -196,8 +194,8 @@ public class BookingServiceTests {
         Account work = new Account();
         work.setAddress("31 fakeplace drive, suburbs");
         work.setEmail("Jose@mail.com");
-        work.setFirstName("Jose");
-        work.setLastName("Azurro");
+        work.setFirstname("Jose");
+        work.setLastname("Azurro");
         work.setPassword("wordpass");
         Account newWorker = accountRepository.save(work);
         workerService.create(newWorker.getId(), mockService);

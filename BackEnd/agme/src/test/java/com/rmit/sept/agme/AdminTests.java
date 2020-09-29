@@ -24,8 +24,8 @@ public class AdminTests {
         Account account = new Account();
         account.setPassword("password");
         account.setAddress("7 Street somewhere");
-        account.setLastName("Apple");
-        account.setFirstName("Person");
+        account.setLastname("Apple");
+        account.setFirstname("Person");
         account.setEmail("gmail@gmail.com");
         accountRepository.save(account);
         Admin admin = new Admin(account);
@@ -38,16 +38,16 @@ public class AdminTests {
         Account account = new Account();
         account.setPassword("password");
         account.setAddress("adsadasdasdsa");
-        account.setLastName("sdfsdfsdf");
-        account.setFirstName("sgrgergerg");
+        account.setLastname("sdfsdfsdf");
+        account.setFirstname("sgrgergerg");
         account.setEmail("gmail212@gmail.com");
 
         Account account2 = new Account();
 
         account2.setPassword("password2");
         account2.setAddress("testing street");
-        account2.setLastName("replace");
-        account2.setFirstName("bob");
+        account2.setLastname("replace");
+        account2.setFirstname("bob");
         account2.setEmail("email21@gmail.com");
 
         accountRepository.save(account);

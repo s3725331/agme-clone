@@ -42,8 +42,8 @@ public class WorkerServiceTests {
         Account work = new Account();
         work.setAddress("26 Hill Avenue EastLand");
         work.setEmail("bob@gmail.com");
-        work.setFirstName("Bob");
-        work.setLastName("Builder");
+        work.setFirstname("Bob");
+        work.setLastname("Builder");
         work.setPassword("password");
         Account newAccount = accountRepository.save(work);
         assertTrue(workerService.create(newAccount.getId(), mockService).isPresent());
@@ -54,8 +54,8 @@ public class WorkerServiceTests {
         Account work = new Account();
         work.setAddress("132 Wayne Street Etihad");
         work.setEmail("dominic@gmail.com");
-        work.setFirstName("Dominic");
-        work.setLastName("Person");
+        work.setFirstname("Dominic");
+        work.setLastname("Person");
         work.setPassword("password123");
         Account newAccount = accountRepository.save(work);
         assertFalse(workerService.create(12345, mockService).isPresent());
@@ -65,8 +65,8 @@ public class WorkerServiceTests {
         Account work = new Account();
         work.setAddress("132 Wayne Street Etihad");
         work.setEmail("dominic@gmail.com");
-        work.setFirstName("Dominic");
-        work.setLastName("Person");
+        work.setFirstname("Dominic");
+        work.setLastname("Person");
         work.setPassword("password123");
         Account newAccount = accountRepository.save(work);
         Worker worker = new Worker(newAccount);
@@ -79,8 +79,8 @@ public class WorkerServiceTests {
         Account work = new Account();
         work.setAddress("26 Hill Avenue EastLand");
         work.setEmail("bob@gmail.com");
-        work.setFirstName("Bob");
-        work.setLastName("Builder");
+        work.setFirstname("Bob");
+        work.setLastname("Builder");
         work.setPassword("password");
         Account newAccount = accountRepository.save(work);
         Worker worker = new Worker(newAccount);
@@ -93,8 +93,8 @@ public class WorkerServiceTests {
         Account work = new Account();
         work.setEmail("ashley@gmail.com");
         work.setPassword("password123");
-        work.setFirstName("Ashley");
-        work.setLastName("Dale");
+        work.setFirstname("Ashley");
+        work.setLastname("Dale");
         work.setAddress("34 Albert Road Tower");
         Account newAccount = accountRepository.save(work);
         Worker worker = new Worker(newAccount);
@@ -107,8 +107,8 @@ public class WorkerServiceTests {
         Account work = new Account();
         work.setEmail("ashley@gmail.com");
         work.setPassword("password123");
-        work.setFirstName("Ashley");
-        work.setLastName("Dale");
+        work.setFirstname("Ashley");
+        work.setLastname("Dale");
         work.setAddress("34 Albert Road Tower");
         Account newAccount = accountRepository.save(work);
         Worker worker = new Worker(newAccount);
