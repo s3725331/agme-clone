@@ -21,6 +21,18 @@ public class BookingController {
     @Autowired
     BookingService bookingService;
 
+    //Cancel booking
+    @PatchMapping("/cancel")
+    public ResponseEntity<?> authenticateWorker(@RequestParam("bookingId") long id){
+        //Authenticate worker in repo
+        Optional<Booking> booking = bookingService.cancel(id);
+        if(!booking.isPresent()){
+            return new ResponseEntity<>("No Worker found", HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(booking, HttpStatus.OK); //Updated worker returned
+    }
+
     @PostMapping("")
     public ResponseEntity<?> createBooking(@Valid @RequestBody Booking booking, BindingResult result){
         if(result.hasErrors()) { //Invalid booking object in request body

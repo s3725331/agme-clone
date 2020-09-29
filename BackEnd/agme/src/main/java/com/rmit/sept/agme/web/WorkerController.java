@@ -150,7 +150,7 @@ public class WorkerController {
 
         //Update worker account in repo
         Optional<Account> savedAccount = accountService.update(worker.getAccount());
-        if(!savedAccount.isPresent()) //No Account found
+        if(!savedAccount.isPresent()) //Bad account (bad id or non unique email
             return new ResponseEntity<>("Bad Account", HttpStatus.NOT_FOUND);
 
         //Update worker in repo
