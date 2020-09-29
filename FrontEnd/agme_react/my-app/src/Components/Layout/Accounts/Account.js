@@ -10,6 +10,7 @@ import axios from "axios";
     super(props);
     var user;
     var accountType;
+    var serviceValue;
 
     //checks what kind of user is logged in and saves the user into the user variable
     //while also setting accountType appropriately
@@ -19,8 +20,11 @@ import axios from "axios";
       accountType = "Customer";
     } else if (localStorage.getItem("workerObject") != null) {
       user = JSON.parse(localStorage.getItem("workerObject"));
-      console.log(user)
       accountType = "Worker";
+      serviceValue = user["serviceName"]["service"];
+    }else if (localStorage.getItem("adminObject") != null) {
+      user = JSON.parse(localStorage.getItem("adminObject"));
+      accountType = "Admin";
     }
 
     //set state with current user
@@ -30,7 +34,7 @@ import axios from "axios";
       type: accountType,
       loaded: false,
       editStatus: false,
-      service:user["serviceName"]["service"],
+      service:serviceValue,
       services: null,
       loaded:false,
       email: user["account"]["email"],
