@@ -24,49 +24,161 @@ export default class Account extends Component {
 
     this.state = {
       profile: user,
-      book: null,
       account: accountType,
       loaded: false,
+      editStatus: false,
+      email: user["account"]["email"],
+      firstName: user["account"]["firstName"],
+      lastName: user["account"]["lastName"],
+      address: user["account"]["address"]
     };
+
+    this.setEditFalse = this.setEditFalse.bind(this);
+    this.setEditTrue = this.setEditTrue.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  async componentDidMount() {
-    try {
-      //if account type is of customer, gets all upcoming bookings with relevant customer id
-      //and stores the state else if account type is of worker, gets all
-      //upcoming bookings with relevant worker id and then sets loaded
-      //state to true, which then renders the full page.
+  handleChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
 
-      //if a booking object is not returned, book state stays null and loaded is set to true and page renders
+  handleSubmit(e) {
+    e.preventDefault();
+    const newAccount = {
 
-      if (this.state.account === "Customer") {
-        const res = await axios.get(
-          "http://localhost:8080/api/bookings/upcoming",
-          { params: { customerId: this.state.profile["id"] } }
-        );
-
-        this.setState({ book: res.data, loaded: true });
-      } else if (this.state.account === "Worker") {
-        const res = await axios.get(
-          "http://localhost:8080/api/bookings/upcoming",
-          { params: { workerId: this.state.profile["id"] } }
-        );
-
-        this.setState({ book: res.data, loaded: true });
-      }
-    } catch (err) {
-      if (err.response.status === 404) {
-        this.setState({ loaded: true });
-      }
     }
+
+  }
+
+
+  setEditTrue(){
+    this.setState({ editStatus: true });
+  }
+
+
+
+  setEditFalse(){
+    this.setState({ editStatus: false });
+ 
   }
 
   render() {
-    //used to load page only when relevant information has been gathered
-    if (!this.state.loaded) {
-      return null;
-    }
 
+    if(this.state.editStatus){
+      return (
+        <div>
+          <Navbar />
+          <div className="row">
+            <div className="account-card">
+              <div className="col s6 push-s3">
+                <div className="card" data-test="card">
+                  <div className="card-action blue darken-4 white-text center-align">
+                    <h4>
+                      <b>Account Overview</b>
+                    </h4>
+                  </div>
+                  <div class="row">
+                    <div className="card-content">
+                      <div className="col s3">
+                        <h6>
+                          <b>Profile</b>
+                        </h6>
+                      </div>
+                    </div>
+
+
+                    <div className="card-content">
+                    <h6> Edit Email</h6>
+                    <div data-test="email-field">
+                      <input
+                        type="email"
+                        name="email"
+                        value= {this.state.email}
+                        onChange={this.handleChange}
+                      ></input>
+                      <span
+                        className="helper-text"
+                        data-error="This email is invalid. Please make sure it's formatted like example@email.com"
+                        data-success=""
+                      ></span>
+                    </div>
+                  </div>
+
+        
+                  <div className="card-content">
+                    <h6>Edit First Name</h6>
+                    <div data-test="first-name-field">
+                      <input
+                        placeholder="Enter your First Name."
+                        type="text"
+                        className="validate"
+                        name = "firstName"
+                        value= {this.state.firstName}
+                        onChange={this.handleChange}
+                      ></input>
+                    </div>
+                  </div>
+    
+                  <div className="card-content">
+                    <h6>Edit Last Name</h6>
+                    <div data-test="last-name-field">
+                      <input
+                        placeholder="Enter your last name."
+                        type="text"
+                        name = "lastName"
+                        value= {this.state.lastName}
+                        className="validate"
+                        onChange={this.handleChange}
+                      ></input>
+                    </div>
+                  </div>
+    
+                  <div className="card-content">
+                    <h6> Edit Address</h6>
+                    <div data-test="address-field">
+                      <input
+                        placeholder="Enter Address."
+                        type="text"
+                        className="validate"
+                        name = "address"
+                        value= {this.state.address}
+                        onChange={this.handleChange}
+                      ></input>
+                    </div>
+                  </div>
+    
+    
+                  <div className="card-content">
+  
+                  
+  
+                  <button className="btn btn-profile blue darken-4"    type="submit" onClick={this.setEditFalse} >
+                  Save Profile
+                  
+                </button> 
+
+
+
+                </div>
+
+
+
+
+                    </div>
+
+                    <div className="card-content"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        
+      );
+
+    }
+    
+   
     return (
       <div>
         <Navbar />
@@ -121,9 +233,14 @@ export default class Account extends Component {
                     </div>
                   </div>
                   <div className="card-content">
-                    <button className="btn btn-profile blue darken-4" type="submit">
-                      Edit Profile
-                    </button>
+
+                    <button className="btn btn-profile blue darken-4"     type="submit" onClick={this.setEditTrue} >
+                    Edit Profile
+                  </button>
+
+
+                  
+
                   </div>
                   <div className="card-content"></div>
                 </div>
@@ -133,5 +250,6 @@ export default class Account extends Component {
         </div>
       </div>
     );
-  }
+    }
+  
 }
