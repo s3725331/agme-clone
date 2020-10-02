@@ -15,12 +15,12 @@ import { cancelBooking } from "../../actions/cancelBookingActions"
       //checks what kind of user is logged in and saves the user into the user variable
       //while also setting accountType appropriately
 
-     if(localStorage.getItem('customerObject')!= null){ 
+     if(localStorage.getItem('customerObject')!== null){ 
       user = JSON.parse(localStorage.getItem('customerObject'));
       accountType = "Customer";
      } 
      
-     else if(localStorage.getItem('workerObject')!= null){ 
+     else if(localStorage.getItem('workerObject')!== null){ 
       
       user = JSON.parse(localStorage.getItem('workerObject'));
       accountType = "Worker";
@@ -124,7 +124,7 @@ import { cancelBooking } from "../../actions/cancelBookingActions"
                     according to either customer or worker */}
 
                     {
-                      (this.state.book != null) ? ( 
+                      (this.state.book !== null) ? ( 
                         (this.state.account === "Customer") ? 
                           (this.state.account === "Worker") ? null:(
                             
@@ -134,7 +134,7 @@ import { cancelBooking } from "../../actions/cancelBookingActions"
                                 <h6><b>Booking {index +1}</b> 
                                 
                                 {
-                                  (book['cancelled'] != true)? 
+                                  (book['cancelled'] !== true)? 
                                       null
                                   
                                   :(
@@ -149,7 +149,7 @@ import { cancelBooking } from "../../actions/cancelBookingActions"
                                 <h6>End time: {book['endTime'].substring(11)}</h6> 
 
                                 {
-                                  (book['cancelled'] != false)? null:(
+                                  (book['cancelled'] !== false)? null:(
                                     <button className="btn btn-cancel blue darken-4" onClick={this.cancelling.bind(this, book['id'])} >
                                     Cancel Booking
                                     </button> 
@@ -167,7 +167,7 @@ import { cancelBooking } from "../../actions/cancelBookingActions"
                       
                             <div key={book['id']} >   
                             <h6><b>Booking {index +1}</b> {
-                              (book['cancelled'] != true)? null:(
+                              (book['cancelled'] !== true)? null:(
                                 <b> --CANCELLED-- </b>
                               )
                             }</h6>
@@ -179,7 +179,7 @@ import { cancelBooking } from "../../actions/cancelBookingActions"
                               <h6>End time: {book['endTime'].substring(11)}</h6> 
 
                              {/* {
-                                (book['cancelled'] != false)? null:(
+                                (book['cancelled'] !== false)? null:(
                                   <button className="btn btn-profile blue darken-4"    type="submit" >
                                   Cancel Booking
                                   </button> 

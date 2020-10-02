@@ -15,14 +15,14 @@ import axios from "axios";
     //checks what kind of user is logged in and saves the user into the user variable
     //while also setting accountType appropriately
 
-    if (localStorage.getItem("customerObject") != null) {
+    if (localStorage.getItem("customerObject") !== null) {
       user = JSON.parse(localStorage.getItem("customerObject"));
       accountType = "Customer";
-    } else if (localStorage.getItem("workerObject") != null) {
+    } else if (localStorage.getItem("workerObject") !== null) {
       user = JSON.parse(localStorage.getItem("workerObject"));
       accountType = "Worker";
       serviceValue = user["serviceName"]["service"];
-    }else if (localStorage.getItem("adminObject") != null) {
+    }else if (localStorage.getItem("adminObject") !== null) {
       user = JSON.parse(localStorage.getItem("adminObject"));
       accountType = "Admin";
     }
@@ -55,9 +55,9 @@ import axios from "axios";
   handleSubmit(e) {
     e.preventDefault();
     var account;
-    if (localStorage.getItem("customerObject") != null) {
+    if (localStorage.getItem("customerObject") !== null) {
       account = JSON.parse(localStorage.getItem("customerObject"));
-    } else if (localStorage.getItem("workerObject") != null) {
+    } else if (localStorage.getItem("workerObject") !== null) {
       account = JSON.parse(localStorage.getItem("workerObject"));
       account["serviceName"]["service"] = this.state.service;
     }
@@ -194,14 +194,14 @@ import axios from "axios";
                   </div>
 
                   <div className="card-content">
-                  {(this.state.type != "Worker") ? null: 
+                  {(this.state.type !== "Worker") ? null: 
                   <h7>Edit Service</h7>
                 }
                 {
                 
                 
                 
-                  (this.state.type != "Worker") ? null: 
+                  (this.state.type !== "Worker") ? null: 
                 
                 <select className = "browser-default" onChange={this.handleChange} 
                 value= {this.state.service} 
@@ -306,7 +306,7 @@ import axios from "axios";
 
                   <div className="card-content">
                   <div className="col s3">
-                  {(this.state.type != "Worker") ? null: 
+                  {(this.state.type !== "Worker") ? null: 
                   <h7>Service</h7>
                 }
                     
@@ -314,7 +314,7 @@ import axios from "axios";
                   <div className="col s3 push-s3">
                     <h7>
 
-                    {(this.state.type != "Worker") ? null: 
+                    {(this.state.type !== "Worker") ? null: 
                     <b>{this.state.profile["serviceName"]["service"]}</b>
                   }
                       

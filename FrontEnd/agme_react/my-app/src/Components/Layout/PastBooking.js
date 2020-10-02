@@ -12,10 +12,10 @@ export default class PastBooking extends Component {
       //checks what kind of user is logged in and saves the user into the user variable
       //while also setting accountType appropriately
 
-     if(localStorage.getItem('customerObject')!= null){ 
+     if(localStorage.getItem('customerObject')!== null){ 
       user = JSON.parse(localStorage.getItem('customerObject'));
       accountType = "Customer";
-     } else if(localStorage.getItem('workerObject')!= null){ 
+     } else if(localStorage.getItem('workerObject')!== null){ 
       user = JSON.parse(localStorage.getItem('workerObject'));
       accountType = "Worker";
      }
@@ -116,7 +116,7 @@ console.log(res.data)
                     according to either customer or worker */}
 
                     {
-                      (this.state.book != null) ? ( 
+                      (this.state.book !== null) ? ( 
                         (this.state.account === "Customer") ? 
                           (this.state.account === "Worker") ? null:(
                             
@@ -124,7 +124,7 @@ console.log(res.data)
                         
                               <div key={book['id']} >   
                               <h6><b>Booking {index +1}</b>  {
-                                (book['cancelled'] != true)? null:(
+                                (book['cancelled'] !== true)? null:(
                                   <b> --CANCELLED-- </b>
                                 )
                               }</h6>
@@ -143,7 +143,7 @@ console.log(res.data)
                       
                             <div key={book['id']} >   
                             <h6><b>Booking {index +1}</b> {
-                              (book['cancelled'] != true)? null:(
+                              (book['cancelled'] !== true)? null:(
                                 <b> --CANCELLED-- </b>
                               )
                             }</h6>

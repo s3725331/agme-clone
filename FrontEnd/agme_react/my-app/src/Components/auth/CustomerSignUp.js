@@ -203,14 +203,14 @@ export class CustomerSignUp extends Component {
               <div className="card-content">
 
 
-              {(this.state.type != "Worker") ? null: 
+              {(this.state.type !== "Worker") ? null: 
                 <h6> Select Service </h6>
               }
               {
                 
                 
                 
-                (this.state.type != "Worker") ? null: 
+                (this.state.type !== "Worker") ? null: 
               
               <select className = "browser-default" onChange={this.handleChange} 
               value= {this.state.service} 

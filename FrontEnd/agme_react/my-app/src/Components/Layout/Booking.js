@@ -43,10 +43,7 @@ import axios from "axios";
        if(e.target.name === "service"){
          var serviceName = e.target.value;
          var arrayObj = [];
-         this.setState({
-          filteredWorkers:arrayObj
-
-         })
+this.state.filteredWorkers.length = 0;
 
 
          this.state.workers.forEach(worker => {
@@ -121,7 +118,7 @@ import axios from "axios";
     //in order to render page
 
     try{
-    const res = await axios.get("http://localhost:8080/api/worker/all/authenticate");
+    const res = await axios.get("http://localhost:8080/api/worker/all");
     this.setState({ workers: res.data, loaded: true });
     console.log("things"
     )
