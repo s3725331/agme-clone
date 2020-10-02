@@ -33,7 +33,7 @@ public class BookingController {
 
     //Cancel booking
     @PatchMapping("/cancel")
-    public ResponseEntity<?> authenticateWorker(@RequestParam("bookingId") long id){
+    public ResponseEntity<?> cancelBooking(@RequestParam("bookingId") long id){
         //Authenticate worker in repo
         Optional<Booking> booking = bookingService.cancel(id);
         if(!booking.isPresent()){

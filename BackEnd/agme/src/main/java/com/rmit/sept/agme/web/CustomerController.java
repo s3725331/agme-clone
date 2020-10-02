@@ -84,7 +84,7 @@ public class CustomerController {
             return new ResponseEntity<>("Invalid Customer Object", HttpStatus.BAD_REQUEST);
         }
 
-        //Update worker account in repo
+        //Update customer account in repo
         Optional<Account> savedAccount = accountService.update(customer.getAccount());
         if(!savedAccount.isPresent()) //Bad account (bad id or non unique email)
             return new ResponseEntity<>("Bad Account", HttpStatus.NOT_FOUND);
