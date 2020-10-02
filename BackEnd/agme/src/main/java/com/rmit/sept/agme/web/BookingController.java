@@ -1,7 +1,11 @@
 package com.rmit.sept.agme.web;
 
 import com.rmit.sept.agme.model.Booking;
+import com.rmit.sept.agme.model.Customer;
+import com.rmit.sept.agme.model.Worker;
 import com.rmit.sept.agme.services.BookingService;
+import com.rmit.sept.agme.services.CustomerService;
+import com.rmit.sept.agme.services.WorkerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +25,12 @@ public class BookingController {
     @Autowired
     BookingService bookingService;
 
+    @Autowired
+    CustomerService customerService;
+
+    @Autowired
+    WorkerService workerService;
+
     //Cancel booking
     @PatchMapping("/cancel")
     public ResponseEntity<?> authenticateWorker(@RequestParam("bookingId") long id){
@@ -39,11 +49,26 @@ public class BookingController {
             return new ResponseEntity<>("Invalid Bookings Object", HttpStatus.BAD_REQUEST);
         }
 
+        //Check customer id exists
+        Optional<Customer> customer = customerService.get(booking.getCustomer().getId());
+        if(!customer.isPresent()){
+            return new ResponseEntity<>("Invalid Customer id", HttpStatus.NOT_FOUND);
+        }
+
+        //Check worker exists and is accepted
+        Optional<Worker> worker = workerService.get(booking.getWorker().getId());
+        if(!worker.isPresent() || worker.get().getAccepted() != true){
+            return new ResponseEntity<>("Bad Worker",HttpStatus.BAD_REQUEST);
+        }
+
         //Create booking in repo
         Optional<Booking> savedBooking = bookingService.create(booking);
         if(!savedBooking.isPresent()){ //Bad booking
             return new ResponseEntity<>("Invalid Booking", HttpStatus.CONFLICT);
         }
+        savedBooking.get().setCustomer(customer.get());
+        savedBooking.get().setWorker(worker.get());
+
         return new ResponseEntity<>(savedBooking, HttpStatus.CREATED); //New booking object returned
     }
 
