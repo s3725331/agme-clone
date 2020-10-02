@@ -10,6 +10,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 import { Provider } from 'react-redux'
 import store from './store'
 import Account from './Components/Layout/Accounts/Account'
+import WorkerConfirmation from './Components/auth/WorkerConfirmation'
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <Route exact path="/CurrentBooking" component = {CurrentBooking}/>
             <Route exact path="/PastBooking" component = {PastBooking}/>
             <Route exact path="/Account" component = {Account}/>
+            <Route exact path="/WorkerConfirmation" component = {WorkerConfirmation}/>
           </Switch>
         </div>
       </Router>
