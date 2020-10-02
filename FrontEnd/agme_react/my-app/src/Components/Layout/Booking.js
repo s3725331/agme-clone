@@ -17,12 +17,12 @@ import axios from "axios";
 
      }
   
-     
+     var arrayObj = [];
 
     this.state = {
       workers : null,
       worker : "",
-      filteredWorkers : [],
+      filteredWorkers : arrayObj,
       customer : customerObj,
       startDate: "",
       startTime: "",
@@ -42,8 +42,9 @@ import axios from "axios";
        this.setState({ [e.target.name]: e.target.value });
        if(e.target.name === "service"){
          var serviceName = e.target.value;
+         var arrayObj = [];
          this.setState({
-          filteredWorkers:[]
+          filteredWorkers:arrayObj
 
          })
 
@@ -68,8 +69,10 @@ import axios from "axios";
            }
            
          });
+
+      
        }
-   
+
   }
 
 

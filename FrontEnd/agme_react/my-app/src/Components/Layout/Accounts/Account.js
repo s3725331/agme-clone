@@ -36,7 +36,6 @@ import axios from "axios";
       editStatus: false,
       service:serviceValue,
       services: null,
-      loaded:false,
       email: user["account"]["email"],
       firstName: user["account"]["firstName"],
       lastName: user["account"]["lastName"],
