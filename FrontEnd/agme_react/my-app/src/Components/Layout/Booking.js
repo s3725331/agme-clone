@@ -175,7 +175,7 @@ render() {
                   
                   {/* if workers exist, loop through each worker in the drop down menu for the form
                   if they dont exit, load message saying workers dont exist*/ }
-                  { (this.state.workers === null || this.state.filteredWorkers === null) ? (
+                  { (this.state.workers === null || this.state.filteredWorkers.length === 0) ? (
                     <select  className = "browser-default"   required>
   
                           <option value = "" disabled selected>No workers Available</option>
