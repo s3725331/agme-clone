@@ -123,12 +123,18 @@ console.log(res.data)
                             this.state.book.map((book, index) => (
                         
                               <div key={book['id']} >   
-                                <h6><b>Booking {index +1}</b></h6>
+                              <h6><b>Booking {index +1}</b>  {
+                                (book['cancelled'] != true)? null:(
+                                  <b> --CANCELLED-- </b>
+                                )
+                              }</h6>
                                 <h6>Date of appointment: {book['startTime'].substring(0,10)}</h6>
                                 {/* <h6>Service: Consultancy</h6> */}
                                 <h6>Worker: {book['worker']['account']['firstName']} {book['worker']['account']['lastName']}</h6>
+                                <h6>Service: {book['worker']['serviceName']['service']}</h6> 
                                 <h6>Start time: {book['startTime'].substring(11)}</h6> 
-                                <h6>End time: {book['endTime'].substring(11)}</h6> <br></br>
+                                <h6>End time: {book['endTime'].substring(11)}</h6>
+                                <br></br>
                               </div>
                             ))
                           ) : (
@@ -136,12 +142,19 @@ console.log(res.data)
                             this.state.book.map((book, index) => (
                       
                             <div key={book['id']} >   
-                              <h6><b>Booking {index +1}</b></h6>
+                            <h6><b>Booking {index +1}</b> {
+                              (book['cancelled'] != true)? null:(
+                                <b> --CANCELLED-- </b>
+                              )
+                            }</h6>
                               <h6>Date of appointment: {book['startTime'].substring(0,10)}</h6>
                               {/* <h6>Service: Consultancy</h6> */}
                               <h6>Customer: {book['customer']['account']['firstName']} {book['customer']['account']['lastName']}</h6>
+                              <h6>Service: {book['worker']['serviceName']['service']}</h6> 
                               <h6>Start time: {book['startTime'].substring(11)}</h6> 
-                              <h6>End time: {book['endTime'].substring(11)}</h6> <br></br>
+                              <h6>End time: {book['endTime'].substring(11)}</h6> 
+
+                              <br></br>
                             </div>
                             ))
                           )) : (
