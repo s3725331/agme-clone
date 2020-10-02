@@ -10,7 +10,6 @@ import axios from "axios";
     super(props);
 
     var customerObj;
-    var emptyArray = [];
 
     //gets and stores customer object from local storage. Used to add Customer details into booking
      if(localStorage.getItem('customerObject')!= null){ 
@@ -23,7 +22,7 @@ import axios from "axios";
     this.state = {
       workers : null,
       worker : "",
-      filteredWorkers : emptyArray,
+      filteredWorkers : [],
       customer : customerObj,
       startDate: "",
       startTime: "",
@@ -43,7 +42,10 @@ import axios from "axios";
        this.setState({ [e.target.name]: e.target.value });
        if(e.target.name === "service"){
          var serviceName = e.target.value;
-         this.state.filteredWorkers = [];
+         this.setState({
+          filteredWorkers:[]
+
+         })
 
 
          this.state.workers.forEach(worker => {
