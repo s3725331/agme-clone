@@ -7,10 +7,10 @@ export default class WorkerConfirmation extends Component {
     super(props);
     this.state = {
       workers: null,
-      worker: null,
+      worker: "",
       loaded: false,
       email:"",
-      worker2: null
+      worker2: ""
       
     };
     this.handleChange = this.handleChange.bind(this);
@@ -20,7 +20,10 @@ export default class WorkerConfirmation extends Component {
     this.setState({ [e.target.name]: e.target.value });
     console.log(this.state.worker);
     if(e.target.name === "worker") {
+      console.log("test")
+      
         this.setState({worker2: this.state.workers[this.state.worker]})
+        console.log(this.state.worker2)
     }
 }
 
@@ -67,33 +70,26 @@ export default class WorkerConfirmation extends Component {
                     <div className="form-field">
                       {/* if workers exist, loop through each worker in the drop down menu for the form
                   if they dont exit, load message saying workers dont exist*/}
-                      {this.state.workers === null ? (
-                        <h7> No workers currently pending approval </h7>
-                      ) : (
-                        <select
-                          className="browser-default"
-                          name="worker"
-                          value={this.state.worker}
-                          //email={this.state.email}
-                          onChange={this.handleChange}
-                          required
-                        >
-                          <option value="" disabled selected>
-                            Choose your option
-                          </option>
-                          {this.state.workers.map((workerTest, index) => (
-                            <option value={index} key={workerTest["id"]}>
-                              {" "}
-                              {workerTest["account"]["firstName"]}{" "}
-                              {workerTest["account"]["lastName"]}
-                            </option>
-                          ))}
-                        </select>
-                      )}
+                  { (this.state.workers === null) ? (
+                    <h6> No workers available</h6>
+
+                  ) :
+                  <select  className = "browser-default" name = "worker"
+                  value = {this.state.worker} onChange={this.handleChange}  required>
+
+                        <option value = "" disabled selected>Choose your option</option>
+                        {
+                          
+                          this.state.workers.map((worker, index) => (
+                            <option key={worker['id']} value={worker}> {worker['account']['firstName']} {worker['account']['lastName']}</option>
+                          ))
+                        }
+                      
+                    </select>
+                      }
                     </div>
                     <div className="card-content">
-                    {this.state.worker2 === null ? null : 
-                    <h6>{this.state.worker2["account"]["firstName"]}</h6>}
+
                     </div>
                   </div>
                   <div className="card-content"></div>
