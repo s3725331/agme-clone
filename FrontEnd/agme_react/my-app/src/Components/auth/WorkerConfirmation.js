@@ -82,7 +82,11 @@ this.props.approveWorker(this.state.worker['id'], this.props.history);
                       {/* if workers exist, loop through each worker in the drop down menu for the form
                   if they dont exit, load message saying workers dont exist*/}
                   { (this.state.workers === null) ? (
-                    <h6> No workers available</h6>
+                    <select  className = "browser-default"   required>
+  
+                    <option value = "" disabled selected>No workers Available</option>
+                  
+                </select>
 
                   ) :
                   <select  className = "browser-default" name = "index"
@@ -104,8 +108,8 @@ this.props.approveWorker(this.state.worker['id'], this.props.history);
                       
                     {
                       (this.state.workers === null)?
-                      <h7>No workers left to approve</h7>:
-                      <h7>Please Select a Worker to approve</h7>
+                      <h6>No workers left to approve</h6>:
+                      <h6>Please Select a Worker to approve</h6>
 
 
                                          }                     
@@ -189,6 +193,7 @@ this.props.approveWorker(this.state.worker['id'], this.props.history);
                           {this.state.worker["account"]["lastName"]}
                         </b>
                       </h7>
+
                     </div>
                   </div>
                   <div className="card-content">
