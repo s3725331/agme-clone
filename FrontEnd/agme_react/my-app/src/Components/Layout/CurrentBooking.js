@@ -212,10 +212,15 @@ if(this.state.workers!==null){
                       {" "}{this.state.workers[this.state.worker]['account']['lastName']}
                       </h6>),
                       (<h6>Email:  {this.state.workers[this.state.worker]['account']['email']}
-                      </h6>)] :
+                      </h6>),
+                      <h6>Service:  {this.state.workers[this.state.worker]['serviceName']['service']}</h6>
+                    ] :
                       [
                         <h6>Full name:  {this.state.profile['account']['firstName']} {this.state.profile['account']['lastName']}</h6>,
-                        <h6>Email:  {this.state.profile['account']['email']}</h6> 
+                        <h6>Email:  {this.state.profile['account']['email']}</h6>,
+                        (this.state.account === "Worker")?
+                        <h6>Service:  {this.state.profile['serviceName']['service']}</h6>
+                        :(null) 
                       ]
                        
                 } 
