@@ -31,7 +31,7 @@ export class CustomerLogIn extends Component {
     }
     
     //grab account using email and password, will only work if details are correct
-    this.props.login(newResponse/*, this.props.history*/);
+    this.props.login(newResponse, this.props.history);
 
     //set error state to true to display error message, will only work is login fails
     this.setState({ error:true});
