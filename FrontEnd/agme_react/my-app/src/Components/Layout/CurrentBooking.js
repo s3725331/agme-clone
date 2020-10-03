@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { cancelBooking } from "../../actions/cancelBookingActions"
 
 
-export default class CurrentBooking extends Component {
+ class CurrentBooking extends Component {
   constructor(props) {
     super(props);
     var user;
@@ -12,12 +15,12 @@ export default class CurrentBooking extends Component {
       //checks what kind of user is logged in and saves the user into the user variable
       //while also setting accountType appropriately
 
-     if(localStorage.getItem('customerObject')!= null) { 
+     if(localStorage.getItem('customerObject')!== null){ 
       user = JSON.parse(localStorage.getItem('customerObject'));
       accountType = "Customer";
      } 
      
-     else if(localStorage.getItem('workerObject')!= null){ 
+     else if(localStorage.getItem('workerObject')!== null){ 
       
       user = JSON.parse(localStorage.getItem('workerObject'));
       accountType = "Worker";
@@ -29,10 +32,19 @@ export default class CurrentBooking extends Component {
     this.state = {
       profile : user,
       book: null,
+      cancelled: false,
       account: accountType,
       loaded: false
     };
 
+    this.cancelling = this.cancelling.bind(this);
+
+  }
+
+  cancelling(bookId){
+    var id = parseInt(bookId);
+    this.props.cancelBooking(id, this,this.props.history);
+   
   }
 
 
@@ -50,6 +62,7 @@ export default class CurrentBooking extends Component {
       if(this.state.account === "Customer") {
         const res = await axios.get("http://localhost:8080/api/bookings/upcoming",{ params: { customerId :
         this.state.profile['id']}});
+        console.log(res.data)
   
         this.setState({ book: res.data, loaded: true });
 
@@ -111,20 +124,41 @@ export default class CurrentBooking extends Component {
                     according to either customer or worker */}
 
                     {
-                      (this.state.book != null) ? ( 
+                      (this.state.book !== null) ? ( 
                         (this.state.account === "Customer") ? 
                           (this.state.account === "Worker") ? null:(
                             
                             this.state.book.map((book, index) => (
                         
                               <div key={book['id']} >   
-                                <h6><b>Booking {index +1}</b></h6>
-                                <h6>Date of appointment: {book['startTime'].substring(0,10)}</h6>                               
-                                {/* Service functionality will be implemented in future sprints */}
+                                <h6><b>Booking {index +1}</b> 
+                                
+                                {
+                                  (book['cancelled'] !== true)? 
+                                      null
+                                  
+                                  :(
+                                    <b> --CANCELLED-- </b>
+                                  )
+                                }</h6>
+                                <h6>Date of appointment: {book['startTime'].substring(0,10)}</h6>
                                 {/* <h6>Service: Consultancy</h6> */}
                                 <h6>Worker: {book['worker']['account']['firstName']} {book['worker']['account']['lastName']}</h6>
+                                <h6>Service: {book['worker']['serviceName']['service']}</h6> 
                                 <h6>Start time: {book['startTime'].substring(11)}</h6> 
-                                <h6>End time: {book['endTime'].substring(11)}</h6> <br></br>
+                                <h6>End time: {book['endTime'].substring(11)}</h6> 
+
+                                {
+                                  (book['cancelled'] !== false)? null:(
+                                    <button className="btn btn-cancel blue darken-4" onClick={this.cancelling.bind(this, book['id'])} >
+                                    Cancel Booking
+                                    </button> 
+                                  )
+                                }
+                                
+                                <br></br>
+                                <br></br>
+                                <br></br>
                               </div>
                             ))
                           ) : (
@@ -132,12 +166,29 @@ export default class CurrentBooking extends Component {
                             this.state.book.map((book, index) => (
                       
                             <div key={book['id']} >   
-                              <h6><b>Booking {index +1}</b></h6>
+                            <h6><b>Booking {index +1}</b> {
+                              (book['cancelled'] !== true)? null:(
+                                <b> --CANCELLED-- </b>
+                              )
+                            }</h6>
                               <h6>Date of appointment: {book['startTime'].substring(0,10)}</h6>
                               {/* <h6>Service: Consultancy</h6> */}
                               <h6>Customer: {book['customer']['account']['firstName']} {book['customer']['account']['lastName']}</h6>
+                              <h6>Service: {book['worker']['serviceName']['service']}</h6> 
                               <h6>Start time: {book['startTime'].substring(11)}</h6> 
-                              <h6>End time: {book['endTime'].substring(11)}</h6> <br></br>
+                              <h6>End time: {book['endTime'].substring(11)}</h6> 
+
+                             {/* {
+                                (book['cancelled'] !== false)? null:(
+                                  <button className="btn btn-profile blue darken-4"    type="submit" >
+                                  Cancel Booking
+                                  </button> 
+                                )
+                              }
+                            
+                            */}
+                              
+                              <br></br>
                             </div>
                             ))
                           )) : (
@@ -158,4 +209,12 @@ export default class CurrentBooking extends Component {
     }   
   }
   
-
+  CurrentBooking.propTypes = {
+    cancelBooking: PropTypes.func.isRequired,
+  };
+  
+  
+  export default connect (
+    null,
+    {cancelBooking}
+  )(CurrentBooking);

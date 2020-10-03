@@ -1,11 +1,13 @@
 package com.rmit.sept.agme;
 
 import com.rmit.sept.agme.model.Account;
+import com.rmit.sept.agme.model.ServiceName;
 import com.rmit.sept.agme.model.Worker;
 import com.rmit.sept.agme.repositories.AccountRepository;
 import com.rmit.sept.agme.repositories.WorkerRepository;
+import com.rmit.sept.agme.services.ServiceNameService;
 import com.rmit.sept.agme.services.WorkerService;
-import org.hibernate.jdbc.Work;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,6 +26,17 @@ public class WorkerServiceTests {
     @Autowired
     WorkerService workerService;
 
+    @Autowired
+    ServiceNameService serviceNameService;
+
+    ServiceName mockService;
+
+    @BeforeAll
+    public void setUp(){
+        serviceNameService.create("Service Name");
+        mockService = serviceNameService.getByService("Service Name").iterator().next();
+    }
+
     @Test
     public void testValidWorkerCreate() {
         Account work = new Account();
@@ -33,7 +46,7 @@ public class WorkerServiceTests {
         work.setLastName("Builder");
         work.setPassword("password");
         Account newAccount = accountRepository.save(work);
-        assertTrue(workerService.create(newAccount.getId()).isPresent());
+        assertTrue(workerService.create(newAccount.getId(), mockService).isPresent());
     }
 
     @Test
@@ -45,7 +58,7 @@ public class WorkerServiceTests {
         work.setLastName("Person");
         work.setPassword("password123");
         Account newAccount = accountRepository.save(work);
-        assertFalse(workerService.create(12345).isPresent());
+        assertFalse(workerService.create(12345, mockService).isPresent());
     }
     @Test
     public void testValidWorkerGet() {

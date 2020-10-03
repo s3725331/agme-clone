@@ -12,10 +12,10 @@ export default class PastBooking extends Component {
       //checks what kind of user is logged in and saves the user into the user variable
       //while also setting accountType appropriately
 
-     if(localStorage.getItem('customerObject')!= null){ 
+     if(localStorage.getItem('customerObject')!== null){ 
       user = JSON.parse(localStorage.getItem('customerObject'));
       accountType = "Customer";
-     } else if(localStorage.getItem('workerObject')!= null){ 
+     } else if(localStorage.getItem('workerObject')!== null){ 
       user = JSON.parse(localStorage.getItem('workerObject'));
       accountType = "Worker";
      }
@@ -112,20 +112,26 @@ export default class PastBooking extends Component {
                     according to either customer or worker */}
 
                     {
-                      (this.state.book != null) ? ( 
+                      (this.state.book !== null) ? ( 
                         (this.state.account === "Customer") ? 
                           (this.state.account === "Worker") ? null:(
                             
                             this.state.book.map((book, index) => (
                         
                               <div key={book['id']} >   
-                                <h6><b>Booking {index +1}</b></h6>
+                              <h6><b>Booking {index +1}</b>  {
+                                (book['cancelled'] !== true)? null:(
+                                  <b> --CANCELLED-- </b>
+                                )
+                              }</h6>
                                 <h6>Date of appointment: {book['startTime'].substring(0,10)}</h6>
                                 {/* Service functionality will be implemented in future sprints */}
                                 {/* <h6>Service: Consultancy</h6> */}
                                 <h6>Worker: {book['worker']['account']['firstName']} {book['worker']['account']['lastName']}</h6>
+                                <h6>Service: {book['worker']['serviceName']['service']}</h6> 
                                 <h6>Start time: {book['startTime'].substring(11)}</h6> 
-                                <h6>End time: {book['endTime'].substring(11)}</h6> <br></br>
+                                <h6>End time: {book['endTime'].substring(11)}</h6>
+                                <br></br>
                               </div>
                             ))
                           ) : (
@@ -133,12 +139,19 @@ export default class PastBooking extends Component {
                             this.state.book.map((book, index) => (
                       
                             <div key={book['id']} >   
-                              <h6><b>Booking {index +1}</b></h6>
+                            <h6><b>Booking {index +1}</b> {
+                              (book['cancelled'] !== true)? null:(
+                                <b> --CANCELLED-- </b>
+                              )
+                            }</h6>
                               <h6>Date of appointment: {book['startTime'].substring(0,10)}</h6>
                               {/* <h6>Service: Consultancy</h6> */}
                               <h6>Customer: {book['customer']['account']['firstName']} {book['customer']['account']['lastName']}</h6>
+                              <h6>Service: {book['worker']['serviceName']['service']}</h6> 
                               <h6>Start time: {book['startTime'].substring(11)}</h6> 
-                              <h6>End time: {book['endTime'].substring(11)}</h6> <br></br>
+                              <h6>End time: {book['endTime'].substring(11)}</h6> 
+
+                              <br></br>
                             </div>
                             ))
                           )) : (

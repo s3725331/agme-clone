@@ -54,6 +54,20 @@
   display: inline-block;
 }
 
+.btn-profile {
+  width: 20%;
+  display: inline-block;
+  position: relative;
+  top: 15px;
+  left:10px;
+}
+
+.btn-approve {
+  height: 60px;
+  width: 80%;
+  display: inline-block;
+}
+
 .checkbox-left {
   vertical-align:bottom;
 }
@@ -101,4 +115,9 @@ nav ul .waves-effect i {
 
 .logged-in-dashboard-text {
   margin-top: 110px;
+}
+
+.account-card {
+  position: relative;
+  top: 10px;
 }

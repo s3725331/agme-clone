@@ -17,15 +17,19 @@ import axios from "axios";
 
      }
   
-     
+     var arrayObj = [];
 
     this.state = {
       workers : null,
       worker : "",
+      filteredWorkers : arrayObj,
       customer : customerObj,
       startDate: "",
       startTime: "",
       endTime: "",
+      service: null,
+      services: null,
+      sLoaded:false,
       loaded: false
     };
 
@@ -36,7 +40,36 @@ import axios from "axios";
 
     handleChange(e) {
        this.setState({ [e.target.name]: e.target.value });
-   
+       if(e.target.name === "service"){
+         var serviceName = e.target.value;
+         var arrayObj = [];
+this.state.filteredWorkers.length = 0;
+
+
+         this.state.workers.forEach(worker => {
+           
+           if(worker['serviceName']['service'] === serviceName){
+            var hasWorker = false;
+            this.state.filteredWorkers.forEach( filter=>{
+              if(filter['id'] === worker['id']){
+                hasWorker = true;
+              }
+
+            }
+
+            );
+            
+            if(!hasWorker){
+
+             this.state.filteredWorkers.push(worker);
+            }
+           }
+           
+         });
+
+      
+       }
+
   }
 
 
@@ -60,7 +93,23 @@ import axios from "axios";
    this.props.createBooking(newBooking, this.props.history);
 
   }
+  
   async componentDidMount() {
+
+
+
+    try{
+      const res = await axios.get("http://localhost:8080/api/service/all");
+      this.setState({ services: res.data, sLoaded: true });
+      console.log(res.data)
+      }    catch (err) {  
+  
+  
+      if(err.response.status === 404){
+        this.setState({ sLoaded: true });
+  
+    }
+    }
 
     //used to load information on all workers in database in order to give options to the customer
     //when choosing which worker they want to book
@@ -71,6 +120,8 @@ import axios from "axios";
     try{
     const res = await axios.get("http://localhost:8080/api/worker/all");
     this.setState({ workers: res.data, loaded: true });
+    console.log("things"
+    )
     console.log(res.data)
     }    catch (err) {  
 
@@ -86,7 +137,7 @@ import axios from "axios";
 render() { 
 
   //used to render only after workers have been grabbed
-  if (!this.state.loaded) {
+  if (!this.state.loaded && !this.state.sLoaded) {
     return null;
 }
     return (
@@ -106,39 +157,61 @@ render() {
               <div className="card-content" data-test="booking-card-services">
                 <h6> Select a service</h6>
                   <div className="form-field">
-                    <select className = "browser-default" name = "service"
-                    value = "" onChange={this.handleChange} >
-                        <option value="" disabled selected>Choose your option</option>
-                        <option value="1">Option 1</option>
-                        <option value="2">Option 2</option>
-                        <option value="3">Option 3</option>
-                    </select>
+                  <select className = "browser-default" onChange={this.handleChange} 
+                  value= {this.state.service} 
+                  name = "service" >
+                  <option value = "" disabled selected>Choose your option</option>
+                  {
+                    
+                    this.state.services.map((service, index) => (
+                      <option key={index} value={service['service']}> {service['service']} </option>
+                    ))
+                  }
+                      </select> 
                   </div>
               </div>
 
               <div className="card-content" data-test="workers">
                 <h6> Select a worker</h6>
                   <div className="form-field">
-
+                  
                   {/* if workers exist, loop through each worker in the drop down menu for the form
                   if they dont exit, load message saying workers dont exist*/ }
-                  { (this.state.workers === null) ? (
-                    <h6> No workers available</h6>
+                  { (this.state.workers === null || this.state.filteredWorkers.length === 0) ? (
+                    <select  className = "browser-default"   required>
+  
+                          <option value = "" disabled selected>No workers Available</option>
+                        
+                      </select>
+                      
 
-                  ) :
+                  ) 
+
+                  :
                   <select  className = "browser-default" name = "worker"
                   value = {this.state.worker} onChange={this.handleChange}  required>
 
                         <option value = "" disabled selected>Choose your option</option>
                         {
                           
-                          this.state.workers.map((worker, index) => (
+                          this.state.filteredWorkers.map((worker, index) => (
                             <option key={worker['id']} value={index}> {worker['account']['firstName']} {worker['account']['lastName']}</option>
                           ))
                         }
                       
                     </select>
                       }
+
+                      {
+                        (this.state.workers === null)? 
+                        <br></br>:
+                        (this.state.service === null)?
+                        <h6>Please select a service</h6>:
+                        (this.state.filteredWorkers.length === 0)? 
+                        <h6>No workers available for this service</h6>
+                        :<br></br>
+                      }
+
                   </div>
               </div>
 

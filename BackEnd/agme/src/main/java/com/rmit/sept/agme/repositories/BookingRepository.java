@@ -12,6 +12,7 @@ import java.util.List;
 
 public interface BookingRepository extends CrudRepository<Booking, Long> {
 
+    //Custom queries for date/time
     @Query("SELECT b FROM Booking b WHERE b.worker.id = (:workerID) AND b.startTime > (:time)")
     Iterable<Booking> getUpcomingByWorker(@Param("workerID")long workerID, @Param("time") Date time);
 
