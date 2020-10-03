@@ -42,7 +42,8 @@ export default class PastBooking extends Component {
       aLoaded:false,
       sLoaded: false,
       adminBookArray : arrObj,
-      aLoaded:false
+      aLoaded: false,
+      displayedBooking:null
     };
 
 
@@ -51,52 +52,71 @@ export default class PastBooking extends Component {
   }
 
   handleChange(e) {
-    this.setState({worker : e.target.value });
+    this.setState({worker : e.target.value});
+
+    var workerid = this.state.workers[e.target.value]['id'];
+
+    if(this.state.adminBookArray!= null){
+      this.state.adminBookArray.forEach(booking => {
+ 
+        if(booking['0']['wId'] === workerid){
+          console.log(booking['0']['objData'])
+          this.setState({
+            displayedBooking : booking['0']['objData']
+          });
+        }
+
+      });
+
+    }
     
   }
 
 
 
   async componentDidMount() {
-if(this.state.account === "Admin"){
-    
-    try{
-      const res = await axios.get("http://localhost:8080/api/worker/all");
-      this.setState({ workers: res.data, sLoaded: true});
 
-      console.log(res.data)
-      }    catch (err) {  
-  
-  
-      if(err.response.status === 404){
-        this.setState({ sLoaded: true });
-  
-    }
-    }
+
+    if(this.state.account === "Admin"){
+      try{
+        const res = await axios.get("http://localhost:8080/api/worker/all");
+        this.setState({ workers: res.data, sLoaded: true});
+        }    catch (err) {  
     
-if(this.state.workers!==null){
-    this.state.workers.forEach(worker => {
+    
+        if(err.response.status === 404){
+          this.setState({ sLoaded: true });
+    
+      }
+      }
+    
+          if(this.state.workers!==null){
      
       
-        axios.get("http://localhost:8080/api/bookings/past",{ params: { workerId :
-        worker['id']}}).then(
-          res=>{
-           
-            this.state.adminBookArray.push(res.data);
-          }
-        ).catch(err=> {
-          if(err.response.status === 404){
-            this.state.adminBookArray.push(null);
-            
-    
-            }
+      this.state.workers.forEach(worker => {
+       
           
-          });
-       
-      this.setState({aLoaded : true});
-       
-      
-    });
+          axios.get("http://localhost:8080/api/bookings/past",{ params: { workerId :
+          worker['id']}}).then(
+            res=>{
+             
+              this.state.adminBookArray.push([{objData:res.data, wId:worker['id']}]);
+  
+            }
+          ).catch(err=> {
+            if(err.response.status === 404){
+              this.state.adminBookArray.push([{objData:null, wId:worker['id']}]);
+              }
+            
+            });
+             
+        
+      });
+  
+      this.setState({
+        aLoaded : true
+        });
+    
 
   } else {this.setState({aLoaded : true});}
 
@@ -249,8 +269,9 @@ if(this.state.workers!==null){
 
                   {
                     (this.state.adminBookArray !== 0 && this.state.worker !== null)?
-                      (this.state.adminBookArray[this.state.worker]!==null)? (
-                        this.state.adminBookArray[this.state.worker].map((book, index) => (
+                      (this.state.displayedBooking!= null)? (
+                                                  
+                        this.state.displayedBooking.map((book, index) => (
                         
                         <div key={book['id']} >   
                         <h6><b>Booking {index +1}</b>  {
@@ -259,8 +280,8 @@ if(this.state.workers!==null){
                           )
                         }</h6>
                           <h6>Date of appointment: {book['startTime'].substring(0,10)}</h6>
-                          <h6>Worker: {book['worker']['account']['firstName']} {book['worker']['account']['lastName']}</h6>
                           
+                          <h6>Worker: {book['worker']['account']['firstName']} {book['worker']['account']['lastName']}</h6>
                           <h6>Customer: {book['customer']['account']['firstName']} {book['customer']['account']['lastName']}</h6>
                           <h6>Service: {book['worker']['serviceName']['service']}</h6> 
                           <h6>Start time: {book['startTime'].substring(11)}</h6> 

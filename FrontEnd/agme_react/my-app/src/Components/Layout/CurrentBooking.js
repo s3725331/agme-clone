@@ -42,10 +42,10 @@ import { cancelBooking } from "../../actions/cancelBookingActions"
       loaded: false,
       workers: null,
       worker: null,
-      aLoaded:false,
       sLoaded: false,
       adminBookArray : arrObj,
-      aLoaded: false
+      aLoaded: false,
+      displayedBooking:null
     };
 
     this.cancelling = this.cancelling.bind(this);
@@ -54,11 +54,25 @@ import { cancelBooking } from "../../actions/cancelBookingActions"
   }
   
   handleChange(e) {
-    this.setState({worker : e.target.value });
-    
+    this.setState({worker : e.target.value});
+
+    var workerid = this.state.workers[e.target.value]['id'];
+
+    if(this.state.adminBookArray!= null){
+      this.state.adminBookArray.forEach(booking => {
+ 
+        if(booking['0']['wId'] === workerid){
+          console.log(booking['0']['objData'])
+          this.setState({
+            displayedBooking : booking['0']['objData']
+          });
+        }
+
+      });
+
+    }
+
   }
-
-
 
   cancelling(bookId){
     var id = parseInt(bookId);
@@ -73,9 +87,6 @@ import { cancelBooking } from "../../actions/cancelBookingActions"
     try{
       const res = await axios.get("http://localhost:8080/api/worker/all");
       this.setState({ workers: res.data, sLoaded: true});
-      console.log("things"
-      )
-      console.log(res.data)
       }    catch (err) {  
   
   
@@ -84,33 +95,38 @@ import { cancelBooking } from "../../actions/cancelBookingActions"
   
     }
     }
-if(this.state.workers!==null){
+  
+        if(this.state.workers!==null){
+   
+    
     this.state.workers.forEach(worker => {
      
-        console.log(worker['id'])
+        
         axios.get("http://localhost:8080/api/bookings/upcoming",{ params: { workerId :
         worker['id']}}).then(
           res=>{
            
-            this.state.adminBookArray.push(res.data);
+            this.state.adminBookArray.push([{objData:res.data, wId:worker['id']}]);
+
           }
         ).catch(err=> {
           if(err.response.status === 404){
-            this.state.adminBookArray.push(null);
-            
-    
+            this.state.adminBookArray.push([{objData:null, wId:worker['id']}]);
             }
           
           });
-       
-      
-       
+           
       
     });
     this.setState({aLoaded : true});
-  }}
 
-  else{this.setState({aLoaded : true});}
+    }
+    else{this.setState({aLoaded : true});}
+  }
+
+  
+
+
     try{
 
 
@@ -124,7 +140,7 @@ if(this.state.workers!==null){
       if(this.state.account === "Customer") {
         const res = await axios.get("http://localhost:8080/api/bookings/upcoming",{ params: { customerId :
         this.state.profile['id']}});
-        console.log(res.data)
+
   
         this.setState({ book: res.data, loaded: true });
 
@@ -142,11 +158,12 @@ if(this.state.workers!==null){
 
           }
     }
-    console.log(this.state.workers)
-    console.log(this.state.adminBookArray)
+   // console.log(this.state.workers)
+   // console.log(this.state.adminBookArray)
   }
   
   render() { 
+    
 
     //used to load page only when relevant information has been gathered
     if (!this.state.loaded && (!this.state.sLoaded || !this.state.aLoaded)) {
@@ -199,7 +216,7 @@ if(this.state.workers!==null){
                     {
                       
                       this.state.workers.map((worker, index) => (
-                        <option key={worker['id']} value={index}> {worker['account']['firstName']} {worker['account']['lastName']}</option>
+                        <option key={worker['id']} value={index} > {worker['account']['firstName']} {worker['account']['lastName']}</option>
                       ))
                     }
                   
@@ -249,8 +266,9 @@ if(this.state.workers!==null){
 
                     {
                       (this.state.adminBookArray !== 0 && this.state.worker !== null)?
-                        (this.state.adminBookArray[this.state.worker]!==null)? (
-                          this.state.adminBookArray[this.state.worker].map((book, index) => (
+                        (this.state.displayedBooking!= null)? (
+                                                    
+                          this.state.displayedBooking.map((book, index) => (
                           
                           <div key={book['id']} >   
                           <h6><b>Booking {index +1}</b>  {
@@ -259,6 +277,7 @@ if(this.state.workers!==null){
                             )
                           }</h6>
                             <h6>Date of appointment: {book['startTime'].substring(0,10)}</h6>
+                            
                             <h6>Worker: {book['worker']['account']['firstName']} {book['worker']['account']['lastName']}</h6>
                             <h6>Customer: {book['customer']['account']['firstName']} {book['customer']['account']['lastName']}</h6>
                             <h6>Service: {book['worker']['serviceName']['service']}</h6> 
