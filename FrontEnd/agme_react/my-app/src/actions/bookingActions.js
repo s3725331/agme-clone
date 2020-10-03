@@ -3,7 +3,7 @@ import { GET_ERRORS } from "./types";
 
 export const createBooking = (booking, history) => async dispatch => {
   try {
-
+        //creates a booking based on the object provided
         const  res2 = await axios.post("http://localhost:8080/api/bookings", booking);
       
     

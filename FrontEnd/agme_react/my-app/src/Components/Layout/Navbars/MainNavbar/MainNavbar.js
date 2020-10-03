@@ -6,6 +6,7 @@ export default class Navbar extends Component {
 
 
   render() {
+    // assigning Navbar depending on whether user is logged in or not
     var accountComponent;
     if (localStorage.getItem("currentUser") != null) {
       accountComponent = <NavbarLoggedIn />;
@@ -35,7 +36,7 @@ export default class Navbar extends Component {
                 <li>
                   <a>|</a>
                 </li>
-                <li><a data-test="account-component">{accountComponent}</a></li>
+                {accountComponent}
               </ul>
             </div>
           </div>

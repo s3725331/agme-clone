@@ -1,5 +1,5 @@
 import React from 'react';
-import Enzyme, {mount, shallow} from 'enzyme';
+import Enzyme, { shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import MainNavBar from './MainNavBar';
 import { findByTestAtrr } from './../../../../../Utils';
@@ -29,10 +29,4 @@ describe('MainNavbar', () => {
         const wrapper = findByTestAtrr(component, 'logo');
         expect(wrapper.length).toBe(1);
     });
-
-    it('should render account component', () => {
-        const wrapper = findByTestAtrr(component, 'account-component');
-        expect(wrapper.length).toBe(1);
-    });
-
 })

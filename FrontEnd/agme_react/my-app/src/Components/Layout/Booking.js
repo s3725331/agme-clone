@@ -5,29 +5,22 @@ import PropTypes from "prop-types";
 import { createBooking} from "../../actions/bookingActions";
 import axios from "axios";
 
- class Booking extends Component {
+ export class Booking extends Component {
   constructor(props) {
     super(props);
 
-    var workerStore;
     var customerObj;
 
+    //gets and stores customer object from local storage. Used to add Customer details into booking
      if(localStorage.getItem('customerObject')!= null){ 
       customerObj = JSON.parse(localStorage.getItem('customerObject'));
 
      }
-     
-      var workerStore = [{id:"0",
-       account : {
-      firstName:"No",
-      lastName:"workers"}
-      }];
-     
-
+  
      
 
     this.state = {
-      workers : workerStore,
+      workers : null,
       worker : "",
       customer : customerObj,
       startDate: "",
@@ -51,6 +44,8 @@ import axios from "axios";
 
   handleSubmit(e) {
     e.preventDefault();
+
+    //formats dates into database friendly pattern
     var starting = this.state.startDate+ " " + this.state.startTime+":00";
     var ending = this.state.startDate+ " " + this.state.endTime+":00";
 
@@ -60,13 +55,19 @@ import axios from "axios";
       startTime : starting,
       endTime : ending
     }
-    console.log(starting)
-    console.log(ending)
-   console.log(newBooking);
+
+   //creates a booking based on info provided in form
    this.props.createBooking(newBooking, this.props.history);
 
   }
   async componentDidMount() {
+
+    //used to load information on all workers in database in order to give options to the customer
+    //when choosing which worker they want to book
+
+    //set loaded state to true if all workers have bee loaded or if no workers have been found 
+    //in order to render page
+
     try{
     const res = await axios.get("http://localhost:8080/api/worker/all");
     this.setState({ workers: res.data, loaded: true });
@@ -83,26 +84,26 @@ import axios from "axios";
 
   
 render() { 
+
+  //used to render only after workers have been grabbed
   if (!this.state.loaded) {
     return null;
 }
-
-
     return (
-      <div>
+      <div data-test="booking-card">
         <div className="row">
           <div className="col s12 m6 offset-m3">
             <div className="card">
               <div className="card-action blue darken-4 white-text">
                 <Link to="/Dashboard">
-                  <span className="white-text text-darken-2 center-align" data-test="booking-card">
+                  <span className="white-text text-darken-2 center-align">
                     <h3>Book your appointment</h3>
                   </span>
                 </Link>
               </div>
 
               { <form onSubmit={this.handleSubmit}>
-              <div className="card-content">
+              <div className="card-content" data-test="booking-card-services">
                 <h6> Select a service</h6>
                   <div className="form-field">
                     <select className = "browser-default" name = "service"
@@ -115,9 +116,16 @@ render() {
                   </div>
               </div>
 
-              <div className="card-content">
+              <div className="card-content" data-test="workers">
                 <h6> Select a worker</h6>
                   <div className="form-field">
+
+                  {/* if workers exist, loop through each worker in the drop down menu for the form
+                  if they dont exit, load message saying workers dont exist*/ }
+                  { (this.state.workers === null) ? (
+                    <h6> No workers available</h6>
+
+                  ) :
                   <select  className = "browser-default" name = "worker"
                   value = {this.state.worker} onChange={this.handleChange}  required>
 
@@ -128,12 +136,13 @@ render() {
                             <option key={worker['id']} value={index}> {worker['account']['firstName']} {worker['account']['lastName']}</option>
                           ))
                         }
-
+                      
                     </select>
+                      }
                   </div>
               </div>
 
-              <div className="card-content">
+              <div className="card-content" data-test="date-picker">
                 <h6> Choose your availability</h6>
                   <div className="form-field" >
                     <input type="date" className="datepicker"
@@ -145,7 +154,7 @@ render() {
               </div>
 
               
-              <div className="card-content">
+              <div className="card-content" data-test="start-time-picker">
                 <h6> Pick Start time </h6>
                 <div className="form-field" >
                 <input type="time" className="timepicker"
@@ -156,7 +165,7 @@ render() {
                 </div>
                 </div>   
 
-                <div className="card-content">
+                <div className="card-content" data-test="end-time-picker">
                 <h6> Pick End time </h6>
                 <div className="form-field" >
                 <input type="time" className="timepicker"
@@ -168,7 +177,7 @@ render() {
               </div>  
 
 
-                <div className="col s12 m6 offset-m3">
+                <div className="col s12 m6 offset-m3" data-test="book-btn">
                   <button className="btn btn-form blue darken-4" type="submit">
                     Book
                   </button>

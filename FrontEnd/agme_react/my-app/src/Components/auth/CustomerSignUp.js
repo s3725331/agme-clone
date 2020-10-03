@@ -34,8 +34,7 @@ export class CustomerSignUp extends Component {
       address: this.state.address
     }
 
-
-    console.log(newAccount);
+    //method used to create account with specified type. Will be successful if details are valid
     this.props.createCustomer(newAccount, this.state.type, this.props.history);
   }
 
@@ -153,7 +152,7 @@ export class CustomerSignUp extends Component {
               </div>
 
               <div className="card-content">
-              <h6> Are you a customer or a Worker? </h6>
+              <h6> Are you a Customer or a Worker? </h6>
               <select className = "browser-default" onChange={this.handleChange} 
               value= {this.state.type} 
               name = "type" required >
@@ -193,7 +192,6 @@ export class CustomerSignUp extends Component {
 
 CustomerSignUp.propTypes = {
   createCustomer: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
 };
 
 
