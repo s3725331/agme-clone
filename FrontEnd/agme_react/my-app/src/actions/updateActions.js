@@ -11,6 +11,13 @@ export const updateAccount = (newAccount,  type, history) => async dispatch => {
       } else if (type === "Worker"){
         const  res2 = await axios.put("http://localhost:8080/api/worker", newAccount);
         localStorage.setItem('workerObject', JSON.stringify(res2.data));
+      }else if (type === "Admin"){
+        const  res3 = await axios.put("http://localhost:8080/api/accounts", newAccount);
+
+        var adminObj = JSON.parse(localStorage.getItem("adminObject"));
+        adminObj['account']= res3.data;
+
+        localStorage.setItem('adminObject', JSON.stringify(adminObj));
       }
     
     history.push("/Dashboard");

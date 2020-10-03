@@ -142,13 +142,24 @@ if(this.state.workers!==null){
 
           }
     }
+    console.log(this.state.workers)
+    console.log(this.state.adminBookArray)
   }
   
   render() { 
 
     //used to load page only when relevant information has been gathered
     if (!this.state.loaded && (!this.state.sLoaded || !this.state.aLoaded)) {
-      return null;
+      return (
+        
+        
+<div className = "center-align">
+        <div className="progress">
+        <div className="indeterminate"></div>
+    </div>
+    </div>
+
+      );
   } 
 
     return (
@@ -248,7 +259,7 @@ if(this.state.workers!==null){
                             )
                           }</h6>
                             <h6>Date of appointment: {book['startTime'].substring(0,10)}</h6>
-                            
+                            <h6>Worker: {book['worker']['account']['firstName']} {book['worker']['account']['lastName']}</h6>
                             <h6>Customer: {book['customer']['account']['firstName']} {book['customer']['account']['lastName']}</h6>
                             <h6>Service: {book['worker']['serviceName']['service']}</h6> 
                             <h6>Start time: {book['startTime'].substring(11)}</h6> 

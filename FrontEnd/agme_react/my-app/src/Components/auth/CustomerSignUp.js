@@ -72,7 +72,14 @@ export class CustomerSignUp extends Component {
   render() {
   //used to render only after workers have been grabbed
   if (!this.state.loaded) {
-    return null;
+    return (
+      <div className = "center-align">
+              <div className="progress">
+              <div className="indeterminate"></div>
+          </div>
+          </div>
+      
+            );
 }
 
 

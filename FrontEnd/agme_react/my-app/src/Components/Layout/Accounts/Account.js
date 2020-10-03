@@ -60,12 +60,24 @@ import axios from "axios";
     } else if (localStorage.getItem("workerObject") !== null) {
       account = JSON.parse(localStorage.getItem("workerObject"));
       account["serviceName"]["service"] = this.state.service;
+    } else if (localStorage.getItem("adminObject") !== null) {
+      account = JSON.parse(localStorage.getItem("currentUser"));
     }
+
+    if(this.state.type!="Admin") {
 
     account["account"]["email"]=this.state.email;
     account["account"]["firstName"]=this.state.firstName;
     account["account"]["lastName"]=this.state.lastName;
     account["account"]["address"]=this.state.address;
+  }
+    else {
+      account["email"]=this.state.email;
+      account["firstName"]=this.state.firstName;
+      account["lastName"]=this.state.lastName;
+      account["address"]=this.state.address;
+
+    }
 
     console.log(account)
 
@@ -107,7 +119,14 @@ import axios from "axios";
   render() {
       //used to render only after workers have been grabbed
   if (!this.state.loaded) {
-    return null;
+    return (
+      <div className = "center-align">
+              <div className="progress">
+              <div className="indeterminate"></div>
+          </div>
+          </div>
+      
+            );
 }
 
     if(this.state.editStatus){

@@ -57,7 +57,14 @@ this.props.approveWorker(this.state.worker['id'], this.props.history);
   }
   render() {
     if (!this.state.loaded) {
-      return null;
+      return (
+        <div className = "center-align">
+                <div className="progress">
+                <div className="indeterminate"></div>
+            </div>
+            </div>
+        
+              );
     }
 
     if(this.state.worker === null){

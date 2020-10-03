@@ -73,6 +73,7 @@ if(this.state.account === "Admin"){
   
     }
     }
+    
 if(this.state.workers!==null){
     this.state.workers.forEach(worker => {
      
@@ -98,6 +99,8 @@ if(this.state.workers!==null){
     });
 
   } else {this.setState({aLoaded : true});}
+
+
 }
     try{
 
@@ -130,7 +133,8 @@ if(this.state.workers!==null){
 
           }
     }
-
+    console.log(this.state.workers)
+    console.log(this.state.adminBookArray)
   }
   
   render() { 
@@ -139,7 +143,14 @@ if(this.state.workers!==null){
 
      if (!this.state.loaded  && (!this.state.sLoaded  || !this.state.aLoaded )) {
    
-      return null;
+      return (
+        <div className = "center-align">
+                <div className="progress">
+                <div className="indeterminate"></div>
+            </div>
+            </div>
+        
+              );
   } 
 
      return (
@@ -179,7 +190,7 @@ if(this.state.workers!==null){
                   {
                     
                     this.state.workers.map((worker, index) => (
-                      <option key={worker['id']} value={index}> {worker['account']['firstName']} {worker['account']['lastName']}</option>
+                      <option key={worker['id']} value={index} > {worker['account']['firstName']} {worker['account']['lastName']}</option>
                     ))
                   }
                 
@@ -248,6 +259,7 @@ if(this.state.workers!==null){
                           )
                         }</h6>
                           <h6>Date of appointment: {book['startTime'].substring(0,10)}</h6>
+                          <h6>Worker: {book['worker']['account']['firstName']} {book['worker']['account']['lastName']}</h6>
                           
                           <h6>Customer: {book['customer']['account']['firstName']} {book['customer']['account']['lastName']}</h6>
                           <h6>Service: {book['worker']['serviceName']['service']}</h6> 

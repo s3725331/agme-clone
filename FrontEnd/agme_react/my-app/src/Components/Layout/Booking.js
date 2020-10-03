@@ -138,7 +138,14 @@ render() {
 
   //used to render only after workers have been grabbed
   if (!this.state.loaded || !this.state.sLoaded) {
-    return null;
+    return (
+      <div className = "center-align">
+              <div className="progress">
+              <div className="indeterminate"></div>
+          </div>
+          </div>
+      
+            );
 }
     return (
       <div data-test="booking-card">
