@@ -6,12 +6,31 @@ import jwt_decode from "jwt-decode";
 export const createAccount = (newAccount, service, type, history) => async dispatch => {
   try {
       //if account type is of Customer, a customer account is created, else a worker account is created
-      if(type === "Customer"){
-        const  res1 = await axios.post("http://localhost:8080/api/customer", newAccount);
-      } else if (type === "Worker"){
-        const  res2 = await axios.post("http://localhost:8080/api/worker", newAccount, { params: { service :
-        service}});
-      }
+      
+      const res = await axios.post("http://localhost:8080/api/users/register", newAccount);
+
+      const test = {      username : newAccount['username'],
+        password : newAccount['password']}
+      const res1 = await axios.post("http://localhost:8080/api/users/login",  test);
+      const { token } = res1.data;
+
+      console.log(res)
+      console.log(res1)
+  
+      localStorage.setItem("jwtToken", token);
+
+      setJWTTOken(token);
+
+      const res3 = await axios.post("http://localhost:8080/api/customer");
+      console.log(res3)
+
+
+    //  if(type === "Customer"){
+   //     const  res1 = await axios.post("http://localhost:8080/api/customer", newAccount);
+    //  } else if (type === "Worker"){
+    //    const  res2 = await axios.post("http://localhost:8080/api/worker", newAccount, { params: { service :
+    //    service}});
+   //   }
     
     history.push("/Dashboard");
 
@@ -26,12 +45,18 @@ export const createAccount = (newAccount, service, type, history) => async dispa
 
 export const login = LoginRequest => async dispatch =>{
   try{
-    const res = await axios.get("http://localhost:8080/api/accounts",  LoginRequest);
+    console.log(LoginRequest)
+    const res = await axios.post("http://localhost:8080/api/users/login",  LoginRequest);
+
+
+    console.log(res)
 
     const { token } = res.data;
 
-    localStorage.setItem("jwtToken", token);
+    console.log(token)
 
+    localStorage.setItem("jwtToken", token);
+    setJWTTOken(token);
     const decoded = jwt_decode(token);
 
     dispatch({

@@ -16,6 +16,7 @@ export class CustomerSignUp extends Component {
       address: "",
       type:"",
       service:"",
+      confirmPassword:"",
       services:null,
       loaded:false
       //,
@@ -36,13 +37,15 @@ export class CustomerSignUp extends Component {
 
 
     const newAccount = {
-      email: this.state.email,
+      username: this.state.email,
       password: this.state.password,
       firstName: this.state.firstName,
       lastName: this.state.lastName,
-      address: this.state.address
+      address: this.state.address,
+      role:this.state.type,
+      confirmPassword:this.state.confirmPassword
     }
-
+    console.log(newAccount)
 
     //method used to create account with specified type. Will be successful if details are valid
 
@@ -156,6 +159,9 @@ export class CustomerSignUp extends Component {
                     placeholder="Enter your password again."
                     type="password"
                     className="validate"
+                    name="confirmPassword"
+                    value= {this.state.confirmPassword}
+                    onChange={this.handleChange}
                   ></input>
                 </div>
               </div>
