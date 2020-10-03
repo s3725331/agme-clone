@@ -17,7 +17,8 @@ export class CustomerSignUp extends Component {
       type:"",
       service:"",
       services:null,
-      loaded:false
+      loaded:false,
+      errors:{}  
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -45,6 +46,18 @@ export class CustomerSignUp extends Component {
 
       this.props.createCustomer(newAccount, this.state.service, this.state.type, this.props.history);
     
+
+
+  }
+
+  componentWillReceiveProps(nextProps){
+
+    if(nextProps.errors){
+      this.setState ({
+
+        errors:nextProps.errors
+      });
+    }
 
 
   }
