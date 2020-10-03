@@ -9,7 +9,7 @@ export default class Navbar extends Component {
   render() {
     // assigning Navbar depending on whether user is logged in or not
     var accountComponent;
-    if (localStorage.getItem("currentUser") != null) {
+    if (localStorage.getItem("workerObject") !== null || localStorage.getItem("customerObject") !== null || localStorage.getItem("adminObject") !== null)  {
       accountComponent = <NavbarLoggedIn />;
     } else {
       accountComponent = <NavbarLoggedOut />;
