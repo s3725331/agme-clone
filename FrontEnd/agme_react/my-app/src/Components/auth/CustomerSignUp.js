@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { createCustomer } from "../../actions/custCreateActions";
+import { createAccount } from "../../actions/securityActions";
 import axios from "axios";
 
 export class CustomerSignUp extends Component {
@@ -17,8 +17,10 @@ export class CustomerSignUp extends Component {
       type:"",
       service:"",
       services:null,
-      loaded:false,
-      errors:{}  
+      loaded:false
+      //,
+    
+     // errors:{}  
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -44,23 +46,23 @@ export class CustomerSignUp extends Component {
 
     //method used to create account with specified type. Will be successful if details are valid
 
-      this.props.createCustomer(newAccount, this.state.service, this.state.type, this.props.history);
+      this.props.createAccount(newAccount, this.state.service, this.state.type, this.props.history);
     
 
 
   }
 
-  componentWillReceiveProps(nextProps){
+ // componentWillReceiveProps(nextProps){
 
-    if(nextProps.errors){
-      this.setState ({
+ //   if(nextProps.errors){
+  //    this.setState ({
 
-        errors:nextProps.errors
-      });
-    }
+   //     errors:nextProps.errors
+ //     });
+ //   }
 
 
-  }
+//  }
 
   async componentDidMount() {
 
@@ -270,11 +272,11 @@ export class CustomerSignUp extends Component {
 }
 
 CustomerSignUp.propTypes = {
-  createCustomer: PropTypes.func.isRequired,
+  createAccount: PropTypes.func.isRequired,
 };
 
 
 export default connect (
   null,
-  {createCustomer}
+  {createAccount}
 )(CustomerSignUp);
