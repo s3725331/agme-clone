@@ -13,7 +13,7 @@ public class AccountService {
     AccountRepository accountRepository;
 
     //private save used by create and update methods
-    private Optional<Account> saveOrUpdate(Account account){
+    /*private Optional<Account> saveOrUpdate(Account account){
         //Enforcing uniqueness of emails
         Iterable<Account> accounts = accountRepository.getByEmail(account.getEmail());
         if(accounts.iterator().hasNext() &&
@@ -47,5 +47,5 @@ public class AccountService {
             return Optional.empty(); //Account not found in repo
 
         return saveOrUpdate(account);
-    }
+    }*/
 }

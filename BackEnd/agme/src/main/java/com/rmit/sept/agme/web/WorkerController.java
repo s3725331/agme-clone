@@ -1,22 +1,23 @@
 package com.rmit.sept.agme.web;
 
 
-import com.rmit.sept.agme.model.Account;
-import com.rmit.sept.agme.model.Customer;
-import com.rmit.sept.agme.model.ServiceName;
-import com.rmit.sept.agme.model.Worker;
+import com.rmit.sept.agme.model.*;
+import com.rmit.sept.agme.security.JwtTokenProvider;
 import com.rmit.sept.agme.services.AccountService;
 import com.rmit.sept.agme.services.ServiceNameService;
+import com.rmit.sept.agme.services.UserService;
 import com.rmit.sept.agme.services.WorkerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Iterator;
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequestMapping("/api/worker")
@@ -29,7 +30,10 @@ public class WorkerController {
     ServiceNameService serviceNameService;
 
     @Autowired
-    AccountService accountService;
+    UserService userService;
+
+    @Autowired
+    JwtTokenProvider tokenProvider;
 
     //Sets accepted state of worker to true
     @PatchMapping("/authenticate")
@@ -46,7 +50,8 @@ public class WorkerController {
     //Create worker from new account
     //First, the new account is created and saved
     //A new worker is then created and saved with new object
-    @PostMapping("/account")
+    //@PreAuthorize("hasRole('ROLE_WORKER')")
+    /*@PostMapping("/account")
     public ResponseEntity<?> createWorkerAccount(@Valid @RequestBody Account account, @RequestParam(name = "service") String service, BindingResult result){
         if(result.hasErrors()) { //Invalid account object in request body
             return new ResponseEntity<>("Invalid Accounts Object", HttpStatus.BAD_REQUEST);
@@ -74,32 +79,63 @@ public class WorkerController {
         }
 
         return new ResponseEntity<>(savedWorker, HttpStatus.CREATED); //New worker object return
-    }
+    }*/
 
-    //Create new customer from existing account
+    //Create new worker from current logged in user
     @PostMapping("")
-    public ResponseEntity<?> createWorker(@RequestParam("accountId") long accountId, @RequestParam("service") String service){
+    public ResponseEntity<?> createWorker(@RequestHeader("Authorization") String jwt, @RequestParam("service") String service){
+        try{
+            Long userId = tokenProvider.getUserIdFromJWT(jwt);
 
-        //Get service object from service repo
-        ServiceName serviceObject;
-        Iterator<ServiceName> services = serviceNameService.getByService(service).iterator();
-        if(!services.hasNext()){
-            return new ResponseEntity<>("Invalid Service", HttpStatus.CONFLICT); //Service not in repo
-        } else {
-            serviceObject = services.next();
+            //Get service object from service repo
+            ServiceName serviceObject;
+            Iterator<ServiceName> services = serviceNameService.getByService(service).iterator();
+            if(!services.hasNext()){
+                return new ResponseEntity<>("Invalid Service", HttpStatus.CONFLICT); //Service not in repo
+            } else {
+                serviceObject = services.next();
+            }
+
+            //Create new worker from existing account
+            Optional<Worker> savedWorker = workerService.create(userId, serviceObject);
+            if(!savedWorker.isPresent()){ //No account found
+                return new ResponseEntity<>("Invalid Account Id", HttpStatus.NOT_FOUND);
+            }
+
+            return new ResponseEntity<>(savedWorker, HttpStatus.CREATED); //new worker object return
+
+        } catch(Exception e){
+            return new ResponseEntity<>("Bad Jwt", HttpStatus.BAD_REQUEST); //Bad Jwt string format
         }
-
-        //Create new worker from existing account
-        Optional<Worker> savedWorker = workerService.create(accountId, serviceObject);
-        if(!savedWorker.isPresent()){ //No account found
-            return new ResponseEntity<>("Invalid Account Id", HttpStatus.NOT_FOUND);
-        }
-
-        return new ResponseEntity<>(savedWorker, HttpStatus.CREATED); //new worker object return
     }
 
-    //Get customer by its account id
+    //Get worker by a valid jwt
     @GetMapping("")
+    public ResponseEntity<?> getWorker(@RequestHeader("Authorization") String jwt){
+        try{
+            Long userId = tokenProvider.getUserIdFromJWT(jwt);
+
+            //Get user from repo
+            Optional<User> user = userService.get(userId);
+            if(!user.isPresent()){ //No user saved with userId
+                return new ResponseEntity<>("Invalid User Id", HttpStatus.NOT_FOUND);
+            }
+
+            //Get worker by account from repo
+            Optional<Worker> worker = workerService.getByUser(user.get());
+            if(!worker.isPresent()){
+                return new ResponseEntity<>("No Worker Found", HttpStatus.NOT_FOUND);
+            }
+
+            return new ResponseEntity<>(worker,HttpStatus.OK); //Worker from repo returned
+
+        } catch(Exception e){
+            return new ResponseEntity<>("Bad Jwt", HttpStatus.NOT_FOUND); //Bad Jwt string format
+        }
+    }
+
+    //Get worker by account id
+    /*@GetMapping("")
     public ResponseEntity<?> getWorker(@RequestParam("accountId") long accountId){
         //Get account from repo
         Optional<Account> account = accountService.get(accountId);
@@ -114,7 +150,7 @@ public class WorkerController {
         }
 
         return new ResponseEntity<>(worker,HttpStatus.OK); //Worker returned
-    }
+    }*/
 
     //Get all workers
     @GetMapping("/all")
@@ -149,8 +185,8 @@ public class WorkerController {
         }
 
         //Update worker account in repo
-        Optional<Account> savedAccount = accountService.update(worker.getAccount());
-        if(!savedAccount.isPresent()) //Bad account (bad id or non unique email
+        Optional<User> savedUser = userService.update(worker.getUser());
+        if(!savedUser.isPresent()) //Bad account (bad id or non unique email
             return new ResponseEntity<>("Bad Account", HttpStatus.NOT_FOUND);
 
         //Update worker in repo
