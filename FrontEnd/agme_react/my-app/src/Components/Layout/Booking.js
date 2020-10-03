@@ -45,6 +45,7 @@ import axios from "axios";
        
 this.state.filteredWorkers.length = 0;
 
+if(this.state.workers !==null){
 
          this.state.workers.forEach(worker => {
            
@@ -69,7 +70,7 @@ this.state.filteredWorkers.length = 0;
 
       
        }
-
+      }
   }
 
 
@@ -118,10 +119,9 @@ this.state.filteredWorkers.length = 0;
     //in order to render page
 
     try{
-    const res = await axios.get("http://localhost:8080/api/worker/all/authenticate");
+    const res = await axios.get("http://localhost:8080/api/worker/all");
     this.setState({ workers: res.data, loaded: true });
-    console.log("things"
-    )
+
     console.log(res.data)
     }    catch (err) {  
 
@@ -137,7 +137,7 @@ this.state.filteredWorkers.length = 0;
 render() { 
 
   //used to render only after workers have been grabbed
-  if (!this.state.loaded && !this.state.sLoaded) {
+  if (!this.state.loaded || !this.state.sLoaded) {
     return null;
 }
     return (
@@ -204,7 +204,7 @@ render() {
 
                       {
                         (this.state.workers === null)? 
-                        <br></br>:
+                        <h6>No workers available</h6>:
                         (this.state.service === null)?
                         <h6>Please select a service</h6>:
                         (this.state.filteredWorkers.length === 0)? 
