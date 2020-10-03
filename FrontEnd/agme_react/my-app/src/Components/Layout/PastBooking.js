@@ -41,7 +41,8 @@ export default class PastBooking extends Component {
       worker: null,
       aLoaded:false,
       sLoaded: false,
-      adminBookArray : arrObj
+      adminBookArray : arrObj,
+      aLoaded:false
     };
 
 
@@ -57,13 +58,12 @@ export default class PastBooking extends Component {
 
 
   async componentDidMount() {
-
+if(this.state.account === "Admin"){
     
     try{
       const res = await axios.get("http://localhost:8080/api/worker/all");
       this.setState({ workers: res.data, sLoaded: true});
-      console.log("things"
-      )
+
       console.log(res.data)
       }    catch (err) {  
   
@@ -76,8 +76,8 @@ export default class PastBooking extends Component {
 if(this.state.workers!==null){
     this.state.workers.forEach(worker => {
      
-        console.log(worker['id'])
-        axios.get("http://localhost:8080/api/bookings/upcoming",{ params: { workerId :
+      
+        axios.get("http://localhost:8080/api/bookings/past",{ params: { workerId :
         worker['id']}}).then(
           res=>{
            
@@ -92,12 +92,13 @@ if(this.state.workers!==null){
           
           });
        
-      
+      this.setState({aLoaded : true});
        
       
     });
 
-  }
+  } else {this.setState({aLoaded : true});}
+}
     try{
 
 
@@ -109,7 +110,7 @@ if(this.state.workers!==null){
       //if a booking object is not returned, book state stays null and loaded is set to true and page renders
 
       if(this.state.account === "Customer") {
-        const res = await axios.get("http://localhost:8080/api/bookings/upcoming",{ params: { customerId :
+        const res = await axios.get("http://localhost:8080/api/bookings/past",{ params: { customerId :
         this.state.profile['id']}});
         console.log(res.data)
   
@@ -117,7 +118,7 @@ if(this.state.workers!==null){
 
       } else if (this.state.account === "Worker") {
 
-        const res = await axios.get("http://localhost:8080/api/bookings/upcoming",{ params: { workerId :
+        const res = await axios.get("http://localhost:8080/api/bookings/past",{ params: { workerId :
         this.state.profile['id']}});
 
         this.setState({ book: res.data, loaded: true });
@@ -129,17 +130,17 @@ if(this.state.workers!==null){
 
           }
     }
+
   }
   
   render() { 
 
      //used to load page only when relevant information has been gathered
 
-    //used to load page only when relevant information has been gathered
-    if (!this.state.loaded && !this.state.sLoaded) {
+     if (!this.state.loaded  && (!this.state.sLoaded  || !this.state.aLoaded )) {
+   
       return null;
   } 
-
 
      return (
       <div>

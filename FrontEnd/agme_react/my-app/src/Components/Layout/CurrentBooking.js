@@ -44,7 +44,8 @@ import { cancelBooking } from "../../actions/cancelBookingActions"
       worker: null,
       aLoaded:false,
       sLoaded: false,
-      adminBookArray : arrObj
+      adminBookArray : arrObj,
+      aLoaded: false
     };
 
     this.cancelling = this.cancelling.bind(this);
@@ -68,7 +69,7 @@ import { cancelBooking } from "../../actions/cancelBookingActions"
 
 
   async componentDidMount() {
-    
+    if(this.state.account === "Admin"){
     try{
       const res = await axios.get("http://localhost:8080/api/worker/all");
       this.setState({ workers: res.data, sLoaded: true});
@@ -106,8 +107,10 @@ if(this.state.workers!==null){
        
       
     });
+    this.setState({aLoaded : true});
+  }}
 
-  }
+  else{this.setState({aLoaded : true});}
     try{
 
 
@@ -144,7 +147,7 @@ if(this.state.workers!==null){
   render() { 
 
     //used to load page only when relevant information has been gathered
-    if (!this.state.loaded && !this.state.sLoaded) {
+    if (!this.state.loaded && (!this.state.sLoaded || !this.state.aLoaded)) {
       return null;
   } 
 
@@ -216,18 +219,9 @@ if(this.state.workers!==null){
                       ]
                        
                 } 
-
-               
-
-
-                
-                
-                
+         
                 
                 <br></br>
-
-
-
 
 
                   <div data-test="booking-details">

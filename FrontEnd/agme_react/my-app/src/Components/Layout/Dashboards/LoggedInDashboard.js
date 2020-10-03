@@ -99,7 +99,7 @@ export default class LoggedInDashboard extends Component {
       <div className="loggedInComponent" data-test="logged-in-dashboard">
         <div className="container">
           <div className="row">
-            <div className="col l8 s12">
+            <div className="col l7 s12">
               <div className="logged-in-dashboard-text">
                 <h3>
                   <b>Looking to Book?</b>

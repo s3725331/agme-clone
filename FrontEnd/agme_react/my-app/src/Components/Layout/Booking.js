@@ -118,7 +118,7 @@ this.state.filteredWorkers.length = 0;
     //in order to render page
 
     try{
-    const res = await axios.get("http://localhost:8080/api/worker/all");
+    const res = await axios.get("http://localhost:8080/api/worker/all/authenticate");
     this.setState({ workers: res.data, loaded: true });
     console.log("things"
     )
