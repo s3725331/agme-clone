@@ -42,7 +42,7 @@ import axios from "axios";
        this.setState({ [e.target.name]: e.target.value });
        if(e.target.name === "service"){
          var serviceName = e.target.value;
-         var arrayObj = [];
+       
 this.state.filteredWorkers.length = 0;
 
 

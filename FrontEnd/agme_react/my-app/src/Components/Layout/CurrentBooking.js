@@ -11,6 +11,7 @@ import { cancelBooking } from "../../actions/cancelBookingActions"
     super(props);
     var user;
     var accountType;
+    var arrObj = [];
 
       //checks what kind of user is logged in and saves the user into the user variable
       //while also setting accountType appropriately
@@ -24,6 +25,11 @@ import { cancelBooking } from "../../actions/cancelBookingActions"
       
       user = JSON.parse(localStorage.getItem('workerObject'));
       accountType = "Worker";
+
+     }      else if(localStorage.getItem('adminObject')!== null){ 
+      
+      user = JSON.parse(localStorage.getItem('adminObject'));
+      accountType = "Admin";
      }
 
      
@@ -34,23 +40,81 @@ import { cancelBooking } from "../../actions/cancelBookingActions"
       book: null,
       cancelled: false,
       account: accountType,
-      loaded: false
+      loaded: false,
+      workers: null,
+      worker: null,
+      aLoaded:false,
+      sLoaded: false,
+      adminBookArray : arrObj
     };
 
     this.cancelling = this.cancelling.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.test = this.test.bind(this)
 
   }
+  
+  handleChange(e) {
+    this.setState({worker : e.target.value });
+    
+  }
+
+
 
   cancelling(bookId){
     var id = parseInt(bookId);
     this.props.cancelBooking(id, this,this.props.history);
    
   }
+  test(){
+    console.log(this.state.adminBookArray[this.state.worker])
+  }
 
 
   async componentDidMount() {
-
+    
     try{
+      const res = await axios.get("http://localhost:8080/api/worker/all");
+      this.setState({ workers: res.data, sLoaded: true});
+      console.log("things"
+      )
+      console.log(res.data)
+      }    catch (err) {  
+  
+  
+      if(err.response.status === 404){
+        this.setState({ sLoaded: true });
+  
+    }
+    }
+if(this.state.workers!==null){
+    this.state.workers.forEach(worker => {
+     
+        console.log(worker['id'])
+        axios.get("http://localhost:8080/api/bookings/upcoming",{ params: { workerId :
+        worker['id']}}).then(
+          res=>{
+           
+            this.state.adminBookArray.push(res.data);
+          }
+        ).catch(err=> {
+          if(err.response.status === 404){
+            this.state.adminBookArray.push(null);
+            
+    
+            }
+          
+          });
+       
+      
+       
+      
+    });
+    console.log("hi")
+    console.log(this.state.adminBookArray)
+  }
+    try{
+
 
       //if account type is of customer, gets all upcoming bookings with relevant customer id 
       //and stores the state else if account type is of worker, gets all  
@@ -85,9 +149,9 @@ import { cancelBooking } from "../../actions/cancelBookingActions"
   render() { 
 
     //used to load page only when relevant information has been gathered
-    if (!this.state.loaded) {
+    if (!this.state.loaded && !this.state.sLoaded) {
       return null;
-  }
+  } 
 
     return (
         <div>
@@ -104,18 +168,73 @@ import { cancelBooking } from "../../actions/cancelBookingActions"
                 <div className="card-content" data-test="account-details">
                {/*Conditional that checks account type and loads title accordingly */}
 
+               { (this.state.account==="Admin")?
+               <h5><b>Choose a worker</b></h5>:
+               (null)
+               }
+
+               { (this.state.account !=="Admin") ? null:
+                 (this.state.workers === null)?
+                (
+                <select  className = "browser-default"   required>
+      
+                <option value = "" disabled selected>No workers Available</option>
+              
+            </select>
+      
+              ) :
+              <select  className = "browser-default" name = "worker"
+              value = {this.state.worker} onChange={this.handleChange}  required>
+      
+                    <option value = "" disabled selected>Choose your option</option>
+                    {
+                      
+                      this.state.workers.map((worker, index) => (
+                        <option key={worker['id']} value={index}> {worker['account']['firstName']} {worker['account']['lastName']}</option>
+                      ))
+                    }
+                  
+                </select>
+                  }
+
+
                 {
                   (this.state.account === "Customer") ? 
-                    (this.state.account === "Worker") ? null :
+                    (this.state.account === "Worker" || this.state.account ==="Admin") ? null:
                       (<h5><b>Customer Details</b></h5> ):
                         (<h5><b>Worker Details</b></h5>)
                 }
-                
                 <br></br>
                
+                {
+                  (this.state.account === "Admin") ?
+                  (this.state.worker === null)?
+                      (<h6><b>Choose a worker to display information</b></h6>) :
+                      [(<h6>Full name:  {this.state.workers[this.state.worker]['account']['firstName']}
+                      {" "}{this.state.workers[this.state.worker]['account']['lastName']}
+                      </h6>),
+                      (<h6>Email:  {this.state.workers[this.state.worker]['account']['email']}
+                      </h6>)] :
+                      [
+                        <h6>Full name:  {this.state.profile['account']['firstName']} {this.state.profile['account']['lastName']}</h6>,
+                        <h6>Email:  {this.state.profile['account']['email']}</h6> 
+                      ]
+                       
+                } 
 
-                <h6>Full name:  {this.state.profile['account']['firstName']} {this.state.profile['account']['lastName']}</h6>
-                <h6>Email:  {this.state.profile['account']['email']}</h6> <br></br>
+               
+
+
+                
+                
+                
+                
+                <br></br>
+
+
+
+
+
                   <div data-test="booking-details">
                     <h5><b>Booking Details</b></h5> <br></br>
 
@@ -124,9 +243,30 @@ import { cancelBooking } from "../../actions/cancelBookingActions"
                     according to either customer or worker */}
 
                     {
+                      (this.state.adminBookArray !== 0 && this.state.worker !== null)?
+                        (this.state.adminBookArray[this.state.worker]!==null)? (
+                          this.state.adminBookArray[this.state.worker].map((book, index) => (
+                          
+                          <div key={book['id']} >   
+                          <h6><b>Booking {index +1}</b>  {
+                            (book['cancelled'] !== true)? null:(
+                              <b> --CANCELLED-- </b>
+                            )
+                          }</h6>
+                            <h6>Date of appointment: {book['startTime'].substring(0,10)}</h6>
+                            
+                            <h6>Customer: {book['customer']['account']['firstName']} {book['customer']['account']['lastName']}</h6>
+                            <h6>Service: {book['worker']['serviceName']['service']}</h6> 
+                            <h6>Start time: {book['startTime'].substring(11)}</h6> 
+                            <h6>End time: {book['endTime'].substring(11)}</h6>
+                            <br></br>
+                          </div>))):
+                          (<h6><b>No bookings available</b></h6>)
+                        
+                      :
                       (this.state.book !== null) ? ( 
-                        (this.state.account === "Customer") ? 
-                          (this.state.account === "Worker") ? null:(
+                        (this.state.workers != null) ? 
+                          (
                             
                             this.state.book.map((book, index) => (
                         
@@ -177,16 +317,6 @@ import { cancelBooking } from "../../actions/cancelBookingActions"
                               <h6>Service: {book['worker']['serviceName']['service']}</h6> 
                               <h6>Start time: {book['startTime'].substring(11)}</h6> 
                               <h6>End time: {book['endTime'].substring(11)}</h6> 
-
-                             {/* {
-                                (book['cancelled'] !== false)? null:(
-                                  <button className="btn btn-profile blue darken-4"    type="submit" >
-                                  Cancel Booking
-                                  </button> 
-                                )
-                              }
-                            
-                            */}
                               
                               <br></br>
                             </div>
