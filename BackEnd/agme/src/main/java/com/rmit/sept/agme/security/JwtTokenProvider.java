@@ -62,7 +62,10 @@ public class JwtTokenProvider {
     //Get user Id from token
     public Long getUserIdFromJWT(String token){
         try {
-            String cleanToken = token.split(" ")[1];
+            String[] tokenSplit = token.split(" ");
+            if(tokenSplit.length == 2){
+                token = tokenSplit[1];
+            }
 
             JwtParser parser = Jwts.parser().setSigningKey(SECRET);
             Claims claims = parser.parseClaimsJws(token).getBody();

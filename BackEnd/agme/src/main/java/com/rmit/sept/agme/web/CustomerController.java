@@ -63,8 +63,8 @@ public class CustomerController {
             //Customer created from existing account in repo
             Optional<Customer> savedCustomer = customerService.create(id);
 
-            if(!savedCustomer.isPresent()){ //No account saved with accountId
-                return new ResponseEntity<>("Invalid Account Id", HttpStatus.NOT_FOUND);
+            if(!savedCustomer.isPresent()){ //No user saved with accountId
+                return new ResponseEntity<>("Invalid User Id", HttpStatus.NOT_FOUND);
             }
 
             return new ResponseEntity<>(savedCustomer, HttpStatus.CREATED); //New customer returned
