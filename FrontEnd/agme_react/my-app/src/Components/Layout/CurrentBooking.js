@@ -38,7 +38,6 @@ import { cancelBooking } from "../../actions/cancelBookingActions"
     this.state = {
       profile : user,
       book: null,
-      cancelled: false,
       account: accountType,
       loaded: false,
       workers: null,
@@ -50,7 +49,6 @@ import { cancelBooking } from "../../actions/cancelBookingActions"
 
     this.cancelling = this.cancelling.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.test = this.test.bind(this)
 
   }
   
@@ -66,9 +64,7 @@ import { cancelBooking } from "../../actions/cancelBookingActions"
     this.props.cancelBooking(id, this,this.props.history);
    
   }
-  test(){
-    console.log(this.state.adminBookArray[this.state.worker])
-  }
+
 
 
   async componentDidMount() {
@@ -110,8 +106,7 @@ if(this.state.workers!==null){
        
       
     });
-    console.log("hi")
-    console.log(this.state.adminBookArray)
+
   }
     try{
 
@@ -265,7 +260,8 @@ if(this.state.workers!==null){
                         
                       :
                       (this.state.book !== null) ? ( 
-                        (this.state.workers != null) ? 
+                        (this.state.account === "Customer") ? 
+                        (this.state.account === "Worker") ? null:
                           (
                             
                             this.state.book.map((book, index) => (
