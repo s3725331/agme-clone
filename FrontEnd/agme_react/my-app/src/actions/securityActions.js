@@ -1,6 +1,5 @@
 import axios from "axios";
 import { GET_ERRORS, SET_CURRENT_USER } from "./types";
-import setJWTTOken from "../securityUtils/setJWTToken";
 import jwt_decode from "jwt-decode"; 
 import setJWTToken from "../securityUtils/setJWTToken";
 
@@ -20,7 +19,7 @@ export const createAccount = (newAccount, services, type, history) => async disp
   
       localStorage.setItem("jwtToken", token);
 
-      setJWTTOken(token);
+      setJWTToken(token);
 
       if(type ==="Customer"){
       const res3 = await axios.post("http://localhost:8080/api/customer");
@@ -65,16 +64,16 @@ export const login = (LoginRequest, history) => async dispatch =>{
     console.log(token)
 
     localStorage.setItem("jwtToken", token);
-    setJWTTOken(token);
+    setJWTToken(token);
     const decoded = jwt_decode(token);
 
-    var userId;
+
 
     try{
-      const res2 = await axios.get("http://localhost:8080/api/customer"
-    )
+      const res2 = await axios.get("http://localhost:8080/api/customer")
     
      const data2 = res2.data;
+     console.log(data2)
       localStorage.setItem('customerObject', JSON.stringify(data2));
 
 

@@ -122,7 +122,7 @@ if(this.state.workers !==null){
     try{
       console.log("hi")
       setJWTToken(localStorage.getItem('jwtToken'))
-    const res = await axios.get("http://localhost:8080/api/worker/all/authenticate");
+    const res = await axios.get("http://localhost:8080/api/worker/all");
     this.setState({ workers: res.data, loaded: true });
 
     console.log(res.data)
@@ -204,13 +204,8 @@ render() {
                         <option value = "" disabled selected>Choose your option</option>
                         {
                           
-<<<<<<< HEAD
-                          this.state.filteredWorkers.map((worker, index) => (
-                            <option key={worker['id']} value={index}> {worker['account']['firstName']} {worker['account']['lastName']}</option>
-=======
                           this.state.workers.map((worker, index) => (
                             <option key={worker['id']} value={index}> {worker['user']['firstName']} {worker['user']['lastName']}</option>
->>>>>>> authentication-impl
                           ))
                         }
                       

@@ -1,8 +1,10 @@
 import axios from "axios";
 import { GET_ERRORS } from "./types";
+import setJWTToken from "../securityUtils/setJWTToken";
 
 export const approveWorker = (workId, history) => async dispatch => {
- 
+  
+  setJWTToken(localStorage.getItem('jwtToken'))
   try {
       //if account type is of Customer, a customer account is created, else a worker account is created
 

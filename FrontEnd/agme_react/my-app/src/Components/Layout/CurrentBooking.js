@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { cancelBooking } from "../../actions/cancelBookingActions"
+import { cancelBooking } from "../../actions/cancelBookingActions";
+import setJWTToken from "../../securityUtils/setJWTToken";
 
 
  class CurrentBooking extends Component {
@@ -83,6 +84,8 @@ import { cancelBooking } from "../../actions/cancelBookingActions"
 
 
   async componentDidMount() {
+
+    setJWTToken(localStorage.getItem('jwtToken'))
     if(this.state.account === "Admin"){
     try{
       const res = await axios.get("http://localhost:8080/api/worker/all");
@@ -216,7 +219,7 @@ import { cancelBooking } from "../../actions/cancelBookingActions"
                     {
                       
                       this.state.workers.map((worker, index) => (
-                        <option key={worker['id']} value={index} > {worker['account']['firstName']} {worker['account']['lastName']}</option>
+                        <option key={worker['id']} value={index} > {worker['user']['firstName']} {worker['user']['lastName']}</option>
                       ))
                     }
                   
@@ -236,16 +239,16 @@ import { cancelBooking } from "../../actions/cancelBookingActions"
                   (this.state.account === "Admin") ?
                   (this.state.worker === null)?
                       (<h6><b>Choose a worker to display information</b></h6>) :
-                      [(<h6>Full name:  {this.state.workers[this.state.worker]['account']['firstName']}
-                      {" "}{this.state.workers[this.state.worker]['account']['lastName']}
+                      [(<h6>Full name:  {this.state.workers[this.state.worker]['user']['firstName']}
+                      {" "}{this.state.workers[this.state.worker]['user']['lastName']}
                       </h6>),
-                      (<h6>Email:  {this.state.workers[this.state.worker]['account']['email']}
+                      (<h6>Email:  {this.state.workers[this.state.worker]['user']['username']}
                       </h6>),
                       <h6>Service:  {this.state.workers[this.state.worker]['serviceName']['service']}</h6>
                     ] :
                       [
-                        <h6>Full name:  {this.state.profile['account']['firstName']} {this.state.profile['account']['lastName']}</h6>,
-                        <h6>Email:  {this.state.profile['account']['email']}</h6>,
+                        <h6>Full name:  {this.state.profile['user']['firstName']} {this.state.profile['user']['lastName']}</h6>,
+                        <h6>Email:  {this.state.profile['user']['username']}</h6>,
                         (this.state.account === "Worker")?
                         <h6>Service:  {this.state.profile['serviceName']['service']}</h6>
                         :(null) 
@@ -278,8 +281,8 @@ import { cancelBooking } from "../../actions/cancelBookingActions"
                           }</h6>
                             <h6>Date of appointment: {book['startTime'].substring(0,10)}</h6>
                             
-                            <h6>Worker: {book['worker']['account']['firstName']} {book['worker']['account']['lastName']}</h6>
-                            <h6>Customer: {book['customer']['account']['firstName']} {book['customer']['account']['lastName']}</h6>
+                            <h6>Worker: {book['worker']['user']['firstName']} {book['worker']['user']['lastName']}</h6>
+                            <h6>Customer: {book['customer']['user']['firstName']} {book['customer']['user']['lastName']}</h6>
                             <h6>Service: {book['worker']['serviceName']['service']}</h6> 
                             <h6>Start time: {book['startTime'].substring(11)}</h6> 
                             <h6>End time: {book['endTime'].substring(11)}</h6>
@@ -308,7 +311,7 @@ import { cancelBooking } from "../../actions/cancelBookingActions"
                                 }</h6>
                                 <h6>Date of appointment: {book['startTime'].substring(0,10)}</h6>
                                 {/* <h6>Service: Consultancy</h6> */}
-                                <h6>Worker: {book['worker']['account']['firstName']} {book['worker']['account']['lastName']}</h6>
+                                <h6>Worker: {book['worker']['user']['firstName']} {book['worker']['user']['lastName']}</h6>
                                 <h6>Service: {book['worker']['serviceName']['service']}</h6> 
                                 <h6>Start time: {book['startTime'].substring(11)}</h6> 
                                 <h6>End time: {book['endTime'].substring(11)}</h6> 
@@ -338,7 +341,7 @@ import { cancelBooking } from "../../actions/cancelBookingActions"
                             }</h6>
                               <h6>Date of appointment: {book['startTime'].substring(0,10)}</h6>
                               {/* <h6>Service: Consultancy</h6> */}
-                              <h6>Customer: {book['customer']['account']['firstName']} {book['customer']['account']['lastName']}</h6>
+                              <h6>Customer: {book['customer']['user']['firstName']} {book['customer']['user']['lastName']}</h6>
                               <h6>Service: {book['worker']['serviceName']['service']}</h6> 
                               <h6>Start time: {book['startTime'].substring(11)}</h6> 
                               <h6>End time: {book['endTime'].substring(11)}</h6> 

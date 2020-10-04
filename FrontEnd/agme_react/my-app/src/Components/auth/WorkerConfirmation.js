@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { approveWorker} from "../../actions/approveWorkerActions";
 import axios from "axios";
+import setJWTToken from "../../securityUtils/setJWTToken";
 
  class WorkerConfirmation extends Component {
   constructor(props) {
@@ -42,6 +43,8 @@ this.props.approveWorker(this.state.worker['id'], this.props.history);
 
     //set loaded state to true if all workers have bee loaded or if no workers have been found
     //in order to render page
+
+    setJWTToken(localStorage.getItem('jwtToken'))
 
     try {
       const res = await axios.get(
@@ -103,7 +106,7 @@ this.props.approveWorker(this.state.worker['id'], this.props.history);
                         {
                           
                           this.state.workers.map((worker, index) => (
-                            <option key={worker['id']} value={index}> {worker['account']['firstName']} {worker['account']['lastName']}</option>
+                            <option key={worker['id']} value={index}> {worker['user']['firstName']} {worker['user']['lastName']}</option>
                           ))
                         }
                       
@@ -164,7 +167,7 @@ this.props.approveWorker(this.state.worker['id'], this.props.history);
                         {
                           
                           this.state.workers.map((worker, index) => (
-                            <option key={worker['id']} value={index}> {worker['account']['firstName']} {worker['account']['lastName']}</option>
+                            <option key={worker['id']} value={index}> {worker['user']['firstName']} {worker['user']['lastName']}</option>
                           ))
                         }
                       
@@ -174,6 +177,7 @@ this.props.approveWorker(this.state.worker['id'], this.props.history);
 
                     <div className="card-content">
                     <div className="col s3">
+                    
                       <h6>
                         <b>Profile</b>
                       </h6>
@@ -185,7 +189,7 @@ this.props.approveWorker(this.state.worker['id'], this.props.history);
                     </div>
                     <div className="col s3 push-s3">
                       <h7>
-                        <b>{this.state.worker["account"]["email"]}</b>
+                        <b>{this.state.worker["user"]["username"]}</b>
                       </h7>
                     </div>
                   </div>
@@ -196,8 +200,8 @@ this.props.approveWorker(this.state.worker['id'], this.props.history);
                     <div className="col s3 push-s3">
                       <h7>
                         <b>
-                          {this.state.worker["account"]["firstName"]}{" "}
-                          {this.state.worker["account"]["lastName"]}
+                          {this.state.worker["user"]["firstName"]}{" "}
+                          {this.state.worker["user"]["lastName"]}
                         </b>
                       </h7>
 
@@ -209,7 +213,7 @@ this.props.approveWorker(this.state.worker['id'], this.props.history);
                     </div>
                     <div className="col s3 push-s3">
                       <h7>
-                        <b>{this.state.worker["account"]["address"]}</b>
+                        <b>{this.state.worker["user"]["address"]}</b>
                       </h7>
                     </div>
                   </div>

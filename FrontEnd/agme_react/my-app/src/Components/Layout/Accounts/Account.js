@@ -27,6 +27,7 @@ import axios from "axios";
       accountType = "Admin";
     }
 
+    console.log(user)
     //set state with current user
 
     this.state = {
@@ -36,10 +37,10 @@ import axios from "axios";
       editStatus: false,
       service:serviceValue,
       services: null,
-      email: user["account"]["email"],
-      firstName: user["account"]["firstName"],
-      lastName: user["account"]["lastName"],
-      address: user["account"]["address"]
+      email: user["user"]["username"],
+      firstName: user["user"]["firstName"],
+      lastName: user["user"]["lastName"],
+      address: user["user"]["address"]
     };
 
  
@@ -61,23 +62,17 @@ import axios from "axios";
       account = JSON.parse(localStorage.getItem("workerObject"));
       account["serviceName"]["service"] = this.state.service;
     } else if (localStorage.getItem("adminObject") !== null) {
-      account = JSON.parse(localStorage.getItem("currentUser"));
+      account = JSON.parse(localStorage.getItem("adminObject"));
     }
 
-    if(this.state.type!="Admin") {
+  
 
-    account["account"]["email"]=this.state.email;
-    account["account"]["firstName"]=this.state.firstName;
-    account["account"]["lastName"]=this.state.lastName;
-    account["account"]["address"]=this.state.address;
-  }
-    else {
-      account["email"]=this.state.email;
-      account["firstName"]=this.state.firstName;
-      account["lastName"]=this.state.lastName;
-      account["address"]=this.state.address;
+    account["user"]["username"]=this.state.email;
+    account["user"]["firstName"]=this.state.firstName;
+    account["user"]["lastName"]=this.state.lastName;
+    account["user"]["address"]=this.state.address;
+ 
 
-    }
 
     console.log(account)
 
@@ -295,7 +290,7 @@ import axios from "axios";
                     </div>
                     <div className="col s3 push-s3">
                       <h7>
-                        <b>{this.state.profile["account"]["email"]}</b>
+                        <b>{this.state.profile["user"]["username"]}</b>
                       </h7>
                     </div>
                   </div>
@@ -306,8 +301,8 @@ import axios from "axios";
                     <div className="col s3 push-s3">
                       <h7>
                         <b>
-                          {this.state.profile["account"]["firstName"]}{" "}
-                          {this.state.profile["account"]["lastName"]}
+                          {this.state.profile["user"]["firstName"]}{" "}
+                          {this.state.profile["user"]["lastName"]}
                         </b>
                       </h7>
                     </div>
@@ -318,7 +313,7 @@ import axios from "axios";
                     </div>
                     <div className="col s3 push-s3">
                       <h7>
-                        <b>{this.state.profile["account"]["address"]}</b>
+                        <b>{this.state.profile["user"]["address"]}</b>
                       </h7>
                     </div>
                   </div>

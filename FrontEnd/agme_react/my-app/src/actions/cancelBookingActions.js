@@ -1,7 +1,9 @@
 import axios from "axios";
 import { GET_ERRORS } from "./types";
+import setJWTToken from "../securityUtils/setJWTToken";
 
 export const cancelBooking = (id, statevar, history) => async dispatch => {
+  setJWTToken(localStorage.getItem('jwtToken'))
  
   try {
 
