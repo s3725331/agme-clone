@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 
@@ -38,6 +37,8 @@ public class BookingController {
         if(result.hasErrors()) { //Invalid booking object in request body
             return new ResponseEntity<>("Invalid Bookings Object", HttpStatus.BAD_REQUEST);
         }
+
+        booking.setService(booking.getWorker().getService());
 
         //Create booking in repo
         Optional<Booking> savedBooking = bookingService.create(booking);

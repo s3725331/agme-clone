@@ -16,7 +16,7 @@ public class Worker {
 
     @NotNull
     @ManyToOne
-    private ServiceName serviceName;
+    private ServiceName service;
 
     public boolean isAccepted() {
         return accepted;
@@ -74,11 +74,11 @@ public class Worker {
         this.accepted = accepted;
     }
 
-    public ServiceName getServiceName() {
-        return serviceName;
+    public ServiceName getService() {
+        return service;
     }
 
-    public void setServiceName(ServiceName serviceName) {
-        this.serviceName = serviceName;
+    public void setService(ServiceName service) {
+        this.service = service;
     }
 }

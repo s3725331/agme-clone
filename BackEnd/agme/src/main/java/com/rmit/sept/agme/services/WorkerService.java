@@ -1,7 +1,6 @@
 package com.rmit.sept.agme.services;
 
 import com.rmit.sept.agme.model.*;
-import com.rmit.sept.agme.repositories.AccountRepository;
 import com.rmit.sept.agme.repositories.UserRepository;
 import com.rmit.sept.agme.repositories.WorkerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,7 +67,7 @@ public class WorkerService {
 
         //Worker created
         Worker newWorker = new Worker(userAccount.get());
-        newWorker.setServiceName(service); //Set workers service
+        newWorker.setService(service); //Set workers service
         return Optional.of(saveOrUpdate(newWorker));
     }
 
