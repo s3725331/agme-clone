@@ -13,17 +13,12 @@ export const createAccount = (newAccount, services, type, history) => async disp
         password : newAccount['password']}
       const res1 = await axios.post("http://localhost:8080/api/users/login",  test);
       const { token } = res1.data;
-
-      console.log(res)
-      console.log(res1)
   
-      localStorage.setItem("jwtToken", token);
-
       setJWTToken(token);
 
-      if(type ==="Customer"){
+      if(type ==="CUSTOMER"){
       const res3 = await axios.post("http://localhost:8080/api/customer");
-      } else if (type ==="Worker"){
+      } else if (type ==="WORKER"){
 
         const res4 = await axios.post("http://localhost:8080/api/worker", null , { params: { service :
         services}

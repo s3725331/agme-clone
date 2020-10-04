@@ -222,8 +222,8 @@ export class CustomerSignUp extends Component {
               value= {this.state.type} 
               name = "type" required >
                       <option value="" disabled selected>Select account type</option>
-                      <option value="Customer">Customer</option>
-                      <option value="Worker">Worker</option>
+                      <option value="CUSTOMER">Customer</option>
+                      <option value="CUSTOMER">Worker</option>
                   </select>
                   
               </div>
