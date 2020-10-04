@@ -105,9 +105,7 @@ export const login = (LoginRequest, history) => async dispatch =>{
 
 
     try{
-      const res4 = await axios.get("http://localhost:8080/api/admin",  { params: { accountId :
-      userId}
-      })
+      const res4 = await axios.get("http://localhost:8080/api/admin")
         const data4 = res4.data;
    
      localStorage.setItem('adminObject', JSON.stringify(data4));
