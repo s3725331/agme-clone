@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { createBooking} from "../../actions/bookingActions";
 import axios from "axios";
+import setJWTToken from "../../securityUtils/setJWTToken";
 
  export class Booking extends Component {
   constructor(props) {
@@ -119,7 +120,9 @@ if(this.state.workers !==null){
     //in order to render page
 
     try{
-    const res = await axios.get("http://localhost:8080/api/worker/all");
+      console.log("hi")
+      setJWTToken(localStorage.getItem('jwtToken'))
+    const res = await axios.get("http://localhost:8080/api/worker/all/authenticate");
     this.setState({ workers: res.data, loaded: true });
 
     console.log(res.data)
@@ -201,8 +204,13 @@ render() {
                         <option value = "" disabled selected>Choose your option</option>
                         {
                           
+<<<<<<< HEAD
                           this.state.filteredWorkers.map((worker, index) => (
                             <option key={worker['id']} value={index}> {worker['account']['firstName']} {worker['account']['lastName']}</option>
+=======
+                          this.state.workers.map((worker, index) => (
+                            <option key={worker['id']} value={index}> {worker['user']['firstName']} {worker['user']['lastName']}</option>
+>>>>>>> authentication-impl
                           ))
                         }
                       

@@ -1,10 +1,8 @@
 package com.rmit.sept.agme.services;
 
-import com.rmit.sept.agme.model.Account;
-import com.rmit.sept.agme.model.Customer;
-import com.rmit.sept.agme.model.ServiceName;
-import com.rmit.sept.agme.model.Worker;
+import com.rmit.sept.agme.model.*;
 import com.rmit.sept.agme.repositories.AccountRepository;
+import com.rmit.sept.agme.repositories.UserRepository;
 import com.rmit.sept.agme.repositories.WorkerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +15,7 @@ public class WorkerService {
     WorkerRepository workerRepository;
 
     @Autowired
-    AccountRepository accountRepository;
+    UserRepository userRepository;
 
     //Sets accepted to true for worker with id
     public Optional<Worker> authenticate(long id){
@@ -52,8 +50,8 @@ public class WorkerService {
         return workerRepository.getByAccepted(false);
     }
 
-    public Optional<Worker> getByAccount(Account account) {
-        Iterable<Worker> workers = workerRepository.getByAccount(account);
+    public Optional<Worker> getByUser(User user) {
+        Iterable<Worker> workers = workerRepository.getByUser(user);
 
         if(workers.iterator().hasNext())
             return Optional.of(workers.iterator().next()); //Worker found
@@ -62,8 +60,8 @@ public class WorkerService {
     }
 
     //Worker created from account
-    public Optional<Worker> create(long accountID, ServiceName service){
-        Optional<Account> userAccount = accountRepository.findById(accountID);
+    public Optional<Worker> create(long userId, ServiceName service){
+        Optional<User> userAccount = userRepository.findById(userId);
         if(!userAccount.isPresent()){
             return Optional.empty(); //no account found, creation failed
         }

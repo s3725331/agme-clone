@@ -17,6 +17,7 @@ import java.util.Optional;
 @RequestMapping("/api/accounts")
 @CrossOrigin
 public class AccountController {
+    /*
     @Autowired
     private AccountService accountService;
 
@@ -71,5 +72,5 @@ public class AccountController {
         return new ResponseEntity<>(savedAccount, HttpStatus.OK); //Updated account object returned
     }
 
-
+*/
 }

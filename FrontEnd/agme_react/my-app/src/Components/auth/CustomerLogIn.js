@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getAccount } from "../../actions/getAccountActions";
+import { login } from "../../actions/securityActions";
 
 export class CustomerLogIn extends Component {
   constructor(props) {
@@ -25,9 +25,13 @@ export class CustomerLogIn extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    const newResponse = {
+      username : this.state.email,
+      password : this.state.password
+    }
     
     //grab account using email and password, will only work if details are correct
-    this.props.getAccount(this.state.email, this.state.password, this.props.history);
+    this.props.login(newResponse, this.props.history);
 
     //set error state to true to display error message, will only work is login fails
     this.setState({ error:true});
@@ -140,7 +144,7 @@ export class CustomerLogIn extends Component {
 }
 
 CustomerLogIn.propTypes = {
-  getAccount: PropTypes.func.isRequired
+  login: PropTypes.func.isRequired
 };
 
 //used to grab errors stored in the store.
@@ -152,5 +156,5 @@ const stateToProps = (state) =>{
 
 export default connect (
   stateToProps,
-  {getAccount}
+  {login}
 )(CustomerLogIn);

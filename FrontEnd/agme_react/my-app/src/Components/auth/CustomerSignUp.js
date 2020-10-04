@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { createCustomer } from "../../actions/custCreateActions";
+import { createAccount } from "../../actions/securityActions";
 import axios from "axios";
 
 export class CustomerSignUp extends Component {
@@ -16,8 +16,12 @@ export class CustomerSignUp extends Component {
       address: "",
       type:"",
       service:"",
+      confirmPassword:"",
       services:null,
       loaded:false
+      //,
+    
+     // errors:{}  
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -33,21 +37,35 @@ export class CustomerSignUp extends Component {
 
 
     const newAccount = {
-      email: this.state.email,
+      username: this.state.email,
       password: this.state.password,
       firstName: this.state.firstName,
       lastName: this.state.lastName,
-      address: this.state.address
+      address: this.state.address,
+      role:this.state.type,
+      confirmPassword:this.state.confirmPassword
     }
-
+    console.log(newAccount)
 
     //method used to create account with specified type. Will be successful if details are valid
 
-      this.props.createCustomer(newAccount, this.state.service, this.state.type, this.props.history);
+      this.props.createAccount(newAccount, this.state.service, this.state.type, this.props.history);
     
 
 
   }
+
+ // componentWillReceiveProps(nextProps){
+
+ //   if(nextProps.errors){
+  //    this.setState ({
+
+   //     errors:nextProps.errors
+ //     });
+ //   }
+
+
+//  }
 
   async componentDidMount() {
 
@@ -148,6 +166,9 @@ export class CustomerSignUp extends Component {
                     placeholder="Enter your password again."
                     type="password"
                     className="validate"
+                    name="confirmPassword"
+                    value= {this.state.confirmPassword}
+                    onChange={this.handleChange}
                   ></input>
                 </div>
               </div>
@@ -264,11 +285,11 @@ export class CustomerSignUp extends Component {
 }
 
 CustomerSignUp.propTypes = {
-  createCustomer: PropTypes.func.isRequired,
+  createAccount: PropTypes.func.isRequired,
 };
 
 
 export default connect (
   null,
-  {createCustomer}
+  {createAccount}
 )(CustomerSignUp);

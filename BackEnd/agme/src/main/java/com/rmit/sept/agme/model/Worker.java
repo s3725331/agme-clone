@@ -12,7 +12,7 @@ public class Worker {
 
     @NotNull
     @ManyToOne
-    private Account account;
+    private User user;
 
     @NotNull
     @ManyToOne
@@ -32,7 +32,7 @@ public class Worker {
 
     public Worker(){}
 
-    public Worker(Account account){this.account = account;}
+    public Worker(User user){this.user = user;}
 
     private boolean accepted;
 
@@ -50,12 +50,12 @@ public class Worker {
         this.modifiedAt = new Date();
     }
 
-    public Account getAccount() {
-        return account;
+    public User getUser() {
+        return user;
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public long getId() {
