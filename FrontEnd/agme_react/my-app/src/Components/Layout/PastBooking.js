@@ -236,13 +236,13 @@ export default class PastBooking extends Component {
                     </h6>),
                     (<h6>Email:  {this.state.workers[this.state.worker]['user']['username']}
                     </h6>),
-                    <h6>Service:  {this.state.workers[this.state.worker]['serviceName']['service']}</h6>
+                    <h6>Service:  {this.state.workers[this.state.worker]['service']['service']}</h6>
                   ]:
                     [
                       <h6>Full name:  {this.state.profile['user']['firstName']} {this.state.profile['user']['lastName']}</h6>,
                       <h6>Email:  {this.state.profile['user']['username']}</h6>,
                       (this.state.account === "Worker")?
-                      <h6>Service:  {this.state.profile['serviceName']['service']}</h6>
+                      <h6>Service:  {this.state.profile['service']['service']}</h6>
                       :(null) 
                     ]
                      
@@ -284,7 +284,7 @@ export default class PastBooking extends Component {
                           
       
                           <h6>Customer: {book['customer']['user']['firstName']} {book['customer']['user']['lastName']}</h6>
-                          <h6>Service: {book['worker']['serviceName']['service']}</h6> 
+                          <h6>Service: {book['service']['service']}</h6> 
                           <h6>Start time: {book['startTime'].substring(11)}</h6> 
                           <h6>End time: {book['endTime'].substring(11)}</h6>
                           <br></br>
@@ -313,7 +313,7 @@ export default class PastBooking extends Component {
                               <h6>Date of appointment: {book['startTime'].substring(0,10)}</h6>
                               {/* <h6>Service: Consultancy</h6> */}
                               <h6>Worker: {book['worker']['user']['firstName']} {book['worker']['user']['lastName']}</h6>
-                              <h6>Service: {book['worker']['serviceName']['service']}</h6> 
+                              <h6>Service: {book['service']['service']}</h6> 
                               <h6>Start time: {book['startTime'].substring(11)}</h6> 
                               <h6>End time: {book['endTime'].substring(11)}</h6> 
                               
@@ -335,7 +335,7 @@ export default class PastBooking extends Component {
                             <h6>Date of appointment: {book['startTime'].substring(0,10)}</h6>
                             {/* <h6>Service: Consultancy</h6> */}
                             <h6>Customer: {book['customer']['user']['firstName']} {book['customer']['user']['lastName']}</h6>
-                            <h6>Service: {book['worker']['serviceName']['service']}</h6> 
+                            <h6>Service: {book['service']['service']}</h6> 
                             <h6>Start time: {book['startTime'].substring(11)}</h6> 
                             <h6>End time: {book['endTime'].substring(11)}</h6> 
                             

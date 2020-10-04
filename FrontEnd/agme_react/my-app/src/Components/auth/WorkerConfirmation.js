@@ -49,6 +49,7 @@ this.props.approveWorker(this.state.worker['id'], this.props.history);
     try {
       const res = await axios.get(
         "http://localhost:8080/api/worker/all/authenticate"
+        
       );
       this.setState({ workers: res.data, loaded: true });
       console.log(res.data);
@@ -230,7 +231,7 @@ this.props.approveWorker(this.state.worker['id'], this.props.history);
                   <h7>
 
          
-                  <b>{this.state.worker["serviceName"]["service"]}</b>
+                  <b>{this.state.worker["service"]["service"]}</b>
                 
                     
                   </h7>

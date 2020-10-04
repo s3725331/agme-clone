@@ -50,7 +50,7 @@ if(this.state.workers !==null){
 
          this.state.workers.forEach(worker => {
            
-           if(worker['serviceName']['service'] === serviceName){
+           if(worker['service']['service'] === serviceName){
             var hasWorker = false;
             this.state.filteredWorkers.forEach( filter=>{
               if(filter['id'] === worker['id']){

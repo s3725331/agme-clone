@@ -223,7 +223,7 @@ export class CustomerSignUp extends Component {
               name = "type" required >
                       <option value="" disabled selected>Select account type</option>
                       <option value="CUSTOMER">Customer</option>
-                      <option value="CUSTOMER">Worker</option>
+                      <option value="WORKER">Worker</option>
                   </select>
                   
               </div>
@@ -231,14 +231,14 @@ export class CustomerSignUp extends Component {
               <div className="card-content">
 
 
-              {(this.state.type !== "Worker") ? null: 
+              {(this.state.type !== "WORKER") ? null: 
                 <h6> Select Service </h6>
               }
               {
                 
                 
                 
-                (this.state.type !== "Worker") ? null: 
+                (this.state.type !== "WORKER") ? null: 
               
               <select className = "browser-default" onChange={this.handleChange} 
               value= {this.state.service} 

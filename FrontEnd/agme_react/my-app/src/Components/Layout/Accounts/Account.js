@@ -21,7 +21,7 @@ import axios from "axios";
     } else if (localStorage.getItem("workerObject") !== null) {
       user = JSON.parse(localStorage.getItem("workerObject"));
       accountType = "Worker";
-      serviceValue = user["serviceName"]["service"];
+      serviceValue = user["service"]["service"];
     }else if (localStorage.getItem("adminObject") !== null) {
       user = JSON.parse(localStorage.getItem("adminObject"));
       accountType = "Admin";
@@ -60,7 +60,7 @@ import axios from "axios";
       account = JSON.parse(localStorage.getItem("customerObject"));
     } else if (localStorage.getItem("workerObject") !== null) {
       account = JSON.parse(localStorage.getItem("workerObject"));
-      account["serviceName"]["service"] = this.state.service;
+      account["service"]["service"] = this.state.service;
     } else if (localStorage.getItem("adminObject") !== null) {
       account = JSON.parse(localStorage.getItem("adminObject"));
     }
@@ -329,7 +329,7 @@ import axios from "axios";
                     <h7>
 
                     {(this.state.type !== "Worker") ? null: 
-                    <b>{this.state.profile["serviceName"]["service"]}</b>
+                    <b>{this.state.profile["service"]["service"]}</b>
                   }
                       
                     </h7>
