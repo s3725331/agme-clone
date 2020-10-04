@@ -96,10 +96,10 @@ public class WorkerController {
                 serviceObject = services.next();
             }
 
-            //Create new worker from existing account
+            //Create new worker from existing user
             Optional<Worker> savedWorker = workerService.create(userId, serviceObject);
-            if(!savedWorker.isPresent()){ //No account found
-                return new ResponseEntity<>("Invalid Account Id", HttpStatus.NOT_FOUND);
+            if(!savedWorker.isPresent()){ //No user found
+                return new ResponseEntity<>("Invalid User Id", HttpStatus.NOT_FOUND);
             }
 
             return new ResponseEntity<>(savedWorker, HttpStatus.CREATED); //new worker object return

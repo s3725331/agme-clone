@@ -41,7 +41,7 @@ public class CustomerService {
     public Optional<Customer> create(long userId){
         Optional<User> userAccount = userRepository.findById(userId);
         if(!userAccount.isPresent()){
-            return Optional.empty(); //create failed, no account with accountID found
+            return Optional.empty(); //create failed, no user with userId found
         }
 
         //New customer created

@@ -33,4 +33,8 @@ public class AdminService {
 
         return Optional.of( adminRepository.save(worker)); //Admin updated
     }
+
+    public Optional<Admin> create(Admin admin){
+        return Optional.of(adminRepository.save(admin));
+    }
 }
