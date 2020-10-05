@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import { cancelBooking } from "../../actions/cancelBookingActions"
 
 
- class CurrentBooking extends Component {
+ export class CurrentBooking extends Component {
   constructor(props) {
     super(props);
     var user;

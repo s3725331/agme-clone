@@ -24,7 +24,7 @@ const setUp = (props={}) => {
         }
     }
     const AccountType = "Customer";
-    component.setState({loaded:true,profile:testAccount,account:AccountType});
+    component.setState({loaded:true,sLoaded:true,profile:testAccount,account:AccountType});
     return component;
 };
 

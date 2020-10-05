@@ -1,7 +1,7 @@
 import React from 'react';
 import Enzyme, { shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import CurrentBooking from './CurrentBooking';
+import { CurrentBooking } from './CurrentBooking';
 import { findByTestAtrr } from './../../../Utils';
 
 Enzyme.configure({ adapter: new Adapter()});
@@ -23,7 +23,7 @@ const setUp = (props={}) => {
         }
     }
     const accountType = "Customer";
-    component.setState({loaded:true,profile:testAccount,account:accountType});
+    component.setState({loaded:true,sLoaded:true,profile:testAccount,account:accountType});
     return component;
 };
 
