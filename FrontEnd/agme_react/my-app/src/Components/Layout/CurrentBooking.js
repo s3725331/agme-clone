@@ -87,7 +87,7 @@ import { cancelBooking } from "../../actions/cancelBookingActions"
     //used to load page only when relevant information has been gathered
     if (!this.state.loaded) {
       return null;
-  }
+    }
 
     return (
         <div>
