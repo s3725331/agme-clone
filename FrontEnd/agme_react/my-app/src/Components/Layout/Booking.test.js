@@ -9,7 +9,9 @@ Enzyme.configure({ adapter: new Adapter()});
 // function to return shallow render
 const setUp = (props={}) => {
     const component = shallow(<Booking {...props} />);
+    const res = ["Appointment","Consult"];
     component.setState({loaded:true});
+    component.setState({services: res, sLoaded: true});
     return component;
 };
 

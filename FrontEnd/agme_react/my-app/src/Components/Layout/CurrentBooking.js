@@ -7,7 +7,7 @@ import { cancelBooking } from "../../actions/cancelBookingActions";
 import setJWTToken from "../../securityUtils/setJWTToken";
 
 
- class CurrentBooking extends Component {
+ export class CurrentBooking extends Component {
   constructor(props) {
     super(props);
     var user;
