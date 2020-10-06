@@ -88,6 +88,20 @@ export default class LoggedInDashboard extends Component {
                     Past Bookings
                   </button>
                 </Link>
+                
+                <h6>
+                <b></b>
+              </h6>
+
+                <Link to="/ViewCalendar">
+                  <button
+                    className="btn btn-bookings blue darken-4"
+                    data-test="sign-up-button"
+                    type="submit"
+                  >
+                    My calendar
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -149,6 +163,21 @@ export default class LoggedInDashboard extends Component {
                   Past Bookings
                 </button>
               </Link>
+
+              <h6>
+                <b></b>
+              </h6>
+
+                <Link to="/ViewCalendar">
+                  <button
+                    className="btn btn-bookings blue darken-4"
+                    data-test="sign-up-button"
+                    type="submit"
+                  >
+                    My calendar
+                  </button>
+                </Link>
+                
             </div>
           </div>
         </div>

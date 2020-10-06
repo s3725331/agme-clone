@@ -120,9 +120,11 @@ if(this.state.workers !==null){
     //in order to render page
 
     try{
+
       console.log("hi")
       setJWTToken(localStorage.getItem('jwtToken'))
     const res = await axios.get("http://localhost:8080/api/worker/all");
+
     this.setState({ workers: res.data, loaded: true });
 
     console.log(res.data)

@@ -116,14 +116,16 @@ export class CustomerLogIn extends Component {
                   >
                     Log In
                   </button>
-                </div>
+                </div>              
               </form>
+              
               <div className="card-content center-align">
                 <h8>
                   <b>Don't have an account?</b>
                 </h8>
                 <div className="form-field"></div>
               </div>
+              
               <div className="card-content">
                 <div className="center-align">
                   <a

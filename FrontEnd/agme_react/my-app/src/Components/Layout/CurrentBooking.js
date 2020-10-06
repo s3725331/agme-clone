@@ -170,6 +170,7 @@ import setJWTToken from "../../securityUtils/setJWTToken";
     
 
     //used to load page only when relevant information has been gathered
+
     if (!this.state.loaded && (!this.state.sLoaded || !this.state.aLoaded)) {
       return (
         
@@ -182,6 +183,7 @@ import setJWTToken from "../../securityUtils/setJWTToken";
 
       );
   } 
+
 
     return (
         <div>
