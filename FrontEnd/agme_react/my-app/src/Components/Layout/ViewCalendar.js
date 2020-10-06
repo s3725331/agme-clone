@@ -3,7 +3,10 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { Inject,ScheduleComponent,Day,Week,WorkWeek,Month,Agenda, ResourceDirective, ResourcesDirective } 
          from '@syncfusion/ej2-react-schedule';
-         import axios from "axios";
+import axios from "axios";
+import setJWTToken from "../../securityUtils/setJWTToken";
+
+
 
 
 export default class ViewCalendar extends Component {  constructor(props) {
@@ -40,13 +43,22 @@ export default class ViewCalendar extends Component {  constructor(props) {
 }
 
 async componentDidMount() {
-
+  setJWTToken(localStorage.getItem('jwtToken'))
   try{
-    const res = await axios.get("http://localhost:8080/api/bookings/past",{ params: { customerId :
-    this.state.profile['id']}});
+    var data1;
+   
+   if(this.state.account === "Customer") {
+      const res = await axios.get("http://localhost:8080/api/bookings/past",{ params: { customerId :
+      this.state.profile['id']}});
 
-    
-    var data1 = res.data;
+      data1 = res.data;
+    } else if (this.state.account === "Worker") {
+
+       const res = await axios.get("http://localhost:8080/api/bookings/past",{ params: { workerId :
+      this.state.profile['id']}});
+
+      data1 = res.data;
+    }
     // var data2 = res2.data;
 
      if(data1.length !==0){
@@ -59,7 +71,7 @@ async componentDidMount() {
 
        const bookObject = {
          Id: data['id'],
-         Subject: 'Appointment',
+         Subject: data['service']['service'],
          StartTime: new Date(startTime.substring(0,4),startTime.substring(5,7)-1, startTime.substring(8,10),startTime.substring(11,13), startTime.substring(14,16) ),
          EndTime: new Date(startTime.substring(0,4),endTime.substring(5,7)-1, endTime.substring(8,10),endTime.substring(11,13), startTime.substring(14,16) )
  
@@ -84,38 +96,23 @@ async componentDidMount() {
 
   try{
 
-    //if account type is of customer, gets all upcoming bookings with relevant customer id 
-    //and stores the state else if account type is of worker, gets all  
-    //upcoming bookings with relevant worker id and then sets loaded
-    //state to true, which then renders the full page. 
 
-    //if a booking object is not returned, book state stays null and loaded is set to true and page renders
- /*   if(this.state.account === "Customer") {
+    var data1;
+   
+   if(this.state.account === "Customer") {
       const res = await axios.get("http://localhost:8080/api/bookings/upcoming",{ params: { customerId :
       this.state.profile['id']}});
-      console.log(res.data)
 
-      this.setState({ book: res.data, loaded: true });
-
+      data1 = res.data;
     } else if (this.state.account === "Worker") {
 
-      const res = await axios.get("http://localhost:8080/api/bookings/upcoming",{ params: { workerId :
+       const res = await axios.get("http://localhost:8080/api/bookings/upcoming",{ params: { workerId :
       this.state.profile['id']}});
 
-      this.setState({ book: res.data, loaded: true });
-    }*/
+      data1 = res.data;
+    }
    
-      const res = await axios.get("http://localhost:8080/api/bookings/upcoming",{ params: { customerId :
-      this.state.profile['id']}});
 
-
-
-
-
-    
-
-      var data1 = res.data;
-     // var data2 = res2.data;
 
       if(data1.length !==0){
         var startTime;
@@ -127,8 +124,7 @@ async componentDidMount() {
 
         const bookObject = {
           Id: data['id'],
-          Subject: 'Appointment',
-          Name:data['worker']['firstName'],
+          Subject: data['service']['service'],
           StartTime: new Date(startTime.substring(0,4),startTime.substring(5,7)-1, startTime.substring(8,10),startTime.substring(11,13), startTime.substring(14,16) ),
           EndTime: new Date(startTime.substring(0,4),endTime.substring(5,7)-1, endTime.substring(8,10),endTime.substring(11,13), startTime.substring(14,16) )
   
@@ -161,15 +157,30 @@ async componentDidMount() {
   render() { 
 
     if (!this.state.loaded1 || !this.state.loaded2) {
-      return null;
+      return   (
+        <div className = "center-align">
+                <div className="progress">
+                <div className="indeterminate"></div>
+            </div>
+            </div>
+        
+              );
     }
 
-    return( <ScheduleComponent height='550px' currentView='Month' eventSettings={{ dataSource: this.state.localData }}> 
-      {/*    <ResourcesDirective>
-            <ResourceDirective field='ResourceID' title='Worker Name' name='Resources' textField='Name' idField='Id' colorField='Colour'></ResourceDirective>
-        
-            </ResourcesDirective>
-      */}
+    return( <ScheduleComponent height='650px' readonly={true} currentView='Month' eventSettings={{ dataSource: this.state.localData
+    
+    }
+
+  
+  }> 
+  {/*<ResourcesDirective>
+  <ResourceDirective  option='Month'>
+  
+  </ResourceDirective>
+
+  </ResourcesDirective>
+  */}
+      
             <Inject services={[Day,Week,WorkWeek,Month,Agenda]}/>
     </ScheduleComponent>);
     
