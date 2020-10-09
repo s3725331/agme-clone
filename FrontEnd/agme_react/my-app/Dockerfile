@@ -15,8 +15,9 @@ RUN npm install react-scripts@3.4.1 -g
 RUN npm i axios
 RUN npm i redux react-redux redux-thunk
 RUN npm i redux-devtools-extension
-RUN echo "redux"
 RUN npm install --save prop-types
+
+#RUN npm run test
 
 # add app
 COPY . ./
